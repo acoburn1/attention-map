@@ -64,6 +64,14 @@
   }
   .view-btn:hover, .tool-btn:hover { background: #182541; }
   .view-btn.active { border-color: #669cff; background: rgba(79,140,255,.18); color: #fff; }
+  .reference-actions { display: grid; gap: 7px; }
+  .reference-btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    width: 100%; border: 1px solid #3a4a69; color: #dce6f8; background: linear-gradient(135deg,#17233d,#111a30);
+    border-radius: 9px; padding: 9px 10px; cursor: pointer; text-align: left; font-size: 11.5px;
+  }
+  .reference-btn:hover, .reference-btn:focus-visible { border-color: #6fa5ff; background: #1a2947; outline: none; }
+  .reference-btn span:last-child { color: #8fa7ca; font-size: 10.5px; }
   .check-row { display: flex; gap: 9px; align-items: flex-start; margin: 8px 0; font-size: 12px; color: #c5d0e5; }
   .check-row input { margin-top: 2px; accent-color: #6f9cff; }
   .swatch { width: 12px; height: 12px; border-radius: 4px; margin-top: 2px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.26); }
@@ -127,6 +135,65 @@
   .warning { color: #ffe39a; }
   .footer-note { color: #8392ad; font-size: 10.5px; line-height: 1.45; padding-top: 10px; border-top: 1px solid var(--border); }
 
+  .header-action {
+    border: 1px solid #456087; background: rgba(79,140,255,.14); color: #deebff; padding: 6px 10px;
+    border-radius: 999px; cursor: pointer; font-size: 11px; white-space: nowrap;
+  }
+  .header-action:hover, .header-action:focus-visible { background: rgba(79,140,255,.25); border-color: #78a8f5; outline: none; }
+
+  .reference-modal[hidden] { display: none; }
+  .reference-modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 22px; background: rgba(3,7,16,.78); backdrop-filter: blur(12px); }
+  .reference-shell {
+    width: min(1180px, 100%); height: min(840px, calc(100vh - 44px)); display: grid; grid-template-rows: auto auto 1fr;
+    overflow: hidden; border: 1px solid #3b4d6d; border-radius: 16px; background: #0e1628; box-shadow: 0 30px 80px rgba(0,0,0,.55);
+  }
+  .reference-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 18px 20px 14px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,#17233d,#10182a); }
+  .reference-head h2 { margin: 0 0 5px; font-size: 21px; }
+  .reference-head p { margin: 0; color: #99a9c5; font-size: 12px; line-height: 1.45; max-width: 760px; }
+  .modal-close { flex: 0 0 auto; border: 1px solid #435475; border-radius: 9px; background: #111a2e; color: #d9e4f6; padding: 7px 10px; cursor: pointer; }
+  .modal-close:hover, .modal-close:focus-visible { border-color: #7ca9ee; outline: none; }
+  .reference-tabs { display: flex; gap: 7px; padding: 10px 20px; border-bottom: 1px solid var(--border); overflow-x: auto; background: #10182a; }
+  .reference-tab { border: 1px solid #344461; background: #111a30; color: #aebed8; border-radius: 999px; padding: 7px 11px; cursor: pointer; font-size: 11.5px; white-space: nowrap; }
+  .reference-tab.active { border-color: #6d9de9; background: rgba(79,140,255,.2); color: #fff; }
+  .reference-body { min-height: 0; overflow: auto; padding: 18px 20px 28px; }
+  .reference-panel[hidden] { display: none; }
+  .reference-intro { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(260px,.6fr); gap: 14px; margin-bottom: 16px; }
+  .reference-note { border: 1px solid #334462; background: #131d32; border-radius: 11px; padding: 12px 13px; color: #cbd6e8; font-size: 12px; line-height: 1.5; }
+  .reference-note strong { color: #fff; }
+  .claim-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
+  .claim-card, .project-card, .glossary-card { border: 1px solid #30405c; background: #111a2e; border-radius: 12px; padding: 13px; }
+  .claim-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .claim-card h3, .project-card h3, .glossary-card h3 { margin: 0; color: #f0f4fb; font-size: 13px; line-height: 1.35; text-transform: none; letter-spacing: 0; }
+  .claim-card p, .project-card p, .glossary-card p { margin: 7px 0 0; color: #b7c4d9; font-size: 11.7px; line-height: 1.5; }
+  .confidence { flex: 0 0 auto; border-radius: 999px; padding: 4px 7px; font-size: 9.5px; font-weight: 750; text-transform: uppercase; letter-spacing: .05em; }
+  .confidence.strong { color: #aef3da; background: rgba(55,200,171,.14); border: 1px solid rgba(55,200,171,.45); }
+  .confidence.converging { color: #d8c0ff; background: rgba(179,120,255,.14); border: 1px solid rgba(179,120,255,.45); }
+  .confidence.mixed { color: #ffe19a; background: rgba(255,209,102,.12); border: 1px solid rgba(255,209,102,.42); }
+  .claim-links { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+  .citation-chip { border: 1px solid #3a4c6a; background: #0d1628; color: #9ec5ff; border-radius: 999px; padding: 4px 7px; cursor: pointer; font-size: 9.8px; }
+  .citation-chip:hover, .citation-chip:focus-visible { border-color: #79a9f2; color: #d9e9ff; outline: none; }
+  .library-controls { display: grid; grid-template-columns: minmax(220px,1fr) repeat(3,minmax(130px,.35fr)); gap: 8px; margin-bottom: 10px; }
+  .library-controls input, .library-controls select { width: 100%; border: 1px solid #344662; border-radius: 9px; padding: 9px 10px; background: #0b1426; color: #e6edf8; outline: none; font-size: 11.5px; }
+  .library-controls input:focus, .library-controls select:focus { border-color: #6f9fe9; box-shadow: 0 0 0 3px rgba(79,140,255,.13); }
+  .library-summary { color: #8fa1bf; font-size: 10.8px; margin: 8px 0 12px; }
+  .library-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .library-paper { border: 1px solid #2e3e59; background: #111a2d; border-radius: 11px; padding: 12px; }
+  .library-paper h3 { margin: 0; font-size: 12.5px; line-height: 1.4; }
+  .library-paper h3 a { color: #cfe2ff; text-decoration: none; }
+  .library-paper h3 a:hover { text-decoration: underline; }
+  .paper-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .paper-tag { border: 1px solid #374762; color: #9aabc5; border-radius: 999px; padding: 3px 6px; font-size: 9.4px; }
+  .paper-tag.center { color: #d6bdff; border-color: rgba(179,120,255,.5); background: rgba(179,120,255,.08); }
+  .paper-tag.causal { color: #aef0da; border-color: rgba(55,200,171,.5); }
+  .project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
+  .project-number { color: #8eb9ff; text-transform: uppercase; letter-spacing: .08em; font-size: 9.8px; font-weight: 750; margin-bottom: 5px; }
+  .project-card a { display: inline-block; margin-top: 9px; font-size: 10.5px; }
+  .glossary-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+  .scope-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11.3px; }
+  .scope-table th, .scope-table td { border-bottom: 1px solid #2d3d58; padding: 9px 8px; text-align: left; vertical-align: top; line-height: 1.45; }
+  .scope-table th { color: #8fa3c2; text-transform: uppercase; letter-spacing: .06em; font-size: 9.7px; }
+  .scope-table td { color: #c2cde0; }
+
 
   .brain-card { border: 1px solid #354562; background: #121c31; border-radius: 12px; padding: 10px; }
   .brain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 10px; }
@@ -150,6 +217,18 @@
     .workspace { grid-template-columns: 1fr; grid-template-rows: auto 680px auto; }
     .sidebar, .details { border: 0; border-bottom: 1px solid var(--border); }
     .details { border-top: 1px solid var(--border); }
+    .reference-modal { padding: 8px; }
+    .reference-shell { height: calc(100vh - 16px); border-radius: 12px; }
+    .reference-intro, .claim-grid, .project-grid, .library-list { grid-template-columns: 1fr; }
+    .library-controls { grid-template-columns: 1fr 1fr; }
+    .glossary-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .header-badges .legend-badge { display: none; }
+    .reference-head { padding: 14px; }
+    .reference-tabs, .reference-body { padding-left: 14px; padding-right: 14px; }
+    .library-controls, .glossary-grid { grid-template-columns: 1fr; }
+    .scope-table { display: block; overflow-x: auto; }
   }
 </style>
 </head>
@@ -158,7 +237,7 @@
   <header>
     <div class="title-wrap">
       <h1>Thalamus–Pulvinar Attention Network</h1>
-      <div class="subtitle">Interactive literature map of the regions and pathways emphasized in the accompanying attention review—not a whole-brain atlas.</div>
+      <div class="subtitle">Interactive evidence map and reference library for visual attention, centered on higher-order thalamocortical control—not a whole-brain atlas.</div>
     </div>
     <div class="header-badges">
       <span class="badge legend-badge">Species key:
@@ -168,7 +247,9 @@
         <span class="species-key-item"><span class="species-key-dot" style="background:#6ee7ff"></span>Tree shrew</span>
         <span class="species-key-item"><span class="species-key-dot" style="background:#8be28b"></span>Ferret</span>
       </span>
-      <span class="badge">Updated July 2026</span>
+      <span class="badge">Updated September 2026</span>
+      <button class="header-action" data-open-reference="synthesis">Synthesis</button>
+      <button class="header-action" data-open-reference="library">Reference library</button>
       <span class="badge">Click nodes or pathways</span>
     </div>
   </header>
@@ -193,6 +274,18 @@
           <button class="view-btn" data-view="control">MD–PFC control</button>
           <button class="view-btn" data-view="sensory">Sensory gating</button>
           <button class="view-btn" data-view="orienting">Orienting</button>
+          <button class="view-btn" data-view="selection">Cortical selection</button>
+          <button class="view-btn" data-view="state">State / arousal</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Reference tools</div>
+        <div class="reference-actions">
+          <button class="reference-btn" data-open-reference="synthesis"><span>Evidence synthesis</span><span>12 claims</span></button>
+          <button class="reference-btn" data-open-reference="library"><span>Searchable literature</span><span id="sidebarPaperCount">—</span></button>
+          <button class="reference-btn" data-open-reference="center"><span>Conte Center lens</span><span>5 projects + cores</span></button>
+          <button class="reference-btn" data-open-reference="glossary"><span>Methods & glossary</span><span>read with care</span></button>
         </div>
       </div>
 
@@ -252,6 +345,27 @@
   </main>
 </div>
 
+<div class="reference-modal" id="referenceModal" hidden>
+  <div class="reference-shell" role="dialog" aria-modal="true" aria-labelledby="referenceTitle">
+    <div class="reference-head">
+      <div><h2 id="referenceTitle">Visual attention & the cognitive thalamus</h2><p>A curated evidence map spanning visual selection, pulvinar and MD computations, sensory gating, rhythmic dynamics, arousal, and clinical translation. Reviews orient the field; primary studies carry the claims.</p></div>
+      <button class="modal-close" id="referenceClose" aria-label="Close reference">Close</button>
+    </div>
+    <nav class="reference-tabs" aria-label="Reference sections">
+      <button class="reference-tab active" data-reference-tab="synthesis">Synthesis</button>
+      <button class="reference-tab" data-reference-tab="library">Literature library</button>
+      <button class="reference-tab" data-reference-tab="center">Conte Center lens</button>
+      <button class="reference-tab" data-reference-tab="glossary">Methods & glossary</button>
+    </nav>
+    <div class="reference-body">
+      <section class="reference-panel" id="reference-synthesis"></section>
+      <section class="reference-panel" id="reference-library" hidden></section>
+      <section class="reference-panel" id="reference-center" hidden></section>
+      <section class="reference-panel" id="reference-glossary" hidden></section>
+    </div>
+  </div>
+</div>
+
 <script>
 const papers = {
   saalmann2012: {
@@ -293,7 +407,7 @@ const papers = {
   },
   eradath2021: {
     title: "A causal role for the pulvinar in coordinating task-independent cortico-cortical interactions",
-    authors: "Eradath, Pinsk & Kastner", year: 2021, journal: "Journal of Neuroscience", species: "Macaque",
+    authors: "Eradath, Pinsk & Kastner", year: 2021, journal: "Journal of Comparative Neurology", species: "Macaque",
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8556184/",
     note: "Dorsal pulvinar inactivation reduced low-frequency V4–LIP coherence without simply suppressing local cortical activity."
   },
@@ -323,30 +437,278 @@ const papers = {
   },
   lam2024: {
     title: "Prefrontal transthalamic uncertainty processing drives flexible switching",
-    authors: "Lam et al.", year: 2024, journal: "Nature", species: "Tree shrew",
+    authors: "Lam et al.", year: 2025, journal: "Nature", species: "Tree shrew",
     url: "https://www.nature.com/articles/s41586-024-08180-8",
     note: "Supports a cingulate–MD–prefrontal route for processing distinct forms of uncertainty during flexible switching."
   },
   boshra2026: {
     title: "Higher-order thalamic bursts are drivers of attention control",
     authors: "Boshra et al.", year: 2026, journal: "Neuron", species: "Macaque",
-    url: "https://www.cell.com/neuron/fulltext/S0896-6273%2826%2900417-4",
-    note: "Final publisher page/abstract supports attention-modulated pulvinar bursts, prediction of behavior and stimulation-linked cortical coordination. Detailed claims should be checked against the full final text if accessible."
+    url: "https://pubmed.ncbi.nlm.nih.gov/42361794/",
+    note: "Pulvinar bursts predicted detection and biased cortical spatial codes; pulvinar microstimulation evoked bursts, synchronized LIP spiking, and improved spatially matched target detection."
   },
   hadinger2023: {
     title: "Region-selective control of the thalamic reticular nucleus via cortical layer 5",
     authors: "Hádinger et al.", year: 2023, journal: "Nature Neuroscience", species: "Mouse",
     url: "https://www.nature.com/articles/s41593-022-01217-z",
     note: "Identified a frontal cortical layer-5 pathway capable of region-selective control of TRN."
+  },
+  guillery1995: {
+    title: "Anatomical evidence concerning the role of the thalamus in corticocortical communication", authors: "Guillery", year: 1995, journal: "Journal of Anatomy", species: "Anatomy review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/8586557/", note: "Introduced the first-order/higher-order distinction and the idea that layer-5-driven higher-order thalamus supports corticocortical communication."
+  },
+  desimone1995: {
+    title: "Neural mechanisms of selective visual attention", authors: "Desimone & Duncan", year: 1995, journal: "Annual Review of Neuroscience", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/7605061/", note: "Foundational biased-competition account: limited representational capacity makes selection an emergent competition biased by goals and stimulus strength."
+  },
+  boshra2022: {
+    title: "Attention control in the primate brain", authors: "Boshra & Kastner", year: 2022, journal: "Current Opinion in Neurobiology", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/35850060/", note: "Integrates cortical top-down accounts with feature-based control, thalamic influences, rhythmic network dynamics, and behavior."
+  },
+  treue1999: {
+    title: "Feature-based attention influences motion processing gain in macaque visual cortex", authors: "Treue & Martínez Trujillo", year: 1999, journal: "Nature", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/10376597/", note: "Feature-based attention changed the gain of direction-selective MT neurons even when attention was directed outside their receptive fields."
+  },
+  moore2003: {
+    title: "Selective gating of visual signals by microstimulation of frontal cortex", authors: "Moore & Armstrong", year: 2003, journal: "Nature", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/12540901/", note: "Subthreshold FEF stimulation enhanced retinotopically aligned V4 responses, causally linking an oculomotor priority structure to sensory gain."
+  },
+  mcalonan2006: {
+    title: "Attentional modulation of thalamic reticular neurons", authors: "McAlonan, Cavanaugh & Wurtz", year: 2006, journal: "Journal of Neuroscience", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/16624964/", note: "Visual TRN responses changed with cross-modal attention, supporting topographically organized inhibitory modulation of LGN."
+  },
+  smith2009: {
+    title: "Dissociating vision and visual attention in the human pulvinar", authors: "Smith et al.", year: 2009, journal: "Journal of Neurophysiology", species: "Human",
+    url: "https://pubmed.ncbi.nlm.nih.gov/19073806/", note: "Posterior pulvinar responded robustly to unattended optic flow; attention added a moderate enhancement rather than creating the response."
+  },
+  snow2009: {
+    title: "Impaired attentional selection following lesions to human pulvinar", authors: "Snow, Allen, Rafal & Humphreys", year: 2009, journal: "PNAS", species: "Human lesion",
+    url: "https://pubmed.ncbi.nlm.nih.gov/19237580/", note: "Three unilateral pulvinar-lesion cases showed contralesional selection deficits specifically when salient distractors competed with the target."
+  },
+  mitchell2009: {
+    title: "Spatial attention decorrelates intrinsic activity fluctuations in macaque area V4", authors: "Mitchell, Sundberg & Reynolds", year: 2009, journal: "Neuron", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/19778515/", note: "Attention reduced low-frequency shared variability in V4, illustrating that selection changes population reliability as well as mean firing rate."
+  },
+  lovejoy2010: {
+    title: "Inactivation of primate superior colliculus impairs covert selection of signals for perceptual judgments", authors: "Lovejoy & Krauzlis", year: 2010, journal: "Nature Neuroscience", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/20023651/", note: "SC inactivation produced a competition-dependent covert selection deficit without requiring an orienting movement."
+  },
+  lennert2011: {
+    title: "Strength of response suppression to distracter stimuli determines attentional-filtering performance in primate prefrontal neurons", authors: "Lennert & Martínez-Trujillo", year: 2011, journal: "Neuron", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/21482363/", note: "dlPFC filtering performance covaried especially with suppression of distractor representations, complementing target-amplification accounts."
+  },
+  saalmann2011: {
+    title: "Cognitive and perceptual functions of the visual thalamus", authors: "Saalmann & Kastner", year: 2011, journal: "Neuron", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/21791281/", note: "Field-defining synthesis of LGN, pulvinar, TRN, and their roles in perception, attention, and corticocortical coordination."
+  },
+  purushothaman2012: {
+    title: "Gating and control of primary visual cortex by pulvinar", authors: "Purushothaman et al.", year: 2012, journal: "Nature Neuroscience", species: "Galago",
+    url: "https://pubmed.ncbi.nlm.nih.gov/22561455/", note: "Manipulating lateral pulvinar powerfully changed supragranular V1 responses while sparing LGN, showing a causal route for controlling cortical output."
+  },
+  fiebelkorn2013: {
+    title: "Rhythmic sampling within and between objects despite sustained attention at a cued location", authors: "Fiebelkorn, Saalmann & Kastner", year: 2013, journal: "Current Biology", species: "Human behavior",
+    url: "https://pubmed.ncbi.nlm.nih.gov/24316204/", note: "Behavioral sensitivity fluctuated rhythmically within and between objects, challenging a strictly continuous attentional spotlight."
+  },
+  komura2013: {
+    title: "Responses of pulvinar neurons reflect a subject's confidence in visual categorization", authors: "Komura et al.", year: 2013, journal: "Nature Neuroscience", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/23666179/", note: "Pulvinar activity and inactivation selectively affected opt-out behavior, implicating pulvinar in perceptual confidence rather than category content itself."
+  },
+  briggs2013: {
+    title: "Attention enhances synaptic efficacy and the signal-to-noise ratio in neural circuits", authors: "Briggs, Mangun & Usrey", year: 2013, journal: "Nature", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/23803766/", note: "Attention increased the efficacy and coordination of electrically probed LGN-to-V1 transmission, even though mean LGN firing effects need not be large."
+  },
+  mante2013: {
+    title: "Context-dependent computation by recurrent dynamics in prefrontal cortex", authors: "Mante et al.", year: 2013, journal: "Nature", species: "Macaque",
+    url: "https://www.nature.com/articles/nature12742", note: "Population dynamics in PFC selected and integrated task-relevant sensory evidence; an important cortical comparator for MD-mediated control of population geometry."
+  },
+  sussillo2013: {
+    title: "Opening the black box: low-dimensional dynamics in high-dimensional recurrent neural networks", authors: "Sussillo & Barak", year: 2013, journal: "Neural Computation", species: "Methods",
+    url: "https://pubmed.ncbi.nlm.nih.gov/23272922/", note: "Introduced fixed-point analysis for understanding trained recurrent networks; included as a methods bridge for interpreting population-dynamics claims."
+  },
+  buzsaki2012: {
+    title: "The origin of extracellular fields and currents—EEG, ECoG, LFP and spikes", authors: "Buzsáki, Anastassiou & Koch", year: 2012, journal: "Nature Reviews Neuroscience", species: "Methods review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/22595786/", note: "Essential methods reference for what field potentials measure and why oscillatory power, phase, and spiking should not be treated as interchangeable signals."
+  },
+  halassa2014: {
+    title: "State-dependent architecture of thalamic reticular subnetworks", authors: "Halassa et al.", year: 2014, journal: "Cell", species: "Mouse",
+    url: "https://pubmed.ncbi.nlm.nih.gov/25126786/", note: "Projection-defined TRN subnetworks changed with sleep, arousal, and attention; causal manipulation altered attentional performance."
+  },
+  arcaro2015: {
+    title: "The anatomical and functional organization of the human visual pulvinar", authors: "Arcaro, Pinsk & Kastner", year: 2015, journal: "Journal of Neuroscience", species: "Human",
+    url: "https://pubmed.ncbi.nlm.nih.gov/26156987/", note: "High-resolution imaging identified ventral pulvinar visual-field maps and a dorsal–ventral division in cortical connectivity."
+  },
+  landau2015: {
+    title: "Distributed attention is implemented through theta-rhythmic gamma modulation", authors: "Landau et al.", year: 2015, journal: "Current Biology", species: "Human",
+    url: "https://pubmed.ncbi.nlm.nih.gov/26279231/", note: "Behavioral sampling of multiple locations alternated near 4 Hz and was linked to theta-modulated gamma activity."
+  },
+  zhou2016: {
+    title: "Pulvinar–cortex interactions in vision and attention", authors: "Zhou, Schafer & Desimone", year: 2016, journal: "Neuron", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/26748092/", note: "Ventro-lateral pulvinar deactivation weakened V4 attention effects and gamma synchrony, increased low-frequency activity, and impaired behavior."
+  },
+  halassakastner2017: {
+    title: "Thalamic functions in distributed cognitive control", authors: "Halassa & Kastner", year: 2017, journal: "Nature Neuroscience", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/29184210/", note: "Unified attention and executive-control evidence around thalamic regulation of cortical effective connectivity rather than passive content relay."
+  },
+  fiebelkorn2018: {
+    title: "A dynamic interplay within the frontoparietal network underlies rhythmic spatial attention", authors: "Fiebelkorn, Pinsk & Kastner", year: 2018, journal: "Neuron", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/30138590/", note: "Theta phase organized alternating FEF/LIP states associated with enhanced sampling versus potential shifting."
+  },
+  arcaro2018: {
+    title: "Organizing principles of pulvino-cortical functional coupling in humans", authors: "Arcaro et al.", year: 2018, journal: "Nature Communications", species: "Human",
+    url: "https://pubmed.ncbi.nlm.nih.gov/30568159/", note: "Ventral pulvinar tracked visual position/statistics and coupled to occipitotemporal cortex; dorsal pulvinar tracked attention and coupled to association networks."
+  },
+  fiebelkorntheory2019: {
+    title: "A rhythmic theory of attention", authors: "Fiebelkorn & Kastner", year: 2019, journal: "Trends in Cognitive Sciences", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/30591373/", note: "Proposed that theta-rhythmic reweighting alternates sampling and shifting states across sensory, attention, and motor networks."
+  },
+  redinbaugh2020: {
+    title: "Thalamus modulates consciousness via layer-specific control of cortex", authors: "Redinbaugh et al.", year: 2020, journal: "Neuron", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32053769/", note: "Central lateral stimulation restored wake-like processing under anesthesia, establishing a causal arousal mechanism distinct from item-specific visual selection."
+  },
+  kastner2020: {
+    title: "Dynamic pulvino-cortical interactions in the primate attention network", authors: "Kastner, Fiebelkorn & Eradath", year: 2020, journal: "Current Opinion in Neurobiology", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32942125/", note: "Concise synthesis of pulvinar control over cortical excitability and synchrony across attention networks."
+  },
+  sheffield2020: {
+    title: "Thalamocortical anatomical connectivity in schizophrenia and psychotic bipolar disorder", authors: "Sheffield et al.", year: 2020, journal: "Schizophrenia Bulletin", species: "Human clinical",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32219397/", note: "Reduced PFC–thalamic and elevated somatosensory–thalamic anatomical connectivity appeared across psychotic disorders and illness stages."
+  },
+  raposo2025: {
+    title: "Human attention-guided visual perception is governed by rhythmic oscillations and aperiodic timescales", authors: "Raposo et al.", year: 2025, journal: "PLOS Biology", species: "Human EEG / intracranial",
+    url: "https://pubmed.ncbi.nlm.nih.gov/40577312/", note: "Five experiments separated periodic sampling from aperiodic timescales, showing both shape attention across sensory and association cortex."
+  },
+  alitto2025: {
+    title: "Spatial attention weakly modulates visual responses in the lateral geniculate nucleus", authors: "Alitto, Johnson & Usrey", year: 2025, journal: "eNeuro", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/41005988/", note: "Direct LGN recordings found statistically detectable but small and inconsistent attentional modulation, substantially weaker than many cortical effects."
+  },
+  zhang2025: {
+    title: "Mediodorsal thalamus regulates task uncertainty to enable cognitive flexibility", authors: "Zhang et al.", year: 2025, journal: "Nature Communications", species: "Biophysical model / mouse constraints",
+    url: "https://pubmed.ncbi.nlm.nih.gov/40097445/", note: "Biologically constrained models show how MD can improve robustness, working memory, and switching under cue uncertainty."
+  },
+  khalaf2025: {
+    title: "Shared subcortical arousal systems across sensory modalities during transient modulation of attention", authors: "Khalaf et al.", year: 2025, journal: "NeuroImage", species: "Human fMRI",
+    url: "https://pubmed.ncbi.nlm.nih.gov/40250641/", note: "Large public datasets implicated midbrain reticular formation and central lateral thalamus in transient, cross-modal engagement."
+  },
+  boroujeni2026: {
+    title: "High-frequency bursts facilitate fast communication for human spatial attention", authors: "Banaie Boroujeni et al.", year: 2026, journal: "Nature Neuroscience", species: "Human intracranial",
+    url: "https://pubmed.ncbi.nlm.nih.gov/41331141/", note: "High-frequency activity bursts marked brief population-firing windows and synchronized cue- and target-responsive subnetworks during spatial attention."
+  },
+  alitto2026: {
+    title: "Dynamic modulation of beta-band oscillations in the LGN and their role in visual processing", authors: "Alitto et al.", year: 2026, journal: "Journal of Neuroscience", species: "Macaque",
+    url: "https://pubmed.ncbi.nlm.nih.gov/41702717/", note: "LGN–V1 beta coherence was suppressed by visual input, attention, and arousal, consistent with a low-engagement or distractor-suppression state rather than active visual processing."
+  },
+  fanyiwi2025: {
+    title: "Stimulus-dependent theta rhythmic activity in primate V1 predicts visual detection", authors: "Fanyiwi et al.", year: 2025, journal: "eLife reviewed preprint", species: "Macaque preprint",
+    url: "https://elifesciences.org/reviewed-preprints/107731v1", note: "Reviewed preprint from the supplied ledger; suggests V1 theta phase predicts detection in a stimulus-dependent manner. Treat as provisional until version of record."
+  },
+  whyte2024: {
+    title: "Thalamic contributions to the state and contents of consciousness", authors: "Whyte et al.", year: 2024, journal: "Neuron", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/38718868/", note: "Separates thalamic contributions to global state from contributions to perceptual content across cellular, circuit, and systems scales."
+  },
+  usrey2015: {
+    title: "Visual functions of the thalamus", authors: "Usrey & Alitto", year: 2015, journal: "Annual Review of Vision Science", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/28217740/", note: "Mechanistic overview of retinal–LGN–V1 transformation, feedback, gain, timing, and the distinct role of visual higher-order thalamus."
+  },
+  sherman2024: {
+    title: "Transthalamic pathways for cortical function", authors: "Sherman & Usrey", year: 2024, journal: "Journal of Neuroscience", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/39197951/", note: "Current account of direct and transthalamic corticocortical routes, emphasizing layer-5 drivers, layer-6 modulators, and parallel processing."
+  },
+  wolff2024: {
+    title: "The mediodorsal thalamus in executive control", authors: "Wolff & Halassa", year: 2024, journal: "Neuron", species: "Review",
+    url: "https://pubmed.ncbi.nlm.nih.gov/38295791/", note: "Reviews MD as a computational partner of PFC in context, flexibility, working memory, and control."
+  },
+  woodward2012: {
+    title: "Thalamocortical dysconnectivity in schizophrenia", authors: "Woodward, Karbasforoushan & Heckers", year: 2012, journal: "American Journal of Psychiatry", species: "Human clinical",
+    url: "https://pubmed.ncbi.nlm.nih.gov/23032387/", note: "Established a reproducible pattern of reduced prefrontal–thalamic and increased somatomotor–thalamic resting connectivity in schizophrenia."
+  },
+  huangwoodward2024: {
+    title: "Lifespan development of thalamic nuclei and characterizing thalamic nuclei abnormalities in schizophrenia using normative modeling", authors: "Huang et al.", year: 2024, journal: "Neuropsychopharmacology", species: "Human clinical",
+    url: "https://pubmed.ncbi.nlm.nih.gov/38480909/", note: "Normative modeling identified marked individual heterogeneity; subsets showed unusually small MD and pulvinar volumes linked to cognitive impairment."
   }
 };
+
+const paperMeta = {};
+function addPaperMeta(ids, fields){
+  ids.forEach(id=>{
+    const previous=paperMeta[id]||{};
+    paperMeta[id]={...previous,...fields};
+    ['topics','methods'].forEach(key=>{
+      if(previous[key]||fields[key]) paperMeta[id][key]=[...new Set([...(previous[key]||[]),...(fields[key]||[])])];
+    });
+  });
+}
+
+addPaperMeta(['desimone1995','treue1999','moore2003','mitchell2009','lovejoy2010','lennert2011','mante2013','fiebelkorn2018','boshra2022'],{topics:['Cortical selection']});
+addPaperMeta(['saalmann2012','purushothaman2012','komura2013','zhou2016','arcaro2015','arcaro2018','eradath2021','kagan2024','furutachi2024','boshra2026','kastner2020','saalmann2011'],{topics:['Pulvinar']});
+addPaperMeta(['schmitt2017','rikhye2018','mukherjee2021','griffiths2022','lam2024','zhang2025','wolff2024','halassakastner2017','mante2013'],{topics:['MD / cognitive control']});
+addPaperMeta(['mcalonan2006','halassa2014','wimmer2015','hadinger2023'],{topics:['TRN / sensory gating']});
+addPaperMeta(['briggs2013','alitto2025','alitto2026','mcalonan2006','wimmer2015','usrey2015'],{topics:['LGN / early vision']});
+addPaperMeta(['fiebelkorn2013','landau2015','fiebelkorn2018','fiebelkorn2019','fiebelkorntheory2019','huang2024','raposo2025','boroujeni2026','boshra2026','alitto2026','fanyiwi2025'],{topics:['Rhythms / bursts']});
+addPaperMeta(['redinbaugh2020','khalaf2025','whyte2024'],{topics:['Arousal / consciousness']});
+addPaperMeta(['woodward2012','sheffield2020','huangwoodward2024'],{topics:['Clinical translation']});
+addPaperMeta(['guillery1995','sherman2024','usrey2015','arcaro2015','arcaro2018'],{topics:['Anatomy / organization']});
+addPaperMeta(['sussillo2013','buzsaki2012','mante2013','zhang2025','raposo2025'],{topics:['Methods / dynamics']});
+
+addPaperMeta(['desimone1995','saalmann2011','halassakastner2017','fiebelkorntheory2019','kastner2020','boshra2022','usrey2015','sherman2024','wolff2024','whyte2024','buzsaki2012'],{methods:['Review']});
+addPaperMeta(['guillery1995'],{methods:['Anatomy']});
+addPaperMeta(['arcaro2015','arcaro2018','smith2009','griffiths2022','khalaf2025','woodward2012','sheffield2020','huangwoodward2024'],{methods:['Human imaging']});
+addPaperMeta(['snow2009'],{methods:['Human lesion']});
+addPaperMeta(['fiebelkorn2013','landau2015'],{methods:['Behavior']});
+addPaperMeta(['schmitt2017','rikhye2018','mukherjee2021','wimmer2015','halassa2014','hadinger2023','furutachi2024'],{methods:['Causal circuit']});
+addPaperMeta(['moore2003','lovejoy2010','purushothaman2012','zhou2016','eradath2021','kagan2024','boshra2026','redinbaugh2020'],{methods:['Causal primate']});
+addPaperMeta(['saalmann2012','komura2013','briggs2013','fiebelkorn2018','fiebelkorn2019','huang2024','alitto2025','alitto2026','boroujeni2026','raposo2025','griffiths2022','mcalonan2006','treue1999','mitchell2009','lennert2011'],{methods:['Recording']});
+addPaperMeta(['mante2013','sussillo2013','zhang2025'],{methods:['Modeling']});
+addPaperMeta(['fanyiwi2025'],{methods:['Reviewed preprint'],provisional:true});
+
+addPaperMeta(['saalmann2012','schmitt2017','rikhye2018','fiebelkorn2019','wimmer2015','mukherjee2021','eradath2021','griffiths2022','furutachi2024','huang2024','lam2024','boshra2026','hadinger2023','arcaro2015','arcaro2018','briggs2013','halassa2014','fiebelkorn2013','fiebelkorn2018','fiebelkorntheory2019','kastner2020','boshra2022','raposo2025','boroujeni2026','alitto2025','alitto2026','fanyiwi2025','halassakastner2017','sherman2024','usrey2015','wolff2024','zhang2025'],{center:true});
+addPaperMeta(['lam2024','fanyiwi2025','whyte2024','saalmann2012','boshra2022','sussillo2013','raposo2025','boroujeni2026','eradath2021','boshra2026','mante2013','lennert2011','komura2013','fiebelkorntheory2019','buzsaki2012'],{ledger:true});
+
+const synthesisClaims = [
+  {title:'The thalamus is not a unitary relay',confidence:'strong',text:'First-order nuclei such as LGN relay subcortical driver input; higher-order nuclei receive major cortical layer-5 driver input and participate in parallel transthalamic communication. Layer-6 feedback is generally modulatory. This is a circuit motif, not a claim that every cell or synapse follows one rule.',papers:['guillery1995','sherman2024','usrey2015']},
+  {title:'Pulvinar organization is network-specific and graded',confidence:'strong',text:'Ventral visual-field maps couple preferentially to occipital and temporal cortex, while dorsal territories couple to parietal, frontal, and cingulate systems. “The pulvinar” therefore cannot be assigned one computation without specifying subdivision, cortical partners, and species.',papers:['arcaro2015','arcaro2018','saalmann2011']},
+  {title:'Pulvinar helps set effective cortical communication',confidence:'converging',text:'Across recordings and inactivation, pulvinar activity changes cortical synchrony, excitability, low-frequency state, and the impact of one cortical population on another. Coherence alone is not routing; causal studies make the coordination account substantially stronger.',papers:['saalmann2012','zhou2016','eradath2021','purushothaman2012']},
+  {title:'Pulvinar bursts can causally improve spatial attention',confidence:'strong',text:'In macaques, pulvinar bursts predicted detection and shifted LIP spatial population codes. Pulvinar microstimulation evoked bursting, synchronized cortical spiking, and improved target detection in a spatially matched window. Generalization beyond the studied circuit and task remains open.',papers:['boshra2026']},
+  {title:'Attention is dynamic across several timescales',confidence:'converging',text:'Theta phase organizes alternating sampling and shifting states; alpha, beta, gamma, and brief high-frequency bursts mark different network configurations. Human intracranial evidence also shows that aperiodic timescales contribute. No single rhythm is a universal attention clock.',papers:['fiebelkorn2018','fiebelkorn2019','raposo2025','boroujeni2026']},
+  {title:'MD regulates cortical state geometry more than sensory detail',confidence:'strong',text:'Projection-defined MD circuits amplify relevant PFC ensembles, suppress interference, stabilize context, and support switching under uncertainty. Most causal evidence is nonhuman; human intracranial data support rhythmic MD–PFC involvement before visual detection.',papers:['schmitt2017','rikhye2018','mukherjee2021','lam2024','griffiths2022']},
+  {title:'TRN provides selective inhibitory gating—but scope matters',confidence:'strong',text:'TRN is topographically organized, state dependent, and causally involved in sensory selection in rodents; macaque recordings show attention-related modulation. Much of the most detailed causal work is cross-modal rather than primate covert spatial attention.',papers:['mcalonan2006','halassa2014','wimmer2015','hadinger2023']},
+  {title:'LGN is modulated, but direct spatial-attention effects are modest',confidence:'mixed',text:'Attention can increase probed LGN→V1 synaptic efficacy and alter thalamocortical state. Yet recent direct macaque LGN recordings find mean firing-rate modulation near one percent and inconsistent across analyses. “Early gating” should not be equated with a large LGN gain change.',papers:['briggs2013','alitto2025','alitto2026']},
+  {title:'Competition reveals many causal attention deficits',confidence:'strong',text:'Pulvinar lesions or inactivation, SC inactivation, and cortical manipulations often produce their largest deficits when targets compete with distractors. This supports selection and weighting accounts more than a generic loss of visual sensitivity.',papers:['snow2009','lovejoy2010','kagan2024','lennert2011']},
+  {title:'Selective attention and arousal interact but are not identical',confidence:'strong',text:'Central and intralaminar thalamus regulate broad engagement and conscious state. Pulvinar, MD, and TRN exert more network- or representation-specific control. Arousal can change the operating regime of attention without specifying which visual item wins.',papers:['redinbaugh2020','khalaf2025','whyte2024']},
+  {title:'Clinical thalamocortical dysconnectivity is robust but not yet mechanistic',confidence:'converging',text:'Psychosis studies repeatedly identify reduced prefrontal–thalamic and altered sensory/somatomotor coupling, with substantial individual and nuclear heterogeneity. Imaging associations do not establish that one thalamic circuit causes symptoms.',papers:['woodward2012','sheffield2020','huangwoodward2024']},
+  {title:'Cross-species translation must preserve circuit identity',confidence:'mixed',text:'Rodent LP, primate pulvinar subdivisions, tree-shrew nuclei, and human imaging parcels are related but not interchangeable. Homology is strongest when connectivity, retinotopy, cell types, task computation, and causal phenotype converge.',papers:['arcaro2015','furutachi2024','lam2024','usrey2015']}
+];
+
+const centerProjects = [
+  {label:'Project 1 · Usrey',title:'Pulvinar microcircuits and early visual cortex',text:'Multielectrode recording and causal perturbation ask how pulvinar and early visual cortex communicate during sensory control. The strongest adjacent literature covers LGN–V1 efficacy, pulvinar bursts, and corticothalamic timing.'},
+  {label:'Project 2 · Kastner',title:'Comparative PUL and MD physiology in macaque',text:'Simultaneous recordings compare pulvinar and MD with posterior parietal and prefrontal targets during cognitive control. This directly addresses whether the two higher-order nuclei share a control principle while carrying different variables.'},
+  {label:'Project 3 · Halassa',title:'Causal thalamocortical engagement in tree shrew',text:'The project compares MD–PFC and pulvinar–visual circuits with causal and microcircuit access during attention and hierarchical reasoning, extending rodent MD/TRN mechanisms into a visual mammal.'},
+  {label:'Project 4 · Arcaro & Collins',title:'Human higher-order thalamic organization',text:'High-resolution imaging links task functions to thalamic topography and cortical networks, with explicit cross-species translation and attention to human-specific organization.'},
+  {label:'Project 5 · Woodward',title:'Higher-order thalamus in schizophrenia',text:'The clinical project tests whether PUL/MD circuit principles help explain cognitive impairment in schizophrenia. Current imaging findings motivate hypotheses but do not yet establish circuit-level causality.'},
+  {label:'Core B · Kopell',title:'Biophysical timing and rhythms',text:'Models connect spike timing and multiple rhythms to PUL/MD–cortical communication. This is where competing interpretations of theta, alpha/beta state, and burst timing can become experimentally testable.'},
+  {label:'Core C · Chen',title:'Shared analysis and computational models',text:'Cross-project analytical infrastructure is intended to compare recordings and imaging across species and to coordinate data-driven and biophysical models.'}
+];
+
+const glossary = [
+  {term:'Selective attention',text:'Preferential processing of task-relevant information at the expense of competing information. It can be spatial, feature-based, object-based, temporal, or modality-based.'},
+  {term:'Priority map',text:'A population code in which locations or objects are weighted by salience, goals, reward, uncertainty, and action relevance. It need not be stored in one region.'},
+  {term:'Effective connectivity',text:'The influence one neural population exerts on another under a particular condition. It is not the same as anatomical connectivity or simple correlation.'},
+  {term:'First- vs higher-order thalamus',text:'First-order nuclei receive driver input from ascending subcortical pathways; higher-order nuclei receive major driver input from cortical layer 5 and can create transthalamic cortical routes.'},
+  {term:'Driver vs modulator',text:'A driver strongly determines relay-cell receptive-field content; a modulator changes gain, timing, or mode. The distinction is synaptic and anatomical, not a synonym for “important” versus “unimportant.”'},
+  {term:'Tonic spikes vs bursts',text:'Thalamic relay cells can fire isolated tonic spikes or rapid low-threshold burst sequences depending on membrane state. Bursts can amplify event impact but do not have one universal meaning.'},
+  {term:'Coherence / synchrony',text:'Statistical alignment of activity across signals. It can enable communication but may also arise from common input, volume conduction, or state changes; causal inference needs additional evidence.'},
+  {term:'Directional influence',text:'Measures such as Granger causality test whether one signal improves prediction of another. They do not by themselves prove a direct synaptic pathway or exclude an unobserved common source.'},
+  {term:'Theta, alpha, beta, gamma',text:'Broad frequency ranges whose boundaries and functions vary by species, area, and task. The same nominal band can reflect different generators or computations.'},
+  {term:'Retinotopy',text:'Orderly mapping of visual-field position across neural tissue. Matching retinotopy helps identify functionally corresponding thalamic and cortical territories.'},
+  {term:'Aperiodic timescale',text:'Temporal structure not captured by a narrow oscillatory peak. Longer intrinsic timescales can support integration and context in association cortex.'},
+  {term:'Arousal',text:'A global dimension of wakefulness and engagement. It changes whether selective networks can operate effectively but does not specify the selected item.'}
+];
 
 const nodes = [
   {id:'pfc', name:'Prefrontal cortex', abbr:'PFC', x:255, y:145, w:185, h:66, type:'cortex', circuits:['control','core'], species:['mouse','human'],
    role:'Represents goals, task rules and context; biases downstream selection and helps decide which representation should remain active.',
    evidence:'MD input can amplify the functional connectivity and selectivity of task-relevant prefrontal ensembles. PFC can also bias sensory gating through TRN.',
    caveat:'“PFC” is a broad label. Rodent medial PFC, primate lateral PFC and human medial PFC are not interchangeable.',
-   questions:['Which PFC subregions provide rule content versus control signals?','When does PFC initiate a switch, and when does it merely stabilize one selected elsewhere?'], papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022']},
+   questions:['Which PFC subregions provide rule content versus control signals?','When does PFC initiate a switch, and when does it merely stabilize one selected elsewhere?'], papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022','lennert2011','mante2013']},
 
   {id:'acc', name:'Anterior cingulate', abbr:'ACC / dmPFC', x:495, y:105, w:175, h:66, type:'cortex', circuits:['control'], species:['mouse','tree shrew','human'],
    role:'Tracks conflict, error and uncertainty; may initiate changes in task state when current predictions or rules fail.',
@@ -358,31 +720,31 @@ const nodes = [
    role:'Contributes to covert spatial attention, saccade planning and top-down biasing of sensory representations.',
    evidence:'FEF participates in a theta-rhythmic frontoparietal–pulvinar network whose apparent direction of influence changes across attentional phases.',
    caveat:'Covert attention and latent eye-movement plans share circuitry, so oculomotor and attentional effects are difficult to fully separate.',
-   questions:['Which FEF signals are genuinely covert-attentional rather than motor preparatory?'], papers:['fiebelkorn2019']},
+   questions:['Which FEF signals are genuinely covert-attentional rather than motor preparatory?'], papers:['moore2003','fiebelkorn2018','fiebelkorn2019']},
 
   {id:'lip', name:'Lateral intraparietal', abbr:'LIP / IPS–PPC', x:1015, y:165, w:190, h:66, type:'cortex', circuits:['core','context'], species:['macaque','human'],
    role:'Represents spatial priority, competing targets, expected value and action relevance; helps translate selection into orienting behavior.',
    evidence:'LIP interacts rhythmically with FEF and mediodorsal pulvinar; V4–LIP coherence is causally affected by dorsal pulvinar inactivation.',
    caveat:'Human IPS/PPC and macaque LIP overlap functionally but are not exact equivalents.',
-   questions:['Does LIP compute priority locally or inherit it from a recurrent SC–pulvinar–FEF loop?'], papers:['fiebelkorn2019','eradath2021','kagan2024','boshra2026']},
+   questions:['Does LIP compute priority locally or inherit it from a recurrent SC–pulvinar–FEF loop?'], papers:['fiebelkorn2018','fiebelkorn2019','eradath2021','kagan2024','boshra2026']},
 
   {id:'v4', name:'Extrastriate visual cortex', abbr:'V4 / TEO', x:1190, y:295, w:190, h:66, type:'cortex', circuits:['core','sensory'], species:['macaque'],
    role:'Encodes selected visual features and objects; attention changes gain, variability, synchrony and downstream impact of its representations.',
    evidence:'Pulvinar–V4/TEO interactions were central to the original cortical-routing findings; dorsal pulvinar inactivation alters V4–LIP coordination.',
    caveat:'V4 and TEO are distinct areas with different positions in the visual hierarchy; they are grouped here only to keep the map readable.',
-   questions:['When does pulvinar change local gain versus interareal timing?'], papers:['saalmann2012','eradath2021']},
+   questions:['When does pulvinar change local gain versus interareal timing?'], papers:['saalmann2012','moore2003','mitchell2009','zhou2016','eradath2021']},
 
   {id:'v1', name:'Early visual cortex', abbr:'V1 / V2', x:1300, y:425, w:170, h:66, type:'cortex', circuits:['sensory','core'], species:['mouse','macaque','human'],
    role:'Represents early visual features and supplies sensory evidence to higher cortical and thalamic pathways.',
    evidence:'Visual thalamus and cortical feedback regulate early visual responses. In mouse, pulvinar/LP input cooperates with local interneurons to amplify unexpected stimuli.',
    caveat:'Mouse V1 prediction-error circuitry cannot automatically be assigned to the same pulvinar subdivision or computation in primates.',
-   questions:['How does attention-related gain interact with prediction error and stimulus expectation?'], papers:['furutachi2024']},
+   questions:['How does attention-related gain interact with prediction error and stimulus expectation?'], papers:['purushothaman2012','briggs2013','furutachi2024','fanyiwi2025']},
 
   {id:'md', name:'Mediodorsal thalamus', abbr:'MD', x:265, y:465, w:190, h:70, type:'thalamus', circuits:['control'], species:['mouse','tree shrew','human'],
    role:'Stabilizes and reconfigures prefrontal representations; regulates uncertainty, context switching, signal amplification and noise suppression.',
    evidence:'Causal pathway-specific studies show that MD can change prefrontal effective connectivity without simply carrying a duplicate of cortical content.',
    caveat:'MD thalamus is not the mediodorsal pulvinar. They are separate thalamic systems with different connectivity and evidence bases.',
-   questions:['What variables are computed in MD versus inherited from PFC or cingulate cortex?','How do separate MD projection populations coordinate during switching?'], papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022','lam2024']},
+   questions:['What variables are computed in MD versus inherited from PFC or cingulate cortex?','How do separate MD projection populations coordinate during switching?'], papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022','lam2024','zhang2025','wolff2024']},
 
   {id:'mdpulv', name:'Mediodorsal pulvinar', abbr:'mdPul / PM', x:690, y:420, w:205, h:72, type:'pulvinar', circuits:['core','context'], species:['macaque'],
    role:'Coordinates the frontoparietal attention network and participates in alternating engagement/disengagement states.',
@@ -394,37 +756,37 @@ const nodes = [
    role:'Contributes to spatial priority, selection under competition and coordination between visual and parietal cortex.',
    evidence:'Inactivation can reduce V4–LIP low-frequency coherence and bias choices away from contralateral space while sparing much of perceptual sensitivity.',
    caveat:'Injection spread and differences among dorsal pulvinar subregions limit claims that one homogeneous structure performs one computation.',
-   questions:['Is dorsal pulvinar computing priority, transmitting it, or changing the effective weight of cortical priority maps?'], papers:['eradath2021','kagan2024','boshra2026']},
+   questions:['Is dorsal pulvinar computing priority, transmitting it, or changing the effective weight of cortical priority maps?'], papers:['komura2013','eradath2021','kagan2024','boshra2026']},
 
   {id:'vpulv', name:'Visual pulvinar', abbr:'Inferior / ventrolateral', x:1110, y:545, w:220, h:72, type:'pulvinar', circuits:['sensory','core'], species:['mouse','macaque'],
    role:'Interacts with early and intermediate visual cortex; supports sensory routing, gain control and responses to unexpected input.',
    evidence:'Macaque recordings support attention-dependent pulvinar coordination of visual cortical areas; mouse LP/pulvinar provides causal input for visual prediction-error amplification.',
    caveat:'The primate visual pulvinar and rodent LP are related but not equivalent. The grouped label hides substantial subnuclear heterogeneity.',
-   questions:['Are routing, gain and prediction error separate projection-defined computations?'], papers:['saalmann2012','furutachi2024']},
+   questions:['Are routing, gain and prediction error separate projection-defined computations?'], papers:['arcaro2015','arcaro2018','saalmann2012','purushothaman2012','zhou2016','furutachi2024']},
 
   {id:'lgn', name:'Lateral geniculate', abbr:'LGN', x:1305, y:585, w:170, h:66, type:'thalamus', circuits:['sensory','state'], species:['mouse','macaque','human'],
    role:'First-order visual thalamic relay whose gain and timing are regulated by cortex and the thalamic reticular nucleus.',
-   evidence:'Retina–LGN–V1 transmission is anatomically established; attention-related sensory gating can be implemented through PFC–TRN control of relay nuclei.',
-   caveat:'The review focused more heavily on higher-order thalamus; LGN is included to show how higher-order and first-order thalamic control differ.',
-   questions:['How much selective-attention modulation originates in LGN versus feedback and TRN?'], papers:['wimmer2015']},
+   evidence:'Retina–LGN–V1 transmission is anatomically established. Attention can alter probed LGN→V1 synaptic efficacy, while recent direct macaque LGN recordings find mean firing-rate effects that are statistically detectable but small and inconsistent.',
+   caveat:'“Attention modulates early vision” does not imply a large LGN gain change. Effects depend on the measure: spikes, synaptic efficacy, coherence, and behavioral state are not interchangeable.',
+   questions:['When does attention alter thalamocortical efficacy without substantially changing mean LGN firing?','How do TRN, cortical feedback and arousal contribute to LGN state?'], papers:['mcalonan2006','briggs2013','wimmer2015','alitto2025','alitto2026','usrey2015']},
 
   {id:'trn', name:'Thalamic reticular nucleus', abbr:'TRN', x:620, y:660, w:210, h:70, type:'gating', circuits:['state','sensory','control'], species:['mouse'],
    role:'A GABAergic shell around the thalamus that inhibits thalamic nuclei and can selectively gate competing sensory channels.',
    evidence:'Mouse causal studies show prefrontal biasing of modality-specific TRN subnetworks during divided attention; frontal layer-5 pathways can exert region-selective TRN control.',
    caveat:'Most detailed causal work is rodent and often involves cross-modal selection, not primate covert visual attention.',
-   questions:['How are TRN gating and pulvinar routing coordinated in the same task?'], papers:['wimmer2015','hadinger2023']},
+   questions:['How are TRN gating and pulvinar routing coordinated in the same task?'], papers:['mcalonan2006','halassa2014','wimmer2015','hadinger2023']},
 
   {id:'central', name:'Central / intralaminar thalamus', abbr:'CL / intralaminar', x:285, y:675, w:220, h:72, type:'thalamus', circuits:['state'], species:['macaque','human'],
    role:'Supports wakefulness, engagement and broad cortical availability rather than selecting one particular visual representation.',
-   evidence:'Central-thalamic intervention studies support effects on global cortical state and behavioral engagement, but this lies adjacent to—not identical with—the pulvinar attention literature.',
+   evidence:'Central-lateral stimulation can restore wake-like cortical processing under anesthesia; large human imaging datasets also implicate central thalamus in transient cross-modal engagement.',
    caveat:'Included to distinguish selective attention from arousal. The graph does not imply central thalamus computes spatial priority.',
-   questions:['How does global engagement modulate the efficacy of selective pulvinar and MD circuits?'], papers:[]},
+   questions:['How does global engagement modulate the efficacy of selective pulvinar and MD circuits?'], papers:['redinbaugh2020','khalaf2025','whyte2024']},
 
   {id:'sc', name:'Superior colliculus', abbr:'SC', x:980, y:755, w:190, h:70, type:'subcortex', circuits:['context','core'], species:['macaque','human'],
    role:'Fast orienting and salience structure that integrates sensory, motor and priority signals and supplies major input to parts of the pulvinar.',
    evidence:'Anatomical and physiological work supports colliculo-pulvinar pathways and recurrent interactions with cortical orienting systems.',
    caveat:'The map emphasizes attention, but SC activity often combines covert selection, microsaccades and overt orienting.',
-   questions:['Which priority signals originate in SC versus cortex, and how does pulvinar transform them?'], papers:['kagan2024']},
+   questions:['Which priority signals originate in SC versus cortex, and how does pulvinar transform them?'], papers:['lovejoy2010','kagan2024']},
 
   {id:'bg', name:'Basal ganglia', abbr:'BG / striatum', x:580, y:820, w:190, h:66, type:'subcortex', circuits:['context'], species:['all'],
    role:'Contributes to action selection and gating of orienting choices through cortical–striatal and collicular loops.',
@@ -449,17 +811,17 @@ const edges = [
   {id:'retina-lgn', s:'retina', t:'lgn', dir:'forward', label:'visual input', strength:'strong', circuits:['sensory'], curve:0,
    summary:'Canonical feedforward retinal projection to first-order visual thalamus.', mechanism:'Anatomical sensory relay.', caveat:'Shown only as network context.', papers:[]},
   {id:'lgn-v1', s:'lgn', t:'v1', dir:'forward', label:'first-order relay', strength:'strong', circuits:['sensory'], curve:-15,
-   summary:'LGN supplies primary thalamic visual input to early visual cortex.', mechanism:'Feedforward thalamocortical transmission, modulated by cortical feedback and TRN.', caveat:'Attention does not reduce to this pathway.', papers:['wimmer2015']},
+   summary:'LGN supplies primary thalamic visual input to early visual cortex.', mechanism:'Feedforward thalamocortical transmission, modulated by cortical feedback, TRN and behavioral state.', caveat:'Attention can alter synaptic efficacy and network state even when mean LGN firing-rate effects are small.', papers:['briggs2013','alitto2025','alitto2026']},
   {id:'trn-lgn', s:'trn', t:'lgn', dir:'inhibitory', label:'selective inhibition', strength:'strong', circuits:['state','sensory'], curve:35,
-   summary:'TRN provides inhibitory control over relay nuclei and can bias which sensory channel gains access.', mechanism:'PFC-driven, modality-selective thalamic gain control in rodent divided-attention tasks.', caveat:'Cross-modal rodent evidence should not be treated as a complete model of primate visual attention.', papers:['wimmer2015','hadinger2023']},
+   summary:'TRN provides inhibitory control over relay nuclei and can bias which sensory channel gains access.', mechanism:'Topographic inhibition is attention-modulated in macaque and causally recruited by PFC in rodent divided-attention tasks.', caveat:'Cross-modal rodent evidence should not be treated as a complete model of primate visual attention.', papers:['mcalonan2006','halassa2014','wimmer2015','hadinger2023']},
   {id:'pfc-trn', s:'pfc', t:'trn', dir:'forward', label:'top-down gate bias', strength:'moderate', circuits:['control','state'], curve:28,
-   summary:'Frontal cortex can bias TRN subnetworks, thereby altering thalamic sensory gain.', mechanism:'Top-down control acts on inhibitory thalamic gating rather than only directly on sensory cortex.', caveat:'Projection architecture is species- and frontal-region-specific.', papers:['wimmer2015','hadinger2023']},
+   summary:'Frontal cortex can bias TRN subnetworks, thereby altering thalamic sensory gain.', mechanism:'Top-down control acts on inhibitory thalamic gating rather than only directly on sensory cortex.', caveat:'Projection architecture is species- and frontal-region-specific.', papers:['halassa2014','wimmer2015','hadinger2023']},
   {id:'v1-v4', s:'v1', t:'v4', dir:'both', label:'visual hierarchy', strength:'strong', circuits:['sensory','core'], curve:20,
-   summary:'Reciprocal feedforward and feedback interactions connect early and extrastriate visual cortex.', mechanism:'Sensory feature transformation plus recurrent contextual modulation.', caveat:'Collapsed across several intermediate visual areas.', papers:[]},
+   summary:'Reciprocal feedforward and feedback interactions connect early and extrastriate visual cortex.', mechanism:'Sensory feature transformation plus recurrent contextual modulation; attention changes gain, reliability and timing.', caveat:'Collapsed across several intermediate visual areas.', papers:['desimone1995','mitchell2009']},
   {id:'vpulv-v1', s:'vpulv', t:'v1', dir:'both', label:'gain / surprise', strength:'moderate', circuits:['sensory','core'], curve:-18,
-   summary:'Visual pulvinar/LP interacts with early visual cortex and can selectively amplify unexpected visual input.', mechanism:'In mouse, pulvinar excitation is gated by local VIP–SST disinhibitory circuitry; broader reciprocal anatomy extends across species.', caveat:'The causal prediction-error mechanism is mouse-specific until demonstrated in primates.', papers:['furutachi2024']},
+   summary:'Visual pulvinar/LP interacts with early visual cortex and can control supragranular output or selectively amplify unexpected input.', mechanism:'Mechanisms range from powerful pulvinar control of V1 in galago to projection- and interneuron-specific prediction-error amplification in mouse.', caveat:'These mechanisms come from different species and pulvinar/LP territories and should not be collapsed into one universal computation.', papers:['purushothaman2012','furutachi2024']},
   {id:'vpulv-v4', s:'vpulv', t:'v4', dir:'both', label:'attention-dependent routing', strength:'strong', circuits:['sensory','core'], curve:-42,
-   summary:'Pulvinar interactions with intermediate visual cortex change with attentional allocation.', mechanism:'Temporal alignment and effective information transmission among cortical populations.', caveat:'Coherence can reflect common input; causal routing requires intervention as well as correlation.', papers:['saalmann2012']},
+   summary:'Pulvinar interactions with intermediate visual cortex change with attentional allocation and help maintain an active cortical processing state.', mechanism:'Temporal alignment, gamma coordination and control of cortical excitability.', caveat:'Coherence can reflect common input; causal routing requires intervention as well as correlation.', papers:['saalmann2012','zhou2016']},
   {id:'dpulv-v4', s:'dpulv', t:'v4', dir:'both', label:'cortical coordination', strength:'moderate', circuits:['core'], curve:26,
    summary:'Dorsal pulvinar contributes to the coordination of extrastriate and parietal cortex.', mechanism:'Inactivation reduced low-frequency V4–LIP coherence without equivalent local suppression.', caveat:'The pathway-level mechanism may involve common thalamic coordination rather than a simple direct relay.', papers:['eradath2021']},
   {id:'dpulv-lip', s:'dpulv', t:'lip', dir:'both', label:'spatial priority', strength:'strong', circuits:['core','context'], curve:-20,
@@ -471,17 +833,17 @@ const edges = [
   {id:'mdpulv-lip', s:'mdpulv', t:'lip', dir:'both', label:'theta / burst reconfiguration', strength:'strong', circuits:['core','context'], curve:36, tags:['theta','burst','rhythm'],
    summary:'Pulvinar–parietal interaction tracks rhythmic sampling; recent work additionally links pulvinar bursts to attentional reconfiguration.', mechanism:'Slow phase may organize when brief burst-driven cortical state changes occur.', caveat:'The unifying theta-to-burst mechanism is a current synthesis, not yet a settled result.', papers:['fiebelkorn2019','boshra2026']},
   {id:'fef-lip', s:'fef', t:'lip', dir:'both', label:'frontoparietal priority loop', strength:'strong', circuits:['core','context'], curve:-15, tags:['theta','rhythm'],
-   summary:'FEF and LIP form a recurrent attention/orienting network with phase-dependent changes in interaction.', mechanism:'Alternating network states may support exploitation of the attended location and exploration of alternatives.', caveat:'The cycle’s generator and necessity remain open.', papers:['fiebelkorn2019']},
+   summary:'FEF and LIP form a recurrent attention/orienting network with phase-dependent changes in interaction.', mechanism:'Alternating network states may support exploitation of the attended location and exploration of alternatives.', caveat:'The cycle’s generator and necessity remain open.', papers:['fiebelkorn2018','fiebelkorn2019']},
   {id:'fef-v4', s:'fef', t:'v4', dir:'forward', label:'top-down bias', strength:'moderate', circuits:['core'], curve:34,
-   summary:'Frontal priority signals can bias extrastriate sensory processing.', mechanism:'Changes gain and effective influence of task-relevant visual populations.', caveat:'Shown as a functional control route, not a claim of one monosynaptic pathway accounting for all effects.', papers:[]},
+   summary:'Frontal priority signals can bias extrastriate sensory processing.', mechanism:'Subthreshold FEF stimulation enhances retinotopically corresponding V4 responses and suppresses competing representations.', caveat:'The stimulation result links oculomotor priority to sensory gain but does not make all covert attention a latent saccade.', papers:['moore2003']},
   {id:'lip-v4', s:'lip', t:'v4', dir:'forward', label:'priority feedback', strength:'moderate', circuits:['core'], curve:-36,
-   summary:'Parietal priority information can feed back toward sensory cortex.', mechanism:'Supports competition-dependent weighting of visual representations.', caveat:'Direction varies across task phase and may be mediated partly through pulvinar.', papers:['eradath2021']},
+   summary:'Parietal priority information can feed back toward sensory cortex.', mechanism:'Supports competition-dependent weighting of visual representations and state-dependent reliability.', caveat:'Direction varies across task phase and may be mediated partly through pulvinar.', papers:['mitchell2009','eradath2021']},
   {id:'pfc-fef', s:'pfc', t:'fef', dir:'forward', label:'goal → spatial set', strength:'moderate', circuits:['control','core'], curve:-15,
    summary:'Task rules and goals can shape the spatial attentional set implemented by frontal orienting circuits.', mechanism:'Functional top-down control within the distributed cortical network.', caveat:'Simplifies multiple prefrontal and premotor pathways.', papers:[]},
   {id:'pfc-lip', s:'pfc', t:'lip', dir:'forward', label:'context → priority', strength:'hypothesis', circuits:['control','core'], curve:-60,
    summary:'Current goals are integrated into parietal priority representations through direct and indirect network interactions.', mechanism:'Integrative network-level interpretation.', caveat:'The edge should not be read as a single demonstrated command pathway.', papers:[]},
   {id:'md-pfc', s:'md', t:'pfc', dir:'both', label:'amplify / stabilize / switch', strength:'strong', circuits:['control'], curve:-16, tags:['theta','uncertainty'],
-   summary:'MD and PFC form a recurrent cognitive-control loop that stabilizes task-relevant representations and enables reconfiguration.', mechanism:'MD changes prefrontal functional connectivity, signal amplification, noise suppression and context-dependent switching.', caveat:'MD may carry contextual variables, but it is not simply a copy of PFC content.', papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022']},
+   summary:'MD and PFC form a recurrent cognitive-control loop that stabilizes task-relevant representations and enables reconfiguration.', mechanism:'MD changes prefrontal functional connectivity, signal amplification, noise suppression and context-dependent switching.', caveat:'MD may carry contextual variables, but it is not simply a copy of PFC content.', papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022','lam2024','zhang2025']},
   {id:'acc-md', s:'acc', t:'md', dir:'forward', label:'error / uncertainty', strength:'moderate', circuits:['control'], curve:20, tags:['uncertainty'],
    summary:'Cingulate uncertainty and error signals can recruit an MD-mediated route for updating prefrontal task representations.', mechanism:'Transthalamic reconfiguration following changes in inferred task structure.', caveat:'Evidence and anatomical labels vary across species.', papers:['lam2024']},
   {id:'md-network', s:'md', t:'network', dir:'forward', label:'select cortical ensemble', strength:'strong', circuits:['control','core'], curve:-15,
@@ -489,15 +851,15 @@ const edges = [
   {id:'network-pfc', s:'network', t:'pfc', dir:'both', label:'maintained task state', strength:'hypothesis', circuits:['control','core'], curve:22,
    summary:'Selected cortical ensembles implement the current task rule and are maintained through recurrent cortical–thalamic dynamics.', mechanism:'Attractor-like stabilization and reconfiguration.', caveat:'This is a conceptual synthesis across experiments.', papers:['schmitt2017','rikhye2018']},
   {id:'central-pfc', s:'central', t:'pfc', dir:'forward', label:'global engagement', strength:'moderate', circuits:['state'], curve:-25,
-   summary:'Central/intralaminar thalamus can increase broad cortical availability and engagement.', mechanism:'State regulation rather than item-specific selection.', caveat:'Included to prevent conflating selective attention with arousal; not central to the highlighted pulvinar experiments.', papers:[]},
+   summary:'Central/intralaminar thalamus can increase broad cortical availability and engagement.', mechanism:'State regulation rather than item-specific selection.', caveat:'Included to prevent conflating selective attention with arousal; not central to the highlighted pulvinar experiments.', papers:['redinbaugh2020','khalaf2025','whyte2024']},
   {id:'central-fef', s:'central', t:'fef', dir:'forward', label:'availability / arousal', strength:'hypothesis', circuits:['state'], curve:70,
-   summary:'Global thalamic state can alter whether attention networks are available to engage.', mechanism:'Broad state modulation.', caveat:'Schematic and not meant as a specific tract claim.', papers:[]},
+   summary:'Global thalamic state can alter whether attention networks are available to engage.', mechanism:'Broad state modulation.', caveat:'Schematic and not meant as a specific tract claim.', papers:['redinbaugh2020','khalaf2025']},
   {id:'sc-dpulv', s:'sc', t:'dpulv', dir:'forward', label:'salience / orienting input', strength:'strong', circuits:['context','core'], curve:-22,
    summary:'Superior colliculus supplies fast orienting and salience-related input to pulvinar pathways.', mechanism:'Subcortical-to-thalamic route that can influence cortical priority systems.', caveat:'Different pulvinar zones receive distinct collicular inputs.', papers:['kagan2024']},
   {id:'sc-vpulv', s:'sc', t:'vpulv', dir:'forward', label:'unexpected events', strength:'moderate', circuits:['context','sensory'], curve:25,
    summary:'Collicular-recipient pulvinar pathways can convey visually salient or behaviorally unexpected events.', mechanism:'Fast subcortical input to higher-order visual thalamus.', caveat:'The exact relationship to cortical prediction error depends on subdivision and species.', papers:['furutachi2024']},
   {id:'fef-sc', s:'fef', t:'sc', dir:'both', label:'covert / overt orienting', strength:'strong', circuits:['context','core'], curve:56,
-   summary:'FEF and SC participate in recurrent selection and eye-movement preparation.', mechanism:'Links cortical priority and subcortical orienting commands.', caveat:'Covert attention and motor preparation overlap.', papers:[]},
+   summary:'FEF and SC participate in recurrent selection and eye-movement preparation.', mechanism:'Links cortical priority and subcortical orienting commands; SC inactivation produces competition-dependent covert selection deficits.', caveat:'Covert attention and motor preparation overlap, but SC selection effects persist without an overt orienting response.', papers:['lovejoy2010','moore2003']},
   {id:'pfc-bg', s:'pfc', t:'bg', dir:'both', label:'rule / action loop', strength:'hypothesis', circuits:['context','control'], curve:30,
    summary:'Cortico–basal-ganglia loops contribute to choosing and maintaining task-appropriate actions.', mechanism:'Broader action-selection context.', caveat:'Compressed schematic edge; not developed by the primary pulvinar papers.', papers:[]},
   {id:'bg-sc', s:'bg', t:'sc', dir:'inhibitory', label:'action gating', strength:'moderate', circuits:['context'], curve:-22,
@@ -647,24 +1009,126 @@ function paperHtml(ids){
   if(!ids || !ids.length) return '<div class="empty">No single paper is assigned here; this element is included as broader anatomical or conceptual context.</div>';
   return ids.map(id=>{
     const p=papers[id];
-    return `<div class="paper"><div class="paper-title"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></div><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}</div><div class="paper-note">${esc(p.note)}</div></div>`;
+    const meta=paperMeta[id]||{};
+    return `<div class="paper"><div class="paper-title"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></div><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}${meta.provisional?' · PROVISIONAL':''}</div><div class="paper-note">${esc(p.note)}</div></div>`;
   }).join('');
 }
+
+const paperCatalog = Object.entries(papers).map(([id,p])=>({id,...p,...(paperMeta[id]||{}),topics:paperMeta[id]?.topics||['Adjacent context'],methods:paperMeta[id]?.methods||['Recording']}));
+const referenceModal=document.getElementById('referenceModal');
+let referenceOpener=null;
+
+function speciesBucket(p){
+  const s=p.species.toLowerCase();
+  if(s.includes('human')) return 'Human';
+  if(s.includes('macaque')) return 'Macaque';
+  if(s.includes('mouse')) return 'Mouse';
+  if(s.includes('tree shrew')) return 'Tree shrew';
+  if(s.includes('ferret')) return 'Ferret';
+  if(s.includes('galago')) return 'Galago';
+  return 'Cross-species / methods';
+}
+function citationLinks(ids){
+  return `<div class="claim-links">${ids.map(id=>{const p=papers[id];return `<a class="citation-chip" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.authors.split(',')[0].split(' & ')[0])} ${p.year}</a>`}).join('')}</div>`;
+}
+function renderSynthesis(){
+  document.getElementById('reference-synthesis').innerHTML=`
+    <div class="reference-intro">
+      <div class="reference-note"><strong>Working model.</strong> Visual attention emerges from recurrent competition across sensory, frontoparietal, thalamic, and orienting systems. Higher-order thalamus changes which cortical representations are stable, excitable, and mutually influential; it does not replace cortical content with a single central command.</div>
+      <div class="reference-note"><strong>Evidence labels.</strong> Strong = convergent anatomy and/or causal evidence. Converging = several methods agree but key mechanism remains indirect. Mixed = boundary conditions or conflicting measures are central to the conclusion.</div>
+    </div>
+    <div class="claim-grid">${synthesisClaims.map(c=>`<article class="claim-card"><div class="claim-top"><h3>${esc(c.title)}</h3><span class="confidence ${c.confidence}">${esc(c.confidence)}</span></div><p>${esc(c.text)}</p>${citationLinks(c.papers)}</article>`).join('')}</div>`;
+}
+function libraryCard(p){
+  const tags=[...p.topics,...p.methods,speciesBucket(p)];
+  return `<article class="library-paper"><h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}</div><div class="paper-note">${esc(p.note)}</div><div class="paper-tags">${p.ledger?'<span class="paper-tag">Your ledger</span>':''}${p.center?'<span class="paper-tag center">Conte investigator</span>':''}${p.provisional?'<span class="paper-tag">Provisional</span>':''}${tags.slice(0,4).map(t=>`<span class="paper-tag ${t.includes('Causal')?'causal':''}">${esc(t)}</span>`).join('')}</div></article>`;
+}
+function renderLibrary(){
+  const topics=[...new Set(paperCatalog.flatMap(p=>p.topics))].sort();
+  const methods=[...new Set(paperCatalog.flatMap(p=>p.methods))].sort();
+  const species=[...new Set(paperCatalog.map(speciesBucket))].sort();
+  document.getElementById('reference-library').innerHTML=`
+    <div class="library-controls">
+      <input id="librarySearch" type="search" placeholder="Search title, author, finding, region…" aria-label="Search literature">
+      <select id="libraryTopic" aria-label="Filter by topic"><option value="">All topics</option>${topics.map(x=>`<option>${esc(x)}</option>`).join('')}</select>
+      <select id="libraryMethod" aria-label="Filter by method"><option value="">All evidence types</option>${methods.map(x=>`<option>${esc(x)}</option>`).join('')}</select>
+      <select id="librarySpecies" aria-label="Filter by species"><option value="">All species</option>${species.map(x=>`<option>${esc(x)}</option>`).join('')}</select>
+    </div>
+    <div class="library-summary" id="librarySummary"></div><div class="library-list" id="libraryList"></div>`;
+  ['librarySearch','libraryTopic','libraryMethod','librarySpecies'].forEach(id=>document.getElementById(id).addEventListener(id==='librarySearch'?'input':'change',updateLibrary));
+  updateLibrary();
+}
+function updateLibrary(){
+  const q=(document.getElementById('librarySearch')?.value||'').trim().toLowerCase();
+  const topic=document.getElementById('libraryTopic')?.value||'';
+  const method=document.getElementById('libraryMethod')?.value||'';
+  const species=document.getElementById('librarySpecies')?.value||'';
+  const matches=paperCatalog.filter(p=>{
+    const hay=[p.title,p.authors,p.journal,p.species,p.note,...p.topics,...p.methods].join(' ').toLowerCase();
+    return (!q||hay.includes(q))&&(!topic||p.topics.includes(topic))&&(!method||p.methods.includes(method))&&(!species||speciesBucket(p)===species);
+  }).sort((a,b)=>b.year-a.year||a.title.localeCompare(b.title));
+  document.getElementById('librarySummary').textContent=`${matches.length} of ${paperCatalog.length} references · reviews provide orientation; claim-level support prioritizes primary studies`;
+  document.getElementById('libraryList').innerHTML=matches.length?matches.map(libraryCard).join(''):'<div class="empty">No references match those filters.</div>';
+}
+function renderCenter(){
+  document.getElementById('reference-center').innerHTML=`
+    <div class="reference-intro"><div class="reference-note"><strong>Why this lens is useful.</strong> The Princeton Thalamus Conte Center explicitly compares PUL and MD across macaque, tree shrew, and human work while linking healthy cognition to schizophrenia. Its project structure exposes the field’s major translation gaps.</div><div class="reference-note"><strong>Important limit.</strong> These projects are an active research agenda, not settled findings. The literature library distinguishes completed studies from center aims.</div></div>
+    <div class="project-grid">${centerProjects.map(p=>`<article class="project-card"><div class="project-number">${esc(p.label)}</div><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></article>`).join('')}</div>
+    <div class="reference-note" style="margin-top:12px"><strong>Center sources:</strong> <a href="https://conte.thalamus.princeton.edu/projects" target="_blank" rel="noopener">scientific projects</a> · <a href="https://conte.thalamus.princeton.edu/cores" target="_blank" rel="noopener">modeling and analysis cores</a></div>`;
+}
+function renderGlossary(){
+  document.getElementById('reference-glossary').innerHTML=`
+    <div class="glossary-grid">${glossary.map(g=>`<article class="glossary-card"><h3>${esc(g.term)}</h3><p>${esc(g.text)}</p></article>`).join('')}</div>
+    <table class="scope-table"><thead><tr><th>Evidence type</th><th>What it can support</th><th>What it cannot establish alone</th></tr></thead><tbody>
+      <tr><td>Anatomy / tracing</td><td>Physical projection, laminar origin, topography</td><td>Task-time information flow or behavioral necessity</td></tr>
+      <tr><td>Simultaneous recording</td><td>Timing, population code, condition-dependent coordination</td><td>Direct causation or exclusion of common input</td></tr>
+      <tr><td>Inactivation / stimulation</td><td>Necessity or sufficiency within a spatial and temporal intervention scope</td><td>The normal endogenous computation, especially with spread or rebound</td></tr>
+      <tr><td>Human imaging</td><td>Large-scale organization, topography, clinical association</td><td>Cell type, directionality, or synaptic mechanism</td></tr>
+      <tr><td>Lesion evidence</td><td>Long-term necessity and behavioral phenotype</td><td>Acute circuit mechanism or clean nuclear specificity</td></tr>
+      <tr><td>Modeling</td><td>Computational sufficiency, formal predictions, mechanism comparison</td><td>That the brain implements the modeled mechanism without empirical tests</td></tr>
+    </tbody></table>`;
+}
+function setReferenceTab(tab){
+  document.querySelectorAll('.reference-tab').forEach(b=>b.classList.toggle('active',b.dataset.referenceTab===tab));
+  document.querySelectorAll('.reference-panel').forEach(p=>p.hidden=p.id!==`reference-${tab}`);
+  if(tab==='library') renderLibrary();
+  document.querySelector('.reference-body').scrollTop=0;
+}
+function openReference(tab='synthesis',opener=null){
+  referenceOpener=opener||document.activeElement;
+  referenceModal.hidden=false;
+  setReferenceTab(tab);
+  document.getElementById('referenceClose').focus();
+}
+function closeReference(){
+  referenceModal.hidden=true;
+  referenceOpener?.focus?.();
+}
+
+renderSynthesis(); renderCenter(); renderGlossary();
+document.getElementById('sidebarPaperCount').textContent=`${paperCatalog.length} papers`;
+document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>openReference(b.dataset.openReference,b)));
+document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>setReferenceTab(b.dataset.referenceTab)));
+document.getElementById('referenceClose').addEventListener('click',closeReference);
+referenceModal.addEventListener('click',e=>{if(e.target===referenceModal)closeReference();});
+
 function showOverview(){
   details.innerHTML=`
-    <div class="detail-kicker">How to read this map</div>
+    <div class="detail-kicker">Current synthesis · September 2026</div>
     <h2 class="detail-title">A recurrent control network, not a command hierarchy</h2>
-    <div class="detail-block"><p>The map organizes the review around three partially overlapping systems: <strong>pulvinar–visual/frontoparietal routing</strong>, <strong>MD–prefrontal cognitive control</strong>, and <strong>TRN/central-thalamic gating and state regulation</strong>. Select a node or pathway to see what the evidence actually establishes.</p></div>
+    <div class="detail-block"><p>The map organizes visual attention around four interacting systems: <strong>pulvinar–visual/frontoparietal coordination</strong>, <strong>MD–prefrontal cognitive control</strong>, <strong>TRN/LGN sensory-state regulation</strong>, and <strong>central-thalamic arousal</strong>. Select a node or pathway to see what each evidence stream actually establishes.</p></div>
     <div class="evidence-card"><div class="detail-kicker">Key distinction</div><p style="margin:0;font-size:12.5px;line-height:1.5"><strong>Mediodorsal thalamus (MD)</strong> and <strong>mediodorsal pulvinar</strong> are different structures. MD is emphasized in context, uncertainty and PFC stabilization; mediodorsal pulvinar is emphasized in rhythmic spatial attention and frontoparietal coordination.</p></div>
     <div class="detail-block"><h3>Central synthesis</h3><ul>
-      <li>Cortex represents goals, sensory evidence and competing actions.</li>
-      <li>Higher-order thalamus helps determine which cortical populations communicate effectively and remain stable.</li>
-      <li>Theta-range phase may organize alternating network states; brief pulvinar or cortical bursts may implement rapid state transitions.</li>
-      <li>These mechanisms are compatible but not yet proven to form one universal attention algorithm.</li>
+      <li>Visual selection reflects competition among sensory, priority, rule, and action representations—not a single attentional spotlight.</li>
+      <li>Higher-order thalamus helps determine which cortical populations communicate effectively, remain stable, or rapidly reconfigure.</li>
+      <li>Theta phase, band-limited state changes, and brief high-frequency or thalamic bursts operate at different temporal scales.</li>
+      <li>Pulvinar, MD, TRN, LGN, and central thalamus have distinct circuit motifs; “thalamic gating” is too vague without a nucleus and measure.</li>
     </ul></div>
+    <div class="detail-block"><button class="reference-btn" data-overview-reference="synthesis"><span>Read the 12-claim evidence synthesis</span><span>open</span></button><button class="reference-btn" style="margin-top:7px" data-overview-reference="library"><span>Search ${paperCatalog.length} curated references</span><span>open</span></button></div>
     <div class="detail-block"><h3>Species markers</h3><p>Small dots on nodes indicate where much of the highlighted evidence comes from: white = mouse, yellow = macaque, red = human, cyan = tree shrew, green = ferret. These colors are intentionally separate from the brain-region colors. A node can be supported across several species.</p></div>
-    <div class="detail-block"><h3>Access and honesty note</h3><p>Links point to primary publisher, PubMed or PMC pages. Access varies by article and institution. The 2026 burst paper is represented conservatively from the final publisher page/abstract; do not infer unlisted methodological details without reading the full final article.</p></div>
+    <div class="detail-block"><h3>Coverage and honesty note</h3><p>The library combines the supplied attention ledger with a broader primary-source review and work from the Princeton Thalamus Conte Center investigators. Reviews are labeled as orientation; the V1 theta reviewed preprint is explicitly provisional. Clinical imaging, cross-species homology, coherence, and directional analyses are not presented as stronger causal evidence than their methods allow.</p></div>
     <div class="footer-note">This is a conceptual literature map. Coordinates are chosen for readability and do not represent anatomical position, distance, laterality or cortical layer.</div>`;
+  details.querySelectorAll('[data-overview-reference]').forEach(b=>b.addEventListener('click',()=>openReference(b.dataset.overviewReference,b)));
 }
 function showNode(n){
   details.innerHTML=`
@@ -739,6 +1203,8 @@ function viewMatchesNode(n){
   if(activeView==='control') return ['acc','md','pfc','network','trn'].includes(n.id);
   if(activeView==='sensory') return ['retina','lgn','trn','v1','v4','vpulv','dpulv'].includes(n.id);
   if(activeView==='orienting') return ['pfc','fef','lip','mdpulv','dpulv','sc','bg','v4'].includes(n.id);
+  if(activeView==='selection') return ['pfc','fef','lip','v4','v1','vpulv','dpulv','mdpulv','sc'].includes(n.id);
+  if(activeView==='state') return ['pfc','fef','central','trn','lgn','md','network','mdpulv'].includes(n.id);
   return true;
 }
 function viewMatchesEdge(e){
@@ -748,6 +1214,8 @@ function viewMatchesEdge(e){
   if(activeView==='control') return e.circuits.includes('control') && [e.s,e.t].some(x=>['acc','md','pfc','network','trn'].includes(x));
   if(activeView==='sensory') return e.circuits.includes('sensory');
   if(activeView==='orienting') return e.circuits.includes('context')||['fef-lip','dpulv-lip','fef-v4','lip-v4'].includes(e.id);
+  if(activeView==='selection') return ['fef-lip','fef-v4','lip-v4','v4-lip','dpulv-lip','vpulv-v4','mdpulv-fef','mdpulv-lip','sc-dpulv','fef-sc','pfc-fef','pfc-lip'].includes(e.id);
+  if(activeView==='state') return e.circuits.includes('state')||['md-pfc','md-network','network-pfc','mdpulv-fef','mdpulv-lip'].includes(e.id);
   return true;
 }
 function applyFilters(){
@@ -758,7 +1226,8 @@ function applyFilters(){
   nodes.forEach(n=>{
     const circuitOk=n.circuits.some(c=>circuits.has(c));
     const viewOk=viewMatchesNode(n);
-    const hay=[n.name,n.abbr,n.role,n.evidence,n.caveat,...n.questions].join(' ').toLowerCase();
+    const refs=(n.papers||[]).flatMap(id=>papers[id]?[papers[id].title,papers[id].authors,papers[id].note]:[]);
+    const hay=[n.name,n.abbr,n.role,n.evidence,n.caveat,...n.questions,...refs].join(' ').toLowerCase();
     const searchOk=!q||hay.includes(q);
     const visible=circuitOk&&viewOk&&searchOk;
     document.querySelector(`.node[data-id="${n.id}"]`)?.classList.toggle('hidden',!visible);
@@ -768,7 +1237,8 @@ function applyFilters(){
   edges.forEach(e=>{
     const circuitOk=e.circuits.some(c=>circuits.has(c));
     const viewOk=viewMatchesEdge(e);
-    const hay=[e.label,e.summary,e.mechanism,e.caveat,...(e.tags||[])].join(' ').toLowerCase();
+    const refs=(e.papers||[]).flatMap(id=>papers[id]?[papers[id].title,papers[id].authors,papers[id].note]:[]);
+    const hay=[e.label,e.summary,e.mechanism,e.caveat,...(e.tags||[]),...refs].join(' ').toLowerCase();
     const searchOk=!q||hay.includes(q)||visibleNodeIds.has(e.s)||visibleNodeIds.has(e.t);
     const visible=circuitOk&&viewOk&&searchOk&&visibleNodeIds.has(e.s)&&visibleNodeIds.has(e.t);
     document.querySelector(`.edge[data-id="${e.id}"]`)?.classList.toggle('hidden',!visible);
@@ -818,7 +1288,7 @@ document.getElementById('reset').addEventListener('click',()=>{transform={x:0,y:
 document.getElementById('search').addEventListener('input',()=>{selected=null;document.querySelectorAll('.node,.edge,.edge-label').forEach(x=>x.classList.remove('selected','connected','dim'));applyFilters();});
 document.querySelectorAll('input[data-circuit]').forEach(x=>x.addEventListener('change',()=>{selected=null;applyFilters();}));
 document.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')clearSelection();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!referenceModal.hidden)closeReference();else clearSelection();}});
 
 drawGroups(); drawEdges(); drawNodes(); showOverview(); applyFilters(); updateTransform();
 </script>
