@@ -208,6 +208,68 @@
   .brain-schematic-note { color: #9eafcb; font-size: 11px; line-height: 1.45; margin-top: 8px; }
   .brain-mini-legend { color: #91a3bf; font-size: 10.5px; margin-top: 4px; }
 
+  button:focus-visible, a:focus-visible, select:focus-visible, .node:focus-visible rect, .edge:focus-visible {
+    outline: 2px solid #91baff; outline-offset: 3px;
+  }
+  .node:focus-visible rect { stroke-width: 4; }
+  .text-link { border: 0; padding: 2px 0; color: #9dc4ff; background: none; cursor: pointer; text-align: left; }
+  .explore-button { margin: 14px 0; border-color: #765baf; background: linear-gradient(120deg,#292047,#17233d); padding: 13px; }
+  .explore-button small { display: block; margin-top: 5px; color: #b3a7cf; font-size: 10.5px; line-height: 1.5; }
+  .explore-button { width: 100%; text-align: left; }
+  .atlas-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; margin-bottom: 16px; }
+  .atlas-controls label { flex: 1; min-width: 190px; color: #9bacca; font-size: 11px; }
+  .atlas-controls select { display: block; width: 100%; margin-top: 6px; border: 1px solid #435574; border-radius: 9px; color: #edf2fc; background: #111c31; padding: 9px; font: inherit; font-size: 13px; }
+  .atlas-layout { display: grid; grid-template-columns: minmax(0,1fr) 245px; gap: 22px; }
+  .atlas-main { min-width: 0; }
+  .atlas-heading { margin: 0 0 8px; font-size: 27px; line-height: 1.2; }
+  .atlas-deck { color: #b6c7e2; margin: 0 0 12px; font-size: 14px; line-height: 1.5; }
+  .atlas-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0; border-bottom: 1px solid #334360; padding-bottom: 10px; }
+  .atlas-tabs button { font-size: 12px; }
+  .guide-section { margin: 0 0 16px; padding: 16px; background: #121d32; border: 1px solid #304360; border-radius: 12px; }
+  .guide-section h3 { font-size: 15px; margin: 0 0 9px; line-height: 1.4; }
+  .guide-section p { font-size: 13px; color: #c6d3e7; line-height: 1.7; margin: 6px 0; }
+  .guide-section .paper-meta { font-size: 11px; margin: 0 0 10px; }
+  .guide-section dl { display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 10px 15px; margin: 12px 0 0; font-size: 12.5px; line-height: 1.65; }
+  .guide-section dt { color: #91a8ce; font-weight: 700; }
+  .guide-section dd { margin: 0; color: #ccd8e9; }
+  .guide-section dd:last-child { color: #e0c78d; }
+  .atlas-side h3 { color: #93a8c8; font-size: 11px; text-transform: uppercase; letter-spacing: .07em; margin: 0 0 10px; }
+  .atlas-side .brain-grid { grid-template-columns: 1fr; }
+  .atlas-side .brain-schematic-note { font-size: 10.5px; }
+  .atlas-side .brain-svg { max-height: 130px; }
+  .related-regions { display: grid; gap: 6px; margin-bottom: 18px; }
+  .related-regions button { text-align: left; }
+  .reading-step { border-bottom: 1px solid #2c3b56; padding: 10px 0; font-size: 11px; line-height: 1.5; }
+  .reading-step a { display: block; }
+  .trail-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 12px 0 20px; }
+  .trail-card { padding: 13px; border: 1px solid #3b4567; border-radius: 11px; background: #161c32; }
+  .trail-card h3 { font-size: 13px; margin: 0; }
+  .trail-card p { color: #aabbd5; font-size: 11.5px; line-height: 1.6; margin: 8px 0; }
+  .trail-card .claim-links { gap: 8px; }
+  .atlas-note { color: #8fa4c5; font-size: 11px; line-height: 1.6; margin: 12px 0; }
+  .atlas-permalink { display: block; width: 100%; color: #bcd6ff; font-size: 12px; padding: 9px; margin-top: 7px; overflow-wrap: anywhere; border: 1px solid #405476; border-radius: 8px; background: #0c1629; }
+  .library-controls { grid-template-columns: minmax(170px,1fr) repeat(4,minmax(110px,.4fr)); }
+  .paper-regions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  @media (max-width: 1000px) {
+    .library-controls { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  }
+  @media (max-width: 880px) {
+    .atlas-layout { grid-template-columns: 1fr; }
+    .atlas-side { border-top: 1px solid #334360; padding-top: 18px; }
+    .atlas-side .brain-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .atlas-side .detail-block:first-child { display: none; }
+  }
+  @media (max-width: 560px) {
+    header { align-items: start; gap: 10px; flex-direction: column; }
+    .header-badges { justify-content: start; }
+    .atlas-heading { font-size: 22px; }
+    .trail-grid { grid-template-columns: 1fr; }
+    .guide-section { padding: 12px; }
+    .guide-section dl { grid-template-columns: 1fr; gap: 3px; }
+    .guide-section dd { margin-bottom: 10px; }
+    .library-controls { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 1120px) {
     .workspace { grid-template-columns: 230px 1fr 320px; }
   }
@@ -225,6 +287,7 @@
   }
   @media (max-width: 560px) {
     .header-badges .legend-badge { display: none; }
+    .library-controls { grid-template-columns: 1fr; }
     .reference-head { padding: 14px; }
     .reference-tabs, .reference-body { padding-left: 14px; padding-right: 14px; }
     .library-controls, .glossary-grid { grid-template-columns: 1fr; }
@@ -247,7 +310,8 @@
         <span class="species-key-item"><span class="species-key-dot" style="background:#6ee7ff"></span>Tree shrew</span>
         <span class="species-key-item"><span class="species-key-dot" style="background:#8be28b"></span>Ferret</span>
       </span>
-      <span class="badge">Updated September 2026</span>
+      <span class="badge">Research expanded October 2026</span>
+      <button class="header-action" data-open-reference="regions">Region explorer</button>
       <button class="header-action" data-open-reference="synthesis">Synthesis</button>
       <button class="header-action" data-open-reference="library">Reference library</button>
       <span class="badge">Click nodes or pathways</span>
@@ -262,7 +326,7 @@
 
       <div class="section">
         <div class="section-title">Find a region or mechanism</div>
-        <input id="search" class="search" type="search" placeholder="e.g., theta, V4, uncertainty" />
+        <input id="search" class="search" type="search" placeholder="e.g., theta, V4, uncertainty" aria-label="Find a region or mechanism" />
       </div>
 
       <div class="section">
@@ -319,7 +383,7 @@
     </aside>
 
     <section class="graph-wrap" id="graphWrap">
-      <svg id="graph" viewBox="0 0 1500 930" aria-label="Interactive network graph">
+      <svg id="graph" viewBox="0 0 1500 930" role="group" aria-label="Interactive network graph">
         <defs>
           <marker id="arrow-strong" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ecf2ff"></path></marker>
           <marker id="arrow-moderate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9eb3d8"></path></marker>
@@ -352,12 +416,14 @@
       <button class="modal-close" id="referenceClose" aria-label="Close reference">Close</button>
     </div>
     <nav class="reference-tabs" aria-label="Reference sections">
+      <button class="reference-tab" data-reference-tab="regions">Region explorer</button>
       <button class="reference-tab active" data-reference-tab="synthesis">Synthesis</button>
       <button class="reference-tab" data-reference-tab="library">Literature library</button>
       <button class="reference-tab" data-reference-tab="center">Conte Center lens</button>
       <button class="reference-tab" data-reference-tab="glossary">Methods & glossary</button>
     </nav>
     <div class="reference-body">
+      <section class="reference-panel" id="reference-regions" hidden></section>
       <section class="reference-panel" id="reference-synthesis"></section>
       <section class="reference-panel" id="reference-library" hidden></section>
       <section class="reference-panel" id="reference-center" hidden></section>
@@ -366,6 +432,7 @@
   </div>
 </div>
 
+<script src="region-content.js"></script>
 <script>
 const papers = {
   saalmann2012: {
@@ -448,7 +515,7 @@ const papers = {
     note: "Pulvinar bursts predicted detection and biased cortical spatial codes; pulvinar microstimulation evoked bursts, synchronized LIP spiking, and improved spatially matched target detection."
   },
   hadinger2023: {
-    title: "Region-selective control of the thalamic reticular nucleus via cortical layer 5",
+    title: "Region-selective control of the thalamic reticular nucleus via cortical layer 5 pyramidal cells",
     authors: "Hádinger et al.", year: 2023, journal: "Nature Neuroscience", species: "Mouse",
     url: "https://www.nature.com/articles/s41593-022-01217-z",
     note: "Identified a frontal cortical layer-5 pathway capable of region-selective control of TRN."
@@ -599,7 +666,7 @@ const papers = {
   },
   fanyiwi2025: {
     title: "Stimulus-dependent theta rhythmic activity in primate V1 predicts visual detection", authors: "Fanyiwi et al.", year: 2025, journal: "eLife reviewed preprint", species: "Macaque preprint",
-    url: "https://elifesciences.org/reviewed-preprints/107731v1", note: "Reviewed preprint from the supplied ledger; suggests V1 theta phase predicts detection in a stimulus-dependent manner. Treat as provisional until version of record."
+    url: "https://elifesciences.org/reviewed-preprints/107731", note: "Reviewed preprint, v1 (August 2025). The eLife assessment calls the neural–behavioral rhythmicity link incomplete; stimulus-dependent V1 theta is an observation, while its perceptual mechanism remains provisional."
   },
   whyte2024: {
     title: "Thalamic contributions to the state and contents of consciousness", authors: "Whyte et al.", year: 2024, journal: "Neuron", species: "Review",
@@ -627,6 +694,7 @@ const papers = {
   }
 };
 
+Object.assign(papers, researchPapers);
 const paperMeta = {};
 function addPaperMeta(ids, fields){
   ids.forEach(id=>{
@@ -637,6 +705,8 @@ function addPaperMeta(ids, fields){
     });
   });
 }
+
+Object.entries(researchPapers).forEach(([id,p])=>addPaperMeta([id],{topics:p.topics,methods:p.methods}));
 
 addPaperMeta(['desimone1995','treue1999','moore2003','mitchell2009','lovejoy2010','lennert2011','mante2013','fiebelkorn2018','boshra2022'],{topics:['Cortical selection']});
 addPaperMeta(['saalmann2012','purushothaman2012','komura2013','zhou2016','arcaro2015','arcaro2018','eradath2021','kagan2024','furutachi2024','boshra2026','kastner2020','saalmann2011'],{topics:['Pulvinar']});
@@ -651,7 +721,8 @@ addPaperMeta(['sussillo2013','buzsaki2012','mante2013','zhang2025','raposo2025']
 
 addPaperMeta(['desimone1995','saalmann2011','halassakastner2017','fiebelkorntheory2019','kastner2020','boshra2022','usrey2015','sherman2024','wolff2024','whyte2024','buzsaki2012'],{methods:['Review']});
 addPaperMeta(['guillery1995'],{methods:['Anatomy']});
-addPaperMeta(['arcaro2015','arcaro2018','smith2009','griffiths2022','khalaf2025','woodward2012','sheffield2020','huangwoodward2024'],{methods:['Human imaging']});
+addPaperMeta(['arcaro2015','arcaro2018','smith2009','khalaf2025','woodward2012','sheffield2020','huangwoodward2024'],{methods:['Human imaging']});
+addPaperMeta(['griffiths2022','boroujeni2026'],{methods:['Human intracranial']});
 addPaperMeta(['snow2009'],{methods:['Human lesion']});
 addPaperMeta(['fiebelkorn2013','landau2015'],{methods:['Behavior']});
 addPaperMeta(['schmitt2017','rikhye2018','mukherjee2021','wimmer2015','halassa2014','hadinger2023','furutachi2024'],{methods:['Causal circuit']});
@@ -669,11 +740,11 @@ const synthesisClaims = [
   {title:'Pulvinar helps set effective cortical communication',confidence:'converging',text:'Across recordings and inactivation, pulvinar activity changes cortical synchrony, excitability, low-frequency state, and the impact of one cortical population on another. Coherence alone is not routing; causal studies make the coordination account substantially stronger.',papers:['saalmann2012','zhou2016','eradath2021','purushothaman2012']},
   {title:'Pulvinar bursts can causally improve spatial attention',confidence:'strong',text:'In macaques, pulvinar bursts predicted detection and shifted LIP spatial population codes. Pulvinar microstimulation evoked bursting, synchronized cortical spiking, and improved target detection in a spatially matched window. Generalization beyond the studied circuit and task remains open.',papers:['boshra2026']},
   {title:'Attention is dynamic across several timescales',confidence:'converging',text:'Theta phase organizes alternating sampling and shifting states; alpha, beta, gamma, and brief high-frequency bursts mark different network configurations. Human intracranial evidence also shows that aperiodic timescales contribute. No single rhythm is a universal attention clock.',papers:['fiebelkorn2018','fiebelkorn2019','raposo2025','boroujeni2026']},
-  {title:'MD regulates cortical state geometry more than sensory detail',confidence:'strong',text:'Projection-defined MD circuits amplify relevant PFC ensembles, suppress interference, stabilize context, and support switching under uncertainty. Most causal evidence is nonhuman; human intracranial data support rhythmic MD–PFC involvement before visual detection.',papers:['schmitt2017','rikhye2018','mukherjee2021','lam2024','griffiths2022']},
-  {title:'TRN provides selective inhibitory gating—but scope matters',confidence:'strong',text:'TRN is topographically organized, state dependent, and causally involved in sensory selection in rodents; macaque recordings show attention-related modulation. Much of the most detailed causal work is cross-modal rather than primate covert spatial attention.',papers:['mcalonan2006','halassa2014','wimmer2015','hadinger2023']},
+  {title:'MD supports prefrontal maintenance and flexible control',confidence:'strong',text:'Projection-defined MD circuits amplify relevant PFC ensembles, suppress interference, stabilize context, and support switching under uncertainty. Direction and task phase matter: MD→PFC and PFC→MD can support different parts of working memory. Most causal evidence is nonhuman; human stimulation and intracranial recordings provide complementary evidence without resolving cell-type mechanisms.',papers:['schmitt2017','bolkan2017','mukherjee2021','lam2024','perakyla2017','griffiths2022']},
+  {title:'TRN provides selective inhibitory gating—but scope matters',confidence:'strong',text:'TRN is topographically organized, state dependent, and causally involved in sensory selection in rodents; macaque recordings show attention-related modulation. Mouse sensory filtering can use an indirect PFC–basal-ganglia route, distinct from direct frontal inputs to other TRN sectors. Much detailed causal work is cross-modal rather than primate covert spatial attention.',papers:['mcalonan2006','halassa2014','wimmer2015','nakajima2019','hadinger2023']},
   {title:'LGN is modulated, but direct spatial-attention effects are modest',confidence:'mixed',text:'Attention can increase probed LGN→V1 synaptic efficacy and alter thalamocortical state. Yet recent direct macaque LGN recordings find mean firing-rate modulation near one percent and inconsistent across analyses. “Early gating” should not be equated with a large LGN gain change.',papers:['briggs2013','alitto2025','alitto2026']},
-  {title:'Competition reveals many causal attention deficits',confidence:'strong',text:'Pulvinar lesions or inactivation, SC inactivation, and cortical manipulations often produce their largest deficits when targets compete with distractors. This supports selection and weighting accounts more than a generic loss of visual sensitivity.',papers:['snow2009','lovejoy2010','kagan2024','lennert2011']},
-  {title:'Selective attention and arousal interact but are not identical',confidence:'strong',text:'Central and intralaminar thalamus regulate broad engagement and conscious state. Pulvinar, MD, and TRN exert more network- or representation-specific control. Arousal can change the operating regime of attention without specifying which visual item wins.',papers:['redinbaugh2020','khalaf2025','whyte2024']},
+  {title:'A selection deficit can spare sensory encoding',confidence:'strong',text:'Competition often exposes causal attention deficits. Dorsal pulvinar inactivation can bias choices while sparing sensitivity; SC inactivation can impair selection while measured MT/MST attention enhancements survive. Behavior, encoding and readout must therefore be measured separately.',papers:['snow2009','lovejoy2010','kagan2024','zenon2012']},
+  {title:'Selective attention and arousal interact but are not identical',confidence:'strong',text:'Central and intralaminar thalamus regulate broad engagement and conscious state. Some higher-order thalamic projections also carry state-related signals, while others support network- or representation-specific control. Arousal can change the operating regime of attention without specifying which visual item wins; clinical stimulation findings remain bounded by trial design.',papers:['redinbaugh2020','khalaf2025','whyte2024','neske2025','schiff2023']},
   {title:'Clinical thalamocortical dysconnectivity is robust but not yet mechanistic',confidence:'converging',text:'Psychosis studies repeatedly identify reduced prefrontal–thalamic and altered sensory/somatomotor coupling, with substantial individual and nuclear heterogeneity. Imaging associations do not establish that one thalamic circuit causes symptoms.',papers:['woodward2012','sheffield2020','huangwoodward2024']},
   {title:'Cross-species translation must preserve circuit identity',confidence:'mixed',text:'Rodent LP, primate pulvinar subdivisions, tree-shrew nuclei, and human imaging parcels are related but not interchangeable. Homology is strongest when connectivity, retinotopy, cell types, task computation, and causal phenotype converge.',papers:['arcaro2015','furutachi2024','lam2024','usrey2015']}
 ];
@@ -700,15 +771,20 @@ const glossary = [
   {term:'Theta, alpha, beta, gamma',text:'Broad frequency ranges whose boundaries and functions vary by species, area, and task. The same nominal band can reflect different generators or computations.'},
   {term:'Retinotopy',text:'Orderly mapping of visual-field position across neural tissue. Matching retinotopy helps identify functionally corresponding thalamic and cortical territories.'},
   {term:'Aperiodic timescale',text:'Temporal structure not captured by a narrow oscillatory peak. Longer intrinsic timescales can support integration and context in association cortex.'},
-  {term:'Arousal',text:'A global dimension of wakefulness and engagement. It changes whether selective networks can operate effectively but does not specify the selected item.'}
+  {term:'Arousal',text:'A global dimension of wakefulness and engagement. It changes whether selective networks can operate effectively but does not specify the selected item.'},
+  {term:'Sensitivity vs choice bias',text:'Sensitivity measures how well a subject distinguishes alternatives; bias concerns which response is favored. Hit rate alone mixes both. Hit and false-alarm rates, stimulus difficulty and response distributions help distinguish them.'},
+  {term:'Communication subspace',text:'Population activity patterns that predict another population’s activity. This is a statistical relationship, not a physical fiber bundle or proof of causal transmission. Improved prediction need not require more shared dimensions; unchanged dimensionality is not proof of unchanged geometry.'},
+  {term:'Encoding vs readout',text:'Encoding asks whether information is present in a population. Readout asks whether other circuits use it to guide behavior. Successful decoding by an analyst does not guarantee the brain uses the same information.'},
+  {term:'Projection-specific evidence',text:'A manipulation or recording defined by input/output target can distinguish functions hidden by a regional average. It still requires controls for collateral projections, cell types and intervention spread.'},
+  {term:'LP, mdPul and PM',text:'Mouse LP is related to primate pulvinar, with incomplete one-to-one subdivision correspondence. mdPul is not MD. PM can mean mouse posterior medial visual cortex or primate medial pulvinar; read the species and structure together.'}
 ];
 
 const nodes = [
-  {id:'pfc', name:'Prefrontal cortex', abbr:'PFC', x:255, y:145, w:185, h:66, type:'cortex', circuits:['control','core'], species:['mouse','human'],
+  {id:'pfc', name:'Prefrontal cortex', abbr:'PFC', x:255, y:145, w:185, h:66, type:'cortex', circuits:['control','core'], species:['mouse','macaque','human','tree shrew'],
    role:'Represents goals, task rules and context; biases downstream selection and helps decide which representation should remain active.',
-   evidence:'MD input can amplify the functional connectivity and selectivity of task-relevant prefrontal ensembles. PFC can also bias sensory gating through TRN.',
+   evidence:'MD input can amplify the functional connectivity and selectivity of task-relevant prefrontal ensembles. Mouse PFC can also bias sensory TRN through an indirect basal-ganglia route.',
    caveat:'“PFC” is a broad label. Rodent medial PFC, primate lateral PFC and human medial PFC are not interchangeable.',
-   questions:['Which PFC subregions provide rule content versus control signals?','When does PFC initiate a switch, and when does it merely stabilize one selected elsewhere?'], papers:['schmitt2017','rikhye2018','mukherjee2021','griffiths2022','lennert2011','mante2013']},
+   questions:['Which PFC subregions provide rule content versus control signals?','When does PFC initiate a switch, and when does it merely stabilize one selected elsewhere?'], papers:['schmitt2017','mukherjee2021','panichello2021','rigotti2013','nakajima2019','griffiths2022']},
 
   {id:'acc', name:'Anterior cingulate', abbr:'ACC / dmPFC', x:495, y:105, w:175, h:66, type:'cortex', circuits:['control'], species:['mouse','tree shrew','human'],
    role:'Tracks conflict, error and uncertainty; may initiate changes in task state when current predictions or rules fail.',
@@ -740,7 +816,7 @@ const nodes = [
    caveat:'Mouse V1 prediction-error circuitry cannot automatically be assigned to the same pulvinar subdivision or computation in primates.',
    questions:['How does attention-related gain interact with prediction error and stimulus expectation?'], papers:['purushothaman2012','briggs2013','furutachi2024','fanyiwi2025']},
 
-  {id:'md', name:'Mediodorsal thalamus', abbr:'MD', x:265, y:465, w:190, h:70, type:'thalamus', circuits:['control'], species:['mouse','tree shrew','human'],
+  {id:'md', name:'Mediodorsal thalamus', abbr:'MD', x:265, y:465, w:190, h:70, type:'thalamus', circuits:['control'], species:['mouse','tree shrew','human','macaque'],
    role:'Stabilizes and reconfigures prefrontal representations; regulates uncertainty, context switching, signal amplification and noise suppression.',
    evidence:'Causal pathway-specific studies show that MD can change prefrontal effective connectivity without simply carrying a duplicate of cortical content.',
    caveat:'MD thalamus is not the mediodorsal pulvinar. They are separate thalamic systems with different connectivity and evidence bases.',
@@ -770,7 +846,7 @@ const nodes = [
    caveat:'“Attention modulates early vision” does not imply a large LGN gain change. Effects depend on the measure: spikes, synaptic efficacy, coherence, and behavioral state are not interchangeable.',
    questions:['When does attention alter thalamocortical efficacy without substantially changing mean LGN firing?','How do TRN, cortical feedback and arousal contribute to LGN state?'], papers:['mcalonan2006','briggs2013','wimmer2015','alitto2025','alitto2026','usrey2015']},
 
-  {id:'trn', name:'Thalamic reticular nucleus', abbr:'TRN', x:620, y:660, w:210, h:70, type:'gating', circuits:['state','sensory','control'], species:['mouse'],
+  {id:'trn', name:'Thalamic reticular nucleus', abbr:'TRN', x:620, y:660, w:210, h:70, type:'gating', circuits:['state','sensory','control'], species:['mouse','macaque'],
    role:'A GABAergic shell around the thalamus that inhibits thalamic nuclei and can selectively gate competing sensory channels.',
    evidence:'Mouse causal studies show prefrontal biasing of modality-specific TRN subnetworks during divided attention; frontal layer-5 pathways can exert region-selective TRN control.',
    caveat:'Most detailed causal work is rodent and often involves cross-modal selection, not primate covert visual attention.',
@@ -782,23 +858,23 @@ const nodes = [
    caveat:'Included to distinguish selective attention from arousal. The graph does not imply central thalamus computes spatial priority.',
    questions:['How does global engagement modulate the efficacy of selective pulvinar and MD circuits?'], papers:['redinbaugh2020','khalaf2025','whyte2024']},
 
-  {id:'sc', name:'Superior colliculus', abbr:'SC', x:980, y:755, w:190, h:70, type:'subcortex', circuits:['context','core'], species:['macaque','human'],
+  {id:'sc', name:'Superior colliculus', abbr:'SC', x:980, y:755, w:190, h:70, type:'subcortex', circuits:['context','core','sensory'], species:['macaque','mouse'],
    role:'Fast orienting and salience structure that integrates sensory, motor and priority signals and supplies major input to parts of the pulvinar.',
-   evidence:'Anatomical and physiological work supports colliculo-pulvinar pathways and recurrent interactions with cortical orienting systems.',
+   evidence:'SC inactivation impairs covert selection even when measured MT/MST attention enhancements survive. Identified SC–inferior-pulvinar–MT cells establish a separate ascending visual route.',
    caveat:'The map emphasizes attention, but SC activity often combines covert selection, microsaccades and overt orienting.',
-   questions:['Which priority signals originate in SC versus cortex, and how does pulvinar transform them?'], papers:['lovejoy2010','kagan2024']},
+   questions:['Which priority signals originate in SC versus cortex, and how does pulvinar transform them?'], papers:['lovejoy2010','zenon2012','berman2010','herman2020']},
 
-  {id:'bg', name:'Basal ganglia', abbr:'BG / striatum', x:580, y:820, w:190, h:66, type:'subcortex', circuits:['context'], species:['all'],
+  {id:'bg', name:'Basal ganglia', abbr:'BG / striatum', x:580, y:820, w:190, h:66, type:'subcortex', circuits:['context','control','sensory'], species:['mouse','macaque'],
    role:'Contributes to action selection and gating of orienting choices through cortical–striatal and collicular loops.',
-   evidence:'Included as broader context from the review’s distributed-network account, not as a central source of the specific pulvinar results summarized here.',
+   evidence:'Macaque caudate neurons track covert spatial selection and task states; SC inactivation changes this coding. Mouse circuit work also identifies a PFC–basal-ganglia route for sensory TRN filtering.',
    caveat:'This node deliberately compresses several nuclei and pathways. It should not be used as an anatomical summary of basal-ganglia circuitry.',
-   questions:['How do value- and action-selection signals interact with pulvinar spatial priority?'], papers:[]},
+   questions:['How do value- and action-selection signals interact with pulvinar spatial priority?'], papers:['arcizet2018','herman2020','nakajima2019','hikosaka1983']},
 
-  {id:'retina', name:'Retinal input', abbr:'sensory input', x:1340, y:755, w:165, h:58, type:'input', circuits:['sensory'], species:['all'],
+  {id:'retina', name:'Retinal input', abbr:'sensory input', x:1340, y:755, w:165, h:58, type:'input', circuits:['sensory'], species:['macaque','mouse'],
    role:'Provides the principal feedforward visual input to LGN and additional input to subcortical visual pathways.',
-   evidence:'Included as an external input for orientation; it is not itself a brain region.',
+   evidence:'Input/output recordings show temporal filtering of retinal spikes at LGN and cell-dependent integration of retinal input in SC. These are sensory-physiology findings rather than attention manipulations.',
    caveat:'The graph omits many retinal and pretectal pathways not central to attention questions.',
-   questions:[], papers:[]},
+   questions:['How do retinal spike timing and adaptation shape the evidence available for selection?'], papers:['carandini2007','gehr2023']},
 
   {id:'network', name:'Selected cortical ensemble', abbr:'dynamic state', x:500, y:330, w:210, h:64, type:'cortex', circuits:['control','core'], species:['concept'],
    role:'A conceptual node representing the currently stabilized task-relevant cortical population—not a distinct anatomical structure.',
@@ -809,13 +885,13 @@ const nodes = [
 
 const edges = [
   {id:'retina-lgn', s:'retina', t:'lgn', dir:'forward', label:'visual input', strength:'strong', circuits:['sensory'], curve:0,
-   summary:'Canonical feedforward retinal projection to first-order visual thalamus.', mechanism:'Anatomical sensory relay.', caveat:'Shown only as network context.', papers:[]},
+   summary:'Canonical feedforward retinal projection to first-order visual thalamus.', mechanism:'Temporal summation helps determine which afferent spikes produce relay output.', caveat:'Input/output physiology is not an attention manipulation.', papers:['carandini2007']},
   {id:'lgn-v1', s:'lgn', t:'v1', dir:'forward', label:'first-order relay', strength:'strong', circuits:['sensory'], curve:-15,
    summary:'LGN supplies primary thalamic visual input to early visual cortex.', mechanism:'Feedforward thalamocortical transmission, modulated by cortical feedback, TRN and behavioral state.', caveat:'Attention can alter synaptic efficacy and network state even when mean LGN firing-rate effects are small.', papers:['briggs2013','alitto2025','alitto2026']},
   {id:'trn-lgn', s:'trn', t:'lgn', dir:'inhibitory', label:'selective inhibition', strength:'strong', circuits:['state','sensory'], curve:35,
    summary:'TRN provides inhibitory control over relay nuclei and can bias which sensory channel gains access.', mechanism:'Topographic inhibition is attention-modulated in macaque and causally recruited by PFC in rodent divided-attention tasks.', caveat:'Cross-modal rodent evidence should not be treated as a complete model of primate visual attention.', papers:['mcalonan2006','halassa2014','wimmer2015','hadinger2023']},
-  {id:'pfc-trn', s:'pfc', t:'trn', dir:'forward', label:'top-down gate bias', strength:'moderate', circuits:['control','state'], curve:28,
-   summary:'Frontal cortex can bias TRN subnetworks, thereby altering thalamic sensory gain.', mechanism:'Top-down control acts on inhibitory thalamic gating rather than only directly on sensory cortex.', caveat:'Projection architecture is species- and frontal-region-specific.', papers:['halassa2014','wimmer2015','hadinger2023']},
+  {id:'pfc-trn', s:'pfc', t:'trn', dir:'forward', label:'gate bias · indirect', strength:'moderate', circuits:['control','state'], curve:28,
+   summary:'PFC can bias TRN-dependent sensory filtering through an indirect basal-ganglia route.', mechanism:'A compressed net functional influence with intermediate striatal and pallidal stages.', caveat:'This arrow is not a direct PFC→sensory-TRN projection. Frontal layer-5 direct TRN contacts concern a different circuit context.', papers:['wimmer2015','nakajima2019','hadinger2023']},
   {id:'v1-v4', s:'v1', t:'v4', dir:'both', label:'visual hierarchy', strength:'strong', circuits:['sensory','core'], curve:20,
    summary:'Reciprocal feedforward and feedback interactions connect early and extrastriate visual cortex.', mechanism:'Sensory feature transformation plus recurrent contextual modulation; attention changes gain, reliability and timing.', caveat:'Collapsed across several intermediate visual areas.', papers:['desimone1995','mitchell2009']},
   {id:'vpulv-v1', s:'vpulv', t:'v1', dir:'both', label:'gain / surprise', strength:'moderate', circuits:['sensory','core'], curve:-18,
@@ -854,16 +930,20 @@ const edges = [
    summary:'Central/intralaminar thalamus can increase broad cortical availability and engagement.', mechanism:'State regulation rather than item-specific selection.', caveat:'Included to prevent conflating selective attention with arousal; not central to the highlighted pulvinar experiments.', papers:['redinbaugh2020','khalaf2025','whyte2024']},
   {id:'central-fef', s:'central', t:'fef', dir:'forward', label:'availability / arousal', strength:'hypothesis', circuits:['state'], curve:70,
    summary:'Global thalamic state can alter whether attention networks are available to engage.', mechanism:'Broad state modulation.', caveat:'Schematic and not meant as a specific tract claim.', papers:['redinbaugh2020','khalaf2025']},
-  {id:'sc-dpulv', s:'sc', t:'dpulv', dir:'forward', label:'salience / orienting input', strength:'strong', circuits:['context','core'], curve:-22,
-   summary:'Superior colliculus supplies fast orienting and salience-related input to pulvinar pathways.', mechanism:'Subcortical-to-thalamic route that can influence cortical priority systems.', caveat:'Different pulvinar zones receive distinct collicular inputs.', papers:['kagan2024']},
-  {id:'sc-vpulv', s:'sc', t:'vpulv', dir:'forward', label:'unexpected events', strength:'moderate', circuits:['context','sensory'], curve:25,
-   summary:'Collicular-recipient pulvinar pathways can convey visually salient or behaviorally unexpected events.', mechanism:'Fast subcortical input to higher-order visual thalamus.', caveat:'The exact relationship to cortical prediction error depends on subdivision and species.', papers:['furutachi2024']},
-  {id:'fef-sc', s:'fef', t:'sc', dir:'both', label:'covert / overt orienting', strength:'strong', circuits:['context','core'], curve:56,
-   summary:'FEF and SC participate in recurrent selection and eye-movement preparation.', mechanism:'Links cortical priority and subcortical orienting commands; SC inactivation produces competition-dependent covert selection deficits.', caveat:'Covert attention and motor preparation overlap, but SC selection effects persist without an overt orienting response.', papers:['lovejoy2010','moore2003']},
-  {id:'pfc-bg', s:'pfc', t:'bg', dir:'both', label:'rule / action loop', strength:'hypothesis', circuits:['context','control'], curve:30,
-   summary:'Cortico–basal-ganglia loops contribute to choosing and maintaining task-appropriate actions.', mechanism:'Broader action-selection context.', caveat:'Compressed schematic edge; not developed by the primary pulvinar papers.', papers:[]},
+  {id:'sc-dpulv', s:'sc', t:'dpulv', dir:'forward', label:'possible priority interaction', strength:'hypothesis', circuits:['context','core'], curve:-22,
+   summary:'SC and dorsal pulvinar participate in spatial selection, but the cited evidence does not isolate a direct SC→dorsal-pulvinar priority route.', mechanism:'A candidate network interaction; the best identified ascending SC–pulvinar–MT route involves inferior pulvinar.', caveat:'Dorsal pulvinar inactivation cannot establish the origin of its input. Treat this arrow as unresolved, not as a demonstrated tract.', papers:['berman2010','kagan2024']},
+  {id:'sc-vpulv', s:'sc', t:'vpulv', dir:'forward', label:'ascending visual signals', strength:'strong', circuits:['context','sensory'], curve:25,
+   summary:'Physiologically identified macaque pulvinar cells receive SC input and project to MT, establishing an ascending route through inferior pulvinar.', mechanism:'Visual input travels through identified relay cells, with signals distinguished from presaccadic activity.', caveat:'The cortical target in these studies was MT, not V4 or V1. The grouped visual-pulvinar node does not imply uniform connectivity.', papers:['berman2010','berman2011']},
+  {id:'fef-sc', s:'fef', t:'sc', dir:'both', label:'orienting loop', strength:'strong', circuits:['context','core'], curve:56,
+   summary:'Identified FEF output neurons project to SC; a separate ascending SC→MD→FEF pathway returns movement-related signals.', mechanism:'The descending projection carries diverse signals. The MD relay supports corollary discharge used to update successive saccades.', caveat:'The two directions use different routes: SC→FEF return influence is indirect through MD. These oculomotor experiments do not by themselves establish a covert-attention mechanism.', papers:['sommer2000','sommer2004a','sommer2004b']},
+  {id:'pfc-bg', s:'pfc', t:'bg', dir:'forward', label:'goal-dependent filtering', strength:'moderate', circuits:['context','control','sensory'], curve:30,
+   summary:'Mouse PFC outputs to basal-ganglia territories contribute to goal-dependent sensory filtering.', mechanism:'An indirect route ultimately recruiting sensory TRN; this arrow denotes the cortical input stage.', caveat:'This evidence does not establish that every basal-ganglia loop has the same sensory function.', papers:['nakajima2019']},
   {id:'bg-sc', s:'bg', t:'sc', dir:'inhibitory', label:'action gating', strength:'moderate', circuits:['context'], curve:-22,
-   summary:'Basal-ganglia output gates orienting behavior through superior-colliculus circuits.', mechanism:'Action-selection and release of orienting responses.', caveat:'Shown as broader network context rather than a central claim of the review.', papers:[]},
+   summary:'Substantia nigra pars reticulata output provides inhibitory control over SC orienting circuitry.', mechanism:'Changes in tonic nigral inhibition help regulate orienting; striatum is not the direct inhibitory endpoint shown here.', caveat:'The grouped BG node compresses several nuclei. This particular edge refers to SNr output, not a direct striatum→SC projection.', papers:['hikosaka1983']},
+  {id:'bg-trn', s:'bg', t:'trn', dir:'forward', label:'sensory gate recruitment', strength:'moderate', circuits:['context','control','sensory'], curve:28,
+   summary:'A basal-ganglia intermediate enables PFC-dependent recruitment of sensory TRN in mouse filtering tasks.', mechanism:'This is a net influence through an inhibitory/disinhibitory circuit, not one excitatory BG→TRN synapse.', caveat:'The arrow compresses striatal and pallidal stages and does not describe every TRN subnetwork.', papers:['nakajima2019']},
+  {id:'retina-sc', s:'retina', t:'sc', dir:'forward', label:'parallel visual input', strength:'strong', circuits:['sensory','context'], curve:24,
+   summary:'Retinal afferents supply direct visual input to SC in parallel with the LGN pathway.', mechanism:'Retinal spike integration differs at excitatory and inhibitory SC neurons in mouse recordings.', caveat:'Sensory input physiology does not establish voluntary attention in the retina.', papers:['gehr2023']},
   {id:'trn-md', s:'trn', t:'md', dir:'inhibitory', label:'thalamic state gating', strength:'hypothesis', circuits:['state','control'], curve:-30,
    summary:'TRN can regulate higher-order thalamic excitability as part of broader thalamocortical state control.', mechanism:'Inhibitory timing/gain control.', caveat:'The specific functional role in the highlighted MD attention tasks is less directly established than TRN–sensory relay gating.', papers:['hadinger2023']}
 ];
@@ -875,6 +955,10 @@ const groups = [
 ];
 
 const nodeById = Object.fromEntries(nodes.map(n => [n.id,n]));
+function guidePaperIds(id){
+  const g=regionGuides[id];
+  return [...new Set([...(nodeById[id]?.papers||[]),...g.anatomy.flatMap(s=>s.papers),...g.mechanisms.flatMap(s=>s.papers),...g.experiments.map(s=>s.paper),...g.reading,...edges.filter(e=>e.s===id||e.t===id).flatMap(e=>e.papers)])];
+}
 const svg = document.getElementById('graph');
 const viewport = document.getElementById('viewport');
 const edgeG = document.getElementById('edges');
@@ -928,11 +1012,12 @@ function markers(edge){
 function drawEdges(){
   edges.forEach(edge=>{
     const p=pathFor(edge);
-    const attrs={d:p.d,class:`edge ${edge.strength}${edge.dir==='inhibitory'?' inhibitory':''}${edge.circuits.includes('context')&&edge.strength==='hypothesis'?' contextual':''}`,'data-id':edge.id};
+    const attrs={d:p.d,class:`edge ${edge.strength}${edge.dir==='inhibitory'?' inhibitory':''}${edge.circuits.includes('context')&&edge.strength==='hypothesis'?' contextual':''}`,'data-id':edge.id,tabindex:0,role:'button','aria-label':`${nodeById[edge.s].abbr} to ${nodeById[edge.t].abbr}: ${edge.label}`};
     Object.assign(attrs,markers(edge));
     const path=el('path',attrs);
     const title=el('title'); title.textContent=`${edge.label}: ${edge.summary}`; path.appendChild(title);
     path.addEventListener('click',ev=>{ev.stopPropagation(); selectItem('edge',edge.id);});
+    path.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectItem('edge',edge.id);}});
     edgeG.appendChild(path);
     const txt=el('text',{x:p.label.x,y:p.label.y,class:'edge-label','data-id':edge.id}); txt.textContent=edge.label;
     edgeLabelG.appendChild(txt);
@@ -940,7 +1025,7 @@ function drawEdges(){
 }
 function drawNodes(){
   nodes.forEach(n=>{
-    const g=el('g',{class:`node ${n.type}`,'data-id':n.id,transform:`translate(${n.x-n.w/2},${n.y-n.h/2})`});
+    const g=el('g',{class:`node ${n.type}`,'data-id':n.id,transform:`translate(${n.x-n.w/2},${n.y-n.h/2})`,tabindex:0,role:'button','aria-label':n.name});
     const r=el('rect',{width:n.w,height:n.h,rx:15,ry:15});
     const title=el('title'); title.textContent=`${n.name}: ${n.role}`; r.appendChild(title);
     const name=el('text',{x:n.w/2,y:n.h/2-4,class:'name'}); name.textContent=n.name;
@@ -949,9 +1034,10 @@ function drawNodes(){
     const species=n.species||[];
     if(species.length && species[0]!=='all' && species[0]!=='concept'){
       const colors={mouse:'#f5f7fb',macaque:'#ffd54a',human:'#ff6b6b','human intracranial':'#ff6b6b','tree shrew':'#6ee7ff',ferret:'#8be28b'};
-      species.slice(0,3).forEach((s,i)=>g.appendChild(el('circle',{cx:12+i*11,cy:12,r:4.2,fill:colors[s]||'#9fa9ba',class:'species-dot'})));
+      species.forEach((s,i)=>g.appendChild(el('circle',{cx:12+i*11,cy:12,r:4.2,fill:colors[s]||'#9fa9ba',class:'species-dot'})));
     }
     g.addEventListener('click',ev=>{ev.stopPropagation(); selectItem('node',n.id);});
+    g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectItem('node',n.id);}});
     nodeG.appendChild(g);
   });
 }
@@ -1032,18 +1118,23 @@ function citationLinks(ids){
   return `<div class="claim-links">${ids.map(id=>{const p=papers[id];return `<a class="citation-chip" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.authors.split(',')[0].split(' & ')[0])} ${p.year}</a>`}).join('')}</div>`;
 }
 function renderSynthesis(){
+  const claimRegions=[['lgn','vpulv'],['mdpulv','dpulv','vpulv'],['vpulv','v4','lip'],['mdpulv','lip'],['mdpulv','fef','lgn'],['md','pfc','acc'],['trn','bg'],['lgn','retina'],['sc','dpulv'],['central','vpulv'],['md','pfc'],['vpulv','md']];
   document.getElementById('reference-synthesis').innerHTML=`
     <div class="reference-intro">
       <div class="reference-note"><strong>Working model.</strong> Visual attention emerges from recurrent competition across sensory, frontoparietal, thalamic, and orienting systems. Higher-order thalamus changes which cortical representations are stable, excitable, and mutually influential; it does not replace cortical content with a single central command.</div>
       <div class="reference-note"><strong>Evidence labels.</strong> Strong = convergent anatomy and/or causal evidence. Converging = several methods agree but key mechanism remains indirect. Mixed = boundary conditions or conflicting measures are central to the conclusion.</div>
     </div>
-    <div class="claim-grid">${synthesisClaims.map(c=>`<article class="claim-card"><div class="claim-top"><h3>${esc(c.title)}</h3><span class="confidence ${c.confidence}">${esc(c.confidence)}</span></div><p>${esc(c.text)}</p>${citationLinks(c.papers)}</article>`).join('')}</div>`;
+    <div class="claim-grid">${synthesisClaims.map((c,i)=>`<article class="claim-card"><div class="claim-top"><h3>${esc(c.title)}</h3><span class="confidence ${c.confidence}">${esc(c.confidence)}</span></div><p>${esc(c.text)}</p>${citationLinks(c.papers)}<div class="paper-regions">${claimRegions[i].map(id=>`<button class="text-link" data-region-link="${id}">Explore ${esc(nodeById[id].abbr)} →</button>`).join(' · ')}</div></article>`).join('')}</div>`;
+  bindRegionLinks(document.getElementById('reference-synthesis'));
 }
 function libraryCard(p){
   const tags=[...p.topics,...p.methods,speciesBucket(p)];
-  return `<article class="library-paper"><h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}</div><div class="paper-note">${esc(p.note)}</div><div class="paper-tags">${p.ledger?'<span class="paper-tag">Your ledger</span>':''}${p.center?'<span class="paper-tag center">Conte investigator</span>':''}${p.provisional?'<span class="paper-tag">Provisional</span>':''}${tags.slice(0,4).map(t=>`<span class="paper-tag ${t.includes('Causal')?'causal':''}">${esc(t)}</span>`).join('')}</div></article>`;
+  const regions=nodes.filter(n=>guidePaperIds(n.id).includes(p.id));
+  return `<article class="library-paper"><h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}</div><div class="paper-note">${esc(p.note)}</div><div class="paper-tags">${p.ledger?'<span class="paper-tag">Your ledger</span>':''}${p.center?'<span class="paper-tag center">Conte investigator</span>':''}${p.provisional?'<span class="paper-tag">Provisional</span>':''}${tags.map(t=>`<span class="paper-tag ${t.includes('Causal')?'causal':''}">${esc(t)}</span>`).join('')}</div>${regions.length?`<div class="paper-regions">${regions.map(n=>`<button class="citation-chip" data-region-link="${n.id}">Explore ${esc(n.abbr)}</button>`).join('')}</div>`:''}</article>`;
 }
-function renderLibrary(){
+let libraryFilters={q:'',topic:'',method:'',species:'',region:''};
+function renderLibrary(region=null){
+  if(region!==null) libraryFilters={q:'',topic:'',method:'',species:'',region};
   const topics=[...new Set(paperCatalog.flatMap(p=>p.topics))].sort();
   const methods=[...new Set(paperCatalog.flatMap(p=>p.methods))].sort();
   const species=[...new Set(paperCatalog.map(speciesBucket))].sort();
@@ -1053,9 +1144,12 @@ function renderLibrary(){
       <select id="libraryTopic" aria-label="Filter by topic"><option value="">All topics</option>${topics.map(x=>`<option>${esc(x)}</option>`).join('')}</select>
       <select id="libraryMethod" aria-label="Filter by method"><option value="">All evidence types</option>${methods.map(x=>`<option>${esc(x)}</option>`).join('')}</select>
       <select id="librarySpecies" aria-label="Filter by species"><option value="">All species</option>${species.map(x=>`<option>${esc(x)}</option>`).join('')}</select>
+      <select id="libraryRegion" aria-label="Filter by region"><option value="">All regions</option>${nodes.map(n=>`<option value="${n.id}">${esc(n.name)}</option>`).join('')}</select>
     </div>
-    <div class="library-summary" id="librarySummary"></div><div class="library-list" id="libraryList"></div>`;
-  ['librarySearch','libraryTopic','libraryMethod','librarySpecies'].forEach(id=>document.getElementById(id).addEventListener(id==='librarySearch'?'input':'change',updateLibrary));
+    <div class="library-summary" id="librarySummary" aria-live="polite"></div><button class="text-link" id="clearLibraryFilters">Clear filters</button><div class="library-list" id="libraryList"></div>`;
+  const ids={librarySearch:'q',libraryTopic:'topic',libraryMethod:'method',librarySpecies:'species',libraryRegion:'region'};
+  Object.entries(ids).forEach(([id,key])=>{document.getElementById(id).value=libraryFilters[key];document.getElementById(id).addEventListener(id==='librarySearch'?'input':'change',updateLibrary);});
+  document.getElementById('clearLibraryFilters').addEventListener('click',()=>{libraryFilters={q:'',topic:'',method:'',species:'',region:''};renderLibrary();});
   updateLibrary();
 }
 function updateLibrary(){
@@ -1063,12 +1157,17 @@ function updateLibrary(){
   const topic=document.getElementById('libraryTopic')?.value||'';
   const method=document.getElementById('libraryMethod')?.value||'';
   const species=document.getElementById('librarySpecies')?.value||'';
+  const region=document.getElementById('libraryRegion')?.value||'';
+  libraryFilters={q,topic,method,species,region};
+  const regionPapers=region?new Set(guidePaperIds(region)):null;
   const matches=paperCatalog.filter(p=>{
-    const hay=[p.title,p.authors,p.journal,p.species,p.note,...p.topics,...p.methods].join(' ').toLowerCase();
-    return (!q||hay.includes(q))&&(!topic||p.topics.includes(topic))&&(!method||p.methods.includes(method))&&(!species||speciesBucket(p)===species);
+    const regions=nodes.filter(n=>guidePaperIds(n.id).includes(p.id)).flatMap(n=>[n.name,n.abbr]);
+    const hay=[p.title,p.authors,p.journal,p.species,p.note,...p.topics,...p.methods,...regions].join(' ').toLowerCase();
+    return (!q||hay.includes(q))&&(!topic||p.topics.includes(topic))&&(!method||p.methods.includes(method))&&(!species||speciesBucket(p)===species)&&(!regionPapers||regionPapers.has(p.id));
   }).sort((a,b)=>b.year-a.year||a.title.localeCompare(b.title));
   document.getElementById('librarySummary').textContent=`${matches.length} of ${paperCatalog.length} references · reviews provide orientation; claim-level support prioritizes primary studies`;
   document.getElementById('libraryList').innerHTML=matches.length?matches.map(libraryCard).join(''):'<div class="empty">No references match those filters.</div>';
+  bindRegionLinks(document.getElementById('libraryList'));
 }
 function renderCenter(){
   document.getElementById('reference-center').innerHTML=`
@@ -1089,32 +1188,132 @@ function renderGlossary(){
     </tbody></table>`;
 }
 function setReferenceTab(tab){
-  document.querySelectorAll('.reference-tab').forEach(b=>b.classList.toggle('active',b.dataset.referenceTab===tab));
+  document.querySelectorAll('.reference-tab').forEach(b=>{b.classList.toggle('active',b.dataset.referenceTab===tab);b.setAttribute('aria-pressed',String(b.dataset.referenceTab===tab));});
   document.querySelectorAll('.reference-panel').forEach(p=>p.hidden=p.id!==`reference-${tab}`);
   if(tab==='library') renderLibrary();
+  if(tab==='regions') renderRegionExplorer();
+  else clearRegionHash();
   document.querySelector('.reference-body').scrollTop=0;
 }
 function openReference(tab='synthesis',opener=null){
-  referenceOpener=opener||document.activeElement;
+  if(referenceModal.hidden) referenceOpener=opener||document.activeElement;
   referenceModal.hidden=false;
+  document.querySelector('.app').inert=true;
+  document.body.style.overflow='hidden';
   setReferenceTab(tab);
   document.getElementById('referenceClose').focus();
 }
 function closeReference(){
   referenceModal.hidden=true;
-  referenceOpener?.focus?.();
+  document.querySelector('.app').inert=false;
+  document.body.style.overflow='';
+  clearRegionHash();
+  if(referenceOpener?.isConnected) referenceOpener.focus();
+  else document.querySelector('[data-open-reference="regions"]').focus();
 }
+
+let exploredRegion='mdpulv';
+let guideSection='anatomy';
+const guideSections={anatomy:'Orientation',mechanisms:'Mechanisms',experiments:'Experiments',questions:'Open questions'};
+function bindRegionLinks(root){
+  root.querySelectorAll('[data-region-link]').forEach(b=>b.addEventListener('click',()=>openRegion(b.dataset.regionLink,b)));
+}
+function clearRegionHash(){
+  if(location.hash.startsWith('#region/')) history.replaceState(null,'',location.pathname+location.search);
+}
+function updateRegionHash(){
+  const hash=`#region/${exploredRegion}/${guideSection}`;
+  if(location.hash!==hash) history.pushState(null,'',hash);
+}
+function openRegion(id,opener=null,updateUrl=true){
+  if(!regionGuides[id]) return;
+  const previousFocus=document.activeElement?.id;
+  const alreadyExploring=!referenceModal.hidden&&!document.getElementById('reference-regions').hidden;
+  exploredRegion=id;
+  openReference('regions',opener);
+  if(updateUrl) updateRegionHash();
+  if(alreadyExploring&&['atlasRegion','atlasPrev','atlasNext'].includes(previousFocus)) document.getElementById(previousFocus).focus();
+}
+function guideSectionCard(s){
+  return `<article class="guide-section">${s.kind?`<div class="detail-kicker">${esc(s.kind)}</div>`:''}<h3>${esc(s.title)}</h3><p>${esc(s.text)}</p>${citationLinks(s.papers)}</article>`;
+}
+function experimentCard(s){
+  const p=papers[s.paper];
+  return `<article class="guide-section"><div class="detail-kicker">${esc((paperMeta[s.paper]?.methods||[]).join(' · '))}</div><h3>${esc(s.question)}</h3><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.species)}</div><dl><dt>Design</dt><dd>${esc(s.design)}</dd><dt>Finding</dt><dd>${esc(s.result)}</dd><dt>What it leaves open</dt><dd>${esc(s.limit)}</dd></dl>${citationLinks([s.paper])}</article>`;
+}
+function renderRegionExplorer(){
+  const n=nodeById[exploredRegion], g=regionGuides[exploredRegion];
+  const root=document.getElementById('reference-regions');
+  const content=guideSection==='experiments'?g.experiments.map(experimentCard).join(''):guideSection==='questions'?`
+    <article class="guide-section"><div class="detail-kicker">Proposed test · synthesis, not a published finding</div><h3>${esc(g.test.question)}</h3><dl><dt>Compare</dt><dd>${esc(g.test.prediction)}</dd><dt>Controls & limits</dt><dd>${esc(g.test.controls)}</dd></dl></article>
+    <article class="guide-section"><h3>Keep this boundary in mind</h3><p>${esc(n.caveat)}</p>${n.questions.length?`<ul>${n.questions.map(q=>`<li><p>${esc(q)}</p></li>`).join('')}</ul>`:''}</article>
+  `:g[guideSection].map(guideSectionCard).join('');
+  root.innerHTML=`
+    <div class="atlas-controls"><label for="atlasRegion">Explore a region or network element<select id="atlasRegion">${nodes.map(x=>`<option value="${x.id}"${x.id===n.id?' selected':''}>${esc(x.name)} · ${esc(x.abbr)}</option>`).join('')}</select></label><button class="tool-btn" id="atlasPrev" aria-label="Previous region">← Previous</button><button class="tool-btn" id="atlasNext" aria-label="Next region">Next →</button></div>
+    <div class="atlas-layout"><div class="atlas-main">
+      <div class="detail-kicker">Region guide · ${nodes.findIndex(x=>x.id===n.id)+1} of ${nodes.length}${n.id==='network'?' · Conceptual element':''}</div>
+      <h2 class="atlas-heading">${esc(n.name)}</h2><p class="atlas-deck">${esc(g.subtitle)}</p>
+      <div>${n.circuits.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}<span class="pill">${g.experiments.length} experiment walkthroughs</span></div>
+      <nav class="atlas-tabs" aria-label="Region guide sections">${Object.entries(guideSections).map(([id,label])=>`<button class="view-btn${id===guideSection?' active':''}" data-guide-section="${id}" aria-pressed="${id===guideSection}">${label}</button>`).join('')}</nav>
+      <div id="guideContent">${content}</div>
+      <div class="atlas-note">Sections link to supporting primary papers or explicitly labeled reviews. Experiment limitations are part of the interpretation. Open-question tests are proposed comparisons, not reported results.</div>
+      <div class="section-title">Explore a connected idea</div><div class="claim-links">${g.related.map(id=>`<button class="citation-chip" data-region-link="${id}">${esc(nodeById[id].name)} →</button>`).join('')}</div>
+      <details style="margin-top:24px"><summary class="text-link">Follow a reading trail</summary><div class="trail-grid">${readingTrails.map(t=>`<article class="trail-card"><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><div class="claim-links">${t.regions.map(id=>`<button class="citation-chip" data-region-link="${id}">${esc(nodeById[id].abbr)}</button>`).join('<span aria-hidden="true">→</span>')}</div></article>`).join('')}</div></details>
+    </div><aside class="atlas-side" aria-label="Region guide context">
+      ${brainLocatorHtml(n)}
+      <div class="related-regions"><button class="reference-btn" id="atlasLocate">Locate on map <span>↗</span></button><button class="reference-btn" id="atlasLibrary">All ${guidePaperIds(n.id).length} related references <span>↗</span></button></div>
+      <h3>Suggested reading order</h3>${g.reading.map((id,i)=>{const p=papers[id];return `<div class="reading-step"><span>${i+1}. ${esc(p.authors)} · ${p.year}</span><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></div>`;}).join('')}
+      <div class="detail-block"><h3>Share this guide</h3><button class="tool-btn" id="copyRegionLink">Copy guide link</button><input class="atlas-permalink" id="regionPermalink" aria-label="Guide link" readonly value="${esc(location.href.split('#')[0]+`#region/${n.id}/${guideSection}`)}"><div class="atlas-note" id="copyRegionStatus" aria-live="polite"></div></div>
+    </aside></div>`;
+  root.querySelector('#atlasRegion').addEventListener('change',e=>openRegion(e.target.value));
+  const step=delta=>openRegion(nodes[(nodes.findIndex(x=>x.id===n.id)+delta+nodes.length)%nodes.length].id);
+  root.querySelector('#atlasPrev').addEventListener('click',()=>step(-1));
+  root.querySelector('#atlasNext').addEventListener('click',()=>step(1));
+  root.querySelectorAll('[data-guide-section]').forEach(b=>b.addEventListener('click',()=>{
+    guideSection=b.dataset.guideSection;renderRegionExplorer();updateRegionHash();
+    root.querySelector(`[data-guide-section="${guideSection}"]`).focus();
+  }));
+  root.querySelector('#atlasLocate').addEventListener('click',()=>{
+    closeReference();revealNode(n.id);document.querySelector(`.node[data-id="${n.id}"]`).focus();
+  });
+  root.querySelector('#atlasLibrary').addEventListener('click',()=>{setReferenceTab('library');renderLibrary(n.id);document.getElementById('libraryRegion').focus();});
+  root.querySelector('#copyRegionLink').addEventListener('click',async()=>{
+    const input=root.querySelector('#regionPermalink'), message=root.querySelector('#copyRegionStatus');
+    try{await navigator.clipboard.writeText(input.value);message.textContent='Guide link copied.';}
+    catch{input.focus();input.select();message.textContent='Link selected. Copy it with Ctrl+C or ⌘C.';}
+  });
+  bindRegionLinks(root);
+}
+function revealNode(id){
+  document.getElementById('search').value='';
+  document.querySelectorAll('input[data-circuit]').forEach(x=>x.checked=true);
+  transform={x:0,y:0,k:1};updateTransform();setView('overview');selectItem('node',id);
+}
+function readRegionHash(){
+  const match=location.hash.match(/^#region\/([a-z]+)(?:\/([a-z]+))?$/);
+  if(match&&regionGuides[match[1]]&&(!match[2]||guideSections[match[2]])){
+    guideSection=match[2]||'anatomy';openRegion(match[1],null,false);
+  }else if(!referenceModal.hidden&&!document.getElementById('reference-regions').hidden){closeReference();}
+}
+window.addEventListener('hashchange',readRegionHash);
+document.addEventListener('keydown',e=>{
+  if(referenceModal.hidden||e.key!=='Tab') return;
+  const focusable=[...referenceModal.querySelectorAll('button,a[href],input,select,summary')].filter(x=>!x.disabled&&x.getClientRects().length);
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
 
 renderSynthesis(); renderCenter(); renderGlossary();
 document.getElementById('sidebarPaperCount').textContent=`${paperCatalog.length} papers`;
-document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>openReference(b.dataset.openReference,b)));
-document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>setReferenceTab(b.dataset.referenceTab)));
+document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.openReference==='regions'?openRegion(exploredRegion,b):openReference(b.dataset.openReference,b)));
+document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>{setReferenceTab(b.dataset.referenceTab);if(b.dataset.referenceTab==='regions')updateRegionHash();}));
 document.getElementById('referenceClose').addEventListener('click',closeReference);
 referenceModal.addEventListener('click',e=>{if(e.target===referenceModal)closeReference();});
 
 function showOverview(){
   details.innerHTML=`
-    <div class="detail-kicker">Current synthesis · September 2026</div>
+    <div class="detail-kicker">Current synthesis · October 2026</div>
     <h2 class="detail-title">A recurrent control network, not a command hierarchy</h2>
     <div class="detail-block"><p>The map organizes visual attention around four interacting systems: <strong>pulvinar–visual/frontoparietal coordination</strong>, <strong>MD–prefrontal cognitive control</strong>, <strong>TRN/LGN sensory-state regulation</strong>, and <strong>central-thalamic arousal</strong>. Select a node or pathway to see what each evidence stream actually establishes.</p></div>
     <div class="evidence-card"><div class="detail-kicker">Key distinction</div><p style="margin:0;font-size:12.5px;line-height:1.5"><strong>Mediodorsal thalamus (MD)</strong> and <strong>mediodorsal pulvinar</strong> are different structures. MD is emphasized in context, uncertainty and PFC stabilization; mediodorsal pulvinar is emphasized in rhythmic spatial attention and frontoparietal coordination.</p></div>
@@ -1124,23 +1323,26 @@ function showOverview(){
       <li>Theta phase, band-limited state changes, and brief high-frequency or thalamic bursts operate at different temporal scales.</li>
       <li>Pulvinar, MD, TRN, LGN, and central thalamus have distinct circuit motifs; “thalamic gating” is too vague without a nucleus and measure.</li>
     </ul></div>
+    <button class="reference-btn explore-button" data-overview-reference="regions"><span>Explore ${nodes.length} region guides<small>Anatomy · mechanisms · experiments · open questions</small></span><span>→</span></button>
     <div class="detail-block"><button class="reference-btn" data-overview-reference="synthesis"><span>Read the 12-claim evidence synthesis</span><span>open</span></button><button class="reference-btn" style="margin-top:7px" data-overview-reference="library"><span>Search ${paperCatalog.length} curated references</span><span>open</span></button></div>
     <div class="detail-block"><h3>Species markers</h3><p>Small dots on nodes indicate where much of the highlighted evidence comes from: white = mouse, yellow = macaque, red = human, cyan = tree shrew, green = ferret. These colors are intentionally separate from the brain-region colors. A node can be supported across several species.</p></div>
     <div class="detail-block"><h3>Coverage and honesty note</h3><p>The library combines the supplied attention ledger with a broader primary-source review and work from the Princeton Thalamus Conte Center investigators. Reviews are labeled as orientation; the V1 theta reviewed preprint is explicitly provisional. Clinical imaging, cross-species homology, coherence, and directional analyses are not presented as stronger causal evidence than their methods allow.</p></div>
     <div class="footer-note">This is a conceptual literature map. Coordinates are chosen for readability and do not represent anatomical position, distance, laterality or cortical layer.</div>`;
-  details.querySelectorAll('[data-overview-reference]').forEach(b=>b.addEventListener('click',()=>openReference(b.dataset.overviewReference,b)));
+  details.querySelectorAll('[data-overview-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.overviewReference==='regions'?openRegion(exploredRegion,b):openReference(b.dataset.overviewReference,b)));
 }
 function showNode(n){
   details.innerHTML=`
     <div class="detail-head"><div><div class="detail-kicker">Region / network element</div><h2 class="detail-title">${esc(n.name)}</h2><div>${n.circuits.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}</div></div></div>
-    ${brainLocatorHtml(n)}
     <div class="detail-block"><h3>Role in this literature</h3><p>${esc(n.role)}</p></div>
+    <button class="reference-btn explore-button" id="exploreSelectedRegion"><span>Explore ${esc(n.abbr)} in depth<small>Mechanisms · ${regionGuides[n.id].experiments.length} experiments · reading order</small></span><span>→</span></button>
+    ${brainLocatorHtml(n)}
     <div class="detail-block"><h3>What the evidence supports</h3><p>${esc(n.evidence)}</p></div>
     <div class="detail-block"><h3>Important limitation</h3><p class="warning">${esc(n.caveat)}</p></div>
     ${n.questions.length?`<div class="detail-block"><h3>Open questions</h3><ul>${n.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul></div>`:''}
-    <div class="detail-block"><h3>Connected pathways shown</h3><ul>${edges.filter(e=>e.s===n.id||e.t===n.id).map(e=>`<li><button class="link-edge" data-edge="${e.id}" style="all:unset;color:#9dc4ff;cursor:pointer">${esc(e.label)}</button> — ${esc(nodeById[e.s===n.id?e.t:e.s].name)}</li>`).join('')}</ul></div>
-    <div class="detail-block"><h3>Representative primary studies</h3>${paperHtml(n.papers)}</div>`;
+    <div class="detail-block"><h3>Connected pathways shown</h3><ul>${edges.filter(e=>e.s===n.id||e.t===n.id).map(e=>`<li><button class="link-edge text-link" data-edge="${e.id}">${esc(e.label)}</button> — ${esc(nodeById[e.s===n.id?e.t:e.s].name)}</li>`).join('')}</ul></div>
+    <div class="detail-block"><h3>Selected references</h3>${paperHtml(n.papers)}</div>`;
   details.querySelectorAll('.link-edge').forEach(b=>b.addEventListener('click',()=>selectItem('edge',b.dataset.edge)));
+  details.querySelector('#exploreSelectedRegion').addEventListener('click',e=>{guideSection='anatomy';openRegion(n.id,e.currentTarget);});
 }
 function showEdge(e){
   const s=nodeById[e.s], t=nodeById[e.t];
@@ -1152,8 +1354,8 @@ function showEdge(e){
     <div class="detail-block"><h3>Interpretation</h3><p>${esc(e.summary)}</p></div>
     <div class="detail-block"><h3>Candidate mechanism</h3><p>${esc(e.mechanism)}</p></div>
     <div class="detail-block"><h3>Do not overread this arrow</h3><p class="warning">${esc(e.caveat)}</p></div>
-    <div class="detail-block"><h3>Endpoints</h3><p><button class="link-node" data-node="${s.id}" style="all:unset;color:#9dc4ff;cursor:pointer">${esc(s.name)}</button> · <button class="link-node" data-node="${t.id}" style="all:unset;color:#9dc4ff;cursor:pointer">${esc(t.name)}</button></p></div>
-    <div class="detail-block"><h3>Representative primary studies</h3>${paperHtml(e.papers)}</div>`;
+    <div class="detail-block"><h3>Endpoints</h3><p><button class="link-node text-link" data-node="${s.id}">${esc(s.name)}</button> · <button class="link-node text-link" data-node="${t.id}">${esc(t.name)}</button></p></div>
+    <div class="detail-block"><h3>Selected supporting references</h3>${paperHtml(e.papers)}</div>`;
   details.querySelectorAll('.link-node').forEach(b=>b.addEventListener('click',()=>selectItem('node',b.dataset.node)));
 }
 
@@ -1200,8 +1402,8 @@ function viewMatchesNode(n){
   if(activeView==='overview') return true;
   if(activeView==='pulvinar') return n.type==='pulvinar'||['fef','lip','v4','v1','sc'].includes(n.id);
   if(activeView==='theta') return ['mdpulv','fef','lip','md','pfc','dpulv','central'].includes(n.id);
-  if(activeView==='control') return ['acc','md','pfc','network','trn'].includes(n.id);
-  if(activeView==='sensory') return ['retina','lgn','trn','v1','v4','vpulv','dpulv'].includes(n.id);
+  if(activeView==='control') return ['acc','md','pfc','network','trn','bg'].includes(n.id);
+  if(activeView==='sensory') return ['retina','lgn','trn','v1','v4','vpulv','dpulv','sc','bg','pfc'].includes(n.id);
   if(activeView==='orienting') return ['pfc','fef','lip','mdpulv','dpulv','sc','bg','v4'].includes(n.id);
   if(activeView==='selection') return ['pfc','fef','lip','v4','v1','vpulv','dpulv','mdpulv','sc'].includes(n.id);
   if(activeView==='state') return ['pfc','fef','central','trn','lgn','md','network','mdpulv'].includes(n.id);
@@ -1226,8 +1428,8 @@ function applyFilters(){
   nodes.forEach(n=>{
     const circuitOk=n.circuits.some(c=>circuits.has(c));
     const viewOk=viewMatchesNode(n);
-    const refs=(n.papers||[]).flatMap(id=>papers[id]?[papers[id].title,papers[id].authors,papers[id].note]:[]);
-    const hay=[n.name,n.abbr,n.role,n.evidence,n.caveat,...n.questions,...refs].join(' ').toLowerCase();
+    const refs=guidePaperIds(n.id).flatMap(id=>papers[id]?[papers[id].title,papers[id].authors,papers[id].note]:[]);
+    const hay=[n.name,n.abbr,n.role,n.evidence,n.caveat,...n.questions,JSON.stringify(regionGuides[n.id]),...refs].join(' ').toLowerCase();
     const searchOk=!q||hay.includes(q);
     const visible=circuitOk&&viewOk&&searchOk;
     document.querySelector(`.node[data-id="${n.id}"]`)?.classList.toggle('hidden',!visible);
@@ -1285,12 +1487,13 @@ svg.addEventListener('click',e=>{if(e.target===svg||e.target.closest('#backgroun
 document.getElementById('zoomIn').addEventListener('click',()=>zoomAt(1.18));
 document.getElementById('zoomOut').addEventListener('click',()=>zoomAt(.85));
 document.getElementById('reset').addEventListener('click',()=>{transform={x:0,y:0,k:1};updateTransform();clearSelection();});
-document.getElementById('search').addEventListener('input',()=>{selected=null;document.querySelectorAll('.node,.edge,.edge-label').forEach(x=>x.classList.remove('selected','connected','dim'));applyFilters();});
-document.querySelectorAll('input[data-circuit]').forEach(x=>x.addEventListener('change',()=>{selected=null;applyFilters();}));
+document.getElementById('search').addEventListener('input',clearSelection);
+document.querySelectorAll('input[data-circuit]').forEach(x=>x.addEventListener('change',clearSelection));
 document.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!referenceModal.hidden)closeReference();else clearSelection();}});
 
 drawGroups(); drawEdges(); drawNodes(); showOverview(); applyFilters(); updateTransform();
+readRegionHash();
 </script>
 </body>
 </html>

@@ -1,0 +1,345 @@
+// Curated additions checked against primary publication pages on 2 October 2026.
+// Section citations support the adjacent text; questions are explicitly proposed tests.
+const researchPapers = {
+  sommer2000: {title:'Composition and topographic organization of signals sent from the frontal eye field to the superior colliculus',authors:'Sommer & Wurtz',year:2000,journal:'Journal of Neurophysiology',species:'Macaque',url:'https://journals.physiology.org/doi/10.1152/jn.2000.83.4.1979',note:'Identified corticotectal FEF neurons carried diverse visual, delay and movement signals rather than exclusively motor commands.',topics:['Cortical selection','Orienting / basal ganglia','Anatomy / organization'],methods:['Recording','Physiological connectivity']},
+  sommer2004a: {title:'What the brain stem tells the frontal cortex. I. Oculomotor signals sent from superior colliculus to frontal eye field via mediodorsal thalamus',authors:'Sommer & Wurtz',year:2004,journal:'Journal of Neurophysiology',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/14573558/',note:'Physiologically identified SC–MD–FEF neurons revealed an ascending pathway with prominent presaccadic signals; return influence is not a direct SC→FEF synapse.',topics:['MD / cognitive control','Orienting / basal ganglia','Anatomy / organization'],methods:['Recording','Physiological connectivity']},
+  sommer2004b: {title:'What the brain stem tells the frontal cortex. II. Role of the SC-MD-FEF pathway in corollary discharge',authors:'Sommer & Wurtz',year:2004,journal:'Journal of Neurophysiology',species:'Macaque',url:'https://journals.physiology.org/doi/10.1152/jn.00740.2003',note:'Inactivating the identified MD relay disrupted double-step saccade updating, supporting a movement-monitoring function distinct from the frontal working-memory experiments.',topics:['MD / cognitive control','Orienting / basal ganglia'],methods:['Causal primate','Recording']},
+  rigotti2013: {title:'The importance of mixed selectivity in complex cognitive tasks',authors:'Rigotti et al.',year:2013,journal:'Nature',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/23685452/',note:'PFC population dimensionality supported flexible decoding of task variables and was reduced on error trials.',topics:['MD / cognitive control','Methods / dynamics'],methods:['Recording','Modeling']},
+  panichello2021: {title:'Shared mechanisms underlie the control of working memory and attention',authors:'Panichello & Buschman',year:2021,journal:'Nature',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/33790467/',note:'PFC control representations generalized between selecting remembered items and attending to visible stimuli; posterior areas showed more distinct representations.',topics:['Cortical selection','MD / cognitive control','Methods / dynamics'],methods:['Recording']},
+  wardak2004: {title:'A deficit in covert attention after parietal cortex inactivation in the monkey',authors:'Wardak, Olivier & Duhamel',year:2004,journal:'Neuron',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/15134645/',note:'LIP inactivation delayed contralateral target detection during visual search with fixation maintained.',topics:['Cortical selection'],methods:['Causal primate']},
+  wardak2006: {title:'Contribution of the monkey frontal eye field to covert visual attention',authors:'Wardak, Ibos, Duhamel & Olivier',year:2006,journal:'Journal of Neuroscience',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/16624943/',note:'Reversible FEF inactivation impaired covert visual search as well as saccades, with effects differing from LIP inactivation.',topics:['Cortical selection'],methods:['Causal primate']},
+  bisley2003: {title:'Neuronal activity in the lateral intraparietal area and spatial attention',authors:'Bisley & Goldberg',year:2003,journal:'Science',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/12511644/',note:'LIP ensemble activity tracked the distribution of attentional priority; activity at one location did not uniquely determine the next attended or saccade location.',topics:['Cortical selection'],methods:['Recording','Behavior']},
+  gregoriou2009: {title:'High-frequency, long-range coupling between prefrontal and visual cortex during attention',authors:'Gregoriou, Gotts, Zhou & Desimone',year:2009,journal:'Science',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/19478185/',note:'Joint FEF–V4 recordings showed attention-related gamma coupling with temporal offsets consistent with communication delays; this is directional recording evidence.',topics:['Cortical selection','Rhythms / bursts'],methods:['Recording']},
+  reynolds1999: {title:'Competitive mechanisms subserve attention in macaque areas V2 and V4',authors:'Reynolds, Chelazzi & Desimone',year:1999,journal:'Journal of Neuroscience',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/10024360/',note:'With two stimuli in a receptive field, attention shifted the response toward that produced by the attended stimulus alone.',topics:['Cortical selection','LGN / early vision'],methods:['Recording','Modeling']},
+  roelfsema1998: {title:'Object-based attention in the primary visual cortex of the macaque monkey',authors:'Roelfsema, Lamme & Spekreijse',year:1998,journal:'Nature',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/9759726/',note:'Curve tracing enhanced V1 responses along the relevant curve relative to a distractor, including when curves crossed.',topics:['Cortical selection','LGN / early vision'],methods:['Recording']},
+  bolkan2017: {title:'Thalamic projections sustain prefrontal activity during working memory maintenance',authors:'Bolkan et al.',year:2017,journal:'Nature Neuroscience',species:'Mouse',url:'https://www.nature.com/articles/nn.4568',note:'Phase-specific inhibition separated MD→mPFC support for delay maintenance from mPFC→MD support for later choice.',topics:['MD / cognitive control'],methods:['Causal circuit','Recording']},
+  parnaudeau2013: {title:'Inhibition of mediodorsal thalamus disrupts thalamofrontal connectivity and cognition',authors:'Parnaudeau et al.',year:2013,journal:'Neuron',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/23522049/',note:'Reducing MD activity disrupted thalamofrontal coordination and cognition, motivating subsequent projection- and task-phase-specific studies.',topics:['MD / cognitive control'],methods:['Causal circuit','Recording']},
+  perakyla2017: {title:'Causal Evidence from Humans for the Role of Mediodorsal Nucleus of the Thalamus in Working Memory',authors:'Peräkylä et al.',year:2017,journal:'Journal of Cognitive Neuroscience',species:'Human clinical stimulation',url:'https://pubmed.ncbi.nlm.nih.gov/28777058/',note:'In eight epilepsy participants, stimulation at MD contacts increased working-memory errors compared with no stimulation and adjacent anterior-thalamic contacts.',topics:['MD / cognitive control','Clinical translation'],methods:['Human stimulation']},
+  cole2024: {title:'Prediction-error signals in anterior cingulate cortex drive task-switching',authors:'Cole, Harvey, Myers-Joseph, Gilra & Khan',year:2024,journal:'Nature Communications',species:'Mouse',url:'https://www.nature.com/articles/s41467-024-51368-9',note:'Temporally targeted ACC silencing impaired switching after omission of an expected event; VIP interneurons contributed to prediction-error computation.',topics:['MD / cognitive control'],methods:['Causal circuit','Recording']},
+  huda2020: {title:'Distinct prefrontal top-down circuits differentially modulate sensorimotor behavior',authors:'Huda et al.',year:2020,journal:'Nature Communications',species:'Mouse',url:'https://www.nature.com/articles/s41467-020-19772-z',note:'Projection-specific manipulations dissociated ACC→visual-cortex sensory effects from ACC→SC effects on response bias.',topics:['Cortical selection','MD / cognitive control','Orienting / basal ganglia'],methods:['Causal circuit','Recording']},
+  bennett2019: {title:'Higher-Order Thalamic Circuits Channel Parallel Streams of Visual Information in Mice',authors:'Bennett et al.',year:2019,journal:'Neuron',species:'Mouse',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8638696/',note:'Circuit mapping and silencing identified LP territories with distinct cortical versus collicular drivers and visual properties.',topics:['Pulvinar','Anatomy / organization'],methods:['Anatomy','Causal circuit','Recording']},
+  blot2021: {title:'Visual intracortical and transthalamic pathways carry distinct information to cortical areas',authors:'Blot et al.',year:2021,journal:'Neuron',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/33979633/',note:'LP inputs to higher visual areas conveyed target-dependent visual and locomotor information distinct from direct V1 inputs.',topics:['Pulvinar','LGN / early vision','Anatomy / organization'],methods:['Causal circuit','Recording','Anatomy']},
+  neske2025: {title:'Higher-order thalamic input to cortex selectively conveys state information',authors:'Neske & Cardin',year:2025,journal:'Cell Reports',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/39937647/',note:'At posterior medial visual cortex, direct cortical inputs supplied stronger visual drive while LP inputs contributed arousal-related modulation; published successor to the 2023 preprint.',topics:['Pulvinar','Arousal / consciousness'],methods:['Causal circuit','Recording']},
+  wilke2010: {title:'Pulvinar Inactivation Disrupts Selection of Movement Plans',authors:'Wilke, Turchi, Smith, Mishkin & Leopold',year:2010,journal:'Journal of Neuroscience',species:'Macaque',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2905633/',note:'Unilateral dorsal pulvinar inactivation disrupted selection of eye and hand movements and spontaneous exploration of contralateral space.',topics:['Pulvinar','Orienting / basal ganglia'],methods:['Causal primate']},
+  wilke2013: {title:'Effects of pulvinar inactivation on spatial decision-making between equal and asymmetric reward options',authors:'Wilke, Kagan & Andersen',year:2013,journal:'Journal of Cognitive Neuroscience',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/23574581/',note:'An ipsilesional choice bias after dorsal pulvinar inactivation could be reduced by increasing contralesional reward; spatial memory was preserved.',topics:['Pulvinar','Orienting / basal ganglia'],methods:['Causal primate']},
+  berman2010: {title:'Functional identification of a pulvinar path from superior colliculus to cortical area MT',authors:'Berman & Wurtz',year:2010,journal:'Journal of Neuroscience',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/20445060/',note:'Physiological identification demonstrated pulvinar neurons receiving SC input and projecting to MT, principally in inferior pulvinar territories.',topics:['Pulvinar','Orienting / basal ganglia','Anatomy / organization'],methods:['Anatomy','Physiological connectivity']},
+  berman2011: {title:'Signals Conveyed in the Pulvinar Pathway from Superior Colliculus to Cortical Area MT',authors:'Berman & Wurtz',year:2011,journal:'Journal of Neuroscience',species:'Macaque',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC6623455/',note:'Connectivity-identified ascending neurons carried brisk visual responses with little presaccadic activity, helping distinguish sensory input from motor preparation.',topics:['Pulvinar','Orienting / basal ganglia'],methods:['Recording','Physiological connectivity']},
+  zenon2012: {title:'Attention deficits without cortical neuronal deficits',authors:'Zénon & Krauzlis',year:2012,journal:'Nature',species:'Macaque',url:'https://www.nature.com/articles/nature11497',note:'SC inactivation impaired covert attention while classic attention-related response enhancements in MT/MST remained intact.',topics:['Cortical selection','Orienting / basal ganglia'],methods:['Causal primate','Recording']},
+  arcizet2018: {title:'Covert spatial selection in primate basal ganglia',authors:'Arcizet & Krauzlis',year:2018,journal:'PLOS Biology',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/30365496/',note:'Caudate neurons represented cued location and task epochs during fixation, with a nonspatial report separating selection from orienting movements.',topics:['Orienting / basal ganglia','Cortical selection'],methods:['Recording']},
+  herman2020: {title:'Attention-related modulation of caudate neurons depends on superior colliculus activity',authors:'Herman, Arcizet & Krauzlis',year:2020,journal:'eLife',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/32940607/',note:'Ipsilateral SC inactivation altered caudate attention modulation and task-epoch decoding; the experiment establishes dependence, not the intermediate anatomical route.',topics:['Orienting / basal ganglia'],methods:['Causal primate','Recording']},
+  nakajima2019: {title:'Prefrontal Cortex Regulates Sensory Filtering through a Basal Ganglia-to-Thalamus Pathway',authors:'Nakajima, Schmitt & Halassa',year:2019,journal:'Neuron',species:'Mouse',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC6886709/',note:'Tracing and circuit perturbation identified an indirect PFC–basal-ganglia route recruiting sensory TRN for distractor and background-noise filtering.',topics:['TRN / sensory gating','MD / cognitive control','Orienting / basal ganglia'],methods:['Anatomy','Causal circuit','Recording']},
+  hikosaka1983: {title:'Visual and oculomotor functions of monkey substantia nigra pars reticulata. IV. Relation of substantia nigra to superior colliculus',authors:'Hikosaka & Wurtz',year:1983,journal:'Journal of Neurophysiology',species:'Macaque',url:'https://journals.physiology.org/doi/10.1152/jn.1983.49.5.1285',note:'Foundational physiological study of the nigro-collicular pathway underlying inhibitory control of orienting; evidence concerns SNr rather than all basal-ganglia nuclei.',topics:['Orienting / basal ganglia','Anatomy / organization'],methods:['Physiological connectivity','Recording']},
+  schiff2023: {title:'Thalamic deep brain stimulation in traumatic brain injury: a phase 1, randomized feasibility study',authors:'Schiff, Giacino, Butson et al.',year:2023,journal:'Nature Medicine',species:'Human clinical stimulation',url:'https://www.nature.com/articles/s41591-023-02638-4',note:'Five completers improved on a processing-speed/executive task after CL/tract-targeted stimulation; this small feasibility study does not establish general treatment efficacy.',topics:['Arousal / consciousness','Clinical translation'],methods:['Human stimulation']},
+  carandini2007: {title:'Thalamic filtering of retinal spike trains by postsynaptic summation',authors:'Carandini, Horton & Sincich',year:2007,journal:'Journal of Vision',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/18217815/',note:'Retinal input and LGN output recordings showed that postsynaptic summation could explain selective transmission of clustered retinal spikes.',topics:['LGN / early vision'],methods:['Recording','Modeling']},
+  gehr2023: {title:'Retinal input integration in excitatory and inhibitory neurons in the mouse superior colliculus in vivo',authors:'Gehr, Sibille & Kremkow',year:2023,journal:'eLife',species:'Mouse',url:'https://elifesciences.org/articles/88289',note:'Retinal afferent recordings revealed different spike integration by excitatory and inhibitory SC neurons; this is sensory physiology, not an attention manipulation.',topics:['LGN / early vision','Orienting / basal ganglia'],methods:['Recording']},
+  binish2026: {title:'A communication subspace relays context-dependent actions from human prefrontal to motor cortex',authors:'Binish et al.',year:2026,journal:'Nature Neuroscience',species:'Human intracranial',url:'https://pubmed.ncbi.nlm.nih.gov/42067701/',note:'Human PFC–M1 recordings identified population patterns predictive of context-dependent actions; thalamic participation was not measured.',topics:['MD / cognitive control','Methods / dynamics'],methods:['Human intracranial','Recording']},
+  semedo2019: {title:'Cortical Areas Interact through a Communication Subspace',authors:'Semedo, Zandvakili, Machens, Yu & Kohn',year:2019,journal:'Neuron',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/30770252/',note:'A restricted set of V1 population fluctuations predicted V2 activity; a communication subspace is a statistical relationship, not a demonstrated anatomical channel.',topics:['Methods / dynamics','LGN / early vision'],methods:['Recording','Modeling']},
+  srinath2021: {title:'Attention improves information flow between neuronal populations without changing the communication subspace',authors:'Srinath, Ruff & Cohen',year:2021,journal:'Current Biology',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/34699782/',note:'MT–SC and V1–MT prediction improved without greater predictive dimensionality, compatible with a fixed nonlinear readout; this does not prove all geometry is unchanged.',topics:['Cortical selection','Methods / dynamics'],methods:['Recording']},
+  mcalonan2008: {title:'Guarding the gateway to cortex with attention in visual thalamus',authors:'McAlonan, Cavanaugh & Wurtz',year:2008,journal:'Nature',species:'Macaque',url:'https://pubmed.ncbi.nlm.nih.gov/18849967/',note:'Attention increased LGN responses and reduced TRN responses during the initial visual response; later LGN effects suggested additional influences.',topics:['TRN / sensory gating','LGN / early vision'],methods:['Recording']}
+};
+
+// Each guide has anatomy, candidate mechanisms, contrasting experiments, and a
+// proposed discriminating test. No guide treats the conceptual ensemble as anatomy.
+const regionGuides = {
+  pfc: {
+    subtitle:'How a task rule changes which evidence can guide behavior',
+    anatomy:[
+      {title:'A family of control territories',text:'Read PFC as a set of cortical populations whose activity depends on the task, rather than a single rule-storage box. Primate lateral PFC supports flexible mixtures of stimulus, context and response variables. The mouse and tree-shrew experiments in this map sample different frontal territories.',papers:['rigotti2013','lam2024']},
+      {title:'Content and the ability to use it',text:'A visual representation can be present without being relevant to the current rule. Comparing selection of visible stimuli with selection of remembered items is one way to ask whether frontal activity represents sensory content, a control operation, or both.',papers:['panichello2021']}
+    ],
+    mechanisms:[
+      {title:'Mixed selectivity',text:'Neurons can respond to combinations of variables. Across the population, this expands the set of distinctions that a downstream readout can make. An easily named single-neuron preference is therefore an incomplete description of the computation.',papers:['rigotti2013'],kind:'Population account'},
+      {title:'Task-dependent readout',text:'Human PFC–motor recordings identify a restricted set of population patterns that predict context-dependent action. This gives a concrete meaning to “usable representation,” but does not show that MD created those patterns.',papers:['binish2026'],kind:'Human recording'}
+    ],
+    experiments:[
+      {paper:'panichello2021',question:'Does selecting a memory use the same control code as attending to a visible item?',design:'Macaques alternated between attention and memory-selection tasks while multiple cortical populations were recorded.',result:'PFC control representations generalized across the two tasks more than posterior cortical representations did.',limit:'Shared coding is evidence about representation; it does not demonstrate a single controller or identical circuitry.'},
+      {paper:'binish2026',question:'Which frontal activity predicts the action appropriate to a context?',design:'Human intracranial PFC and motor-cortex populations were analyzed together.',result:'A communication subspace predicted context-dependent action better than activity from either region alone.',limit:'The study did not record or manipulate thalamus; it is a cortical comparator for the MD hypothesis.'}
+    ],
+    test:{question:'Does MD preserve rule information, or improve its access to a downstream readout?',prediction:'Measure rule decoding and cross-area prediction together during brief MD perturbations. Preserved rule decoding with reduced downstream prediction would favor an access/coordination account; loss of both would remain compatible with maintenance.',controls:'Match sensory input, movement, reward history and task difficulty. A decoder’s failure alone is not evidence that the representation disappeared.'},
+    related:['md','acc','network','fef'],reading:['rigotti2013','panichello2021','schmitt2017','binish2026']
+  },
+  acc: {
+    subtitle:'Detecting when a prediction or policy needs revision',
+    anatomy:[
+      {title:'The frontal label needs a species',text:'ACC and dmPFC cover partially overlapping territories in this simplified graph. Their cell populations and projection targets matter: mouse ACC output to visual cortex and output to SC can have different behavioral effects.',papers:['huda2020']},
+      {title:'Several meanings of error',text:'An omitted expected event, an ambiguous cue, and evidence that the current rule changed are different problems. The omission task in mice and the hierarchical task in tree shrews isolate different aspects of this distinction.',papers:['cole2024','lam2024']}
+    ],
+    mechanisms:[
+      {title:'A time-limited update signal',text:'ACC prediction-error activity can be necessary during the interval when a missing expected event signals a switch. This is more specific than saying ACC must remain active throughout every trial.',papers:['cole2024'],kind:'Causal circuit'},
+      {title:'Projection-specific control',text:'ACC→visual-cortex pathways can facilitate cue processing, whereas ACC→SC pathways can alter response bias. Grouping these effects under “top-down attention” hides the sensory versus action distinction.',papers:['huda2020'],kind:'Causal circuit'}
+    ],
+    experiments:[
+      {paper:'cole2024',question:'Is a prediction-error signal needed to change rules?',design:'Mice switched between odor and visual rules; ACC was silenced during selected time windows.',result:'Perturbing the prediction-error interval impaired rapid switching; established discrimination could remain accurate.',limit:'This omission-driven switch does not by itself establish the downstream route through MD.'},
+      {paper:'huda2020',question:'Do ACC outputs have a single function?',design:'Projection-specific imaging and optogenetics separated visual-cortex and SC outputs during a visual choice task.',result:'The outputs dissociated sensory processing from control of motor response bias.',limit:'These are mouse sensorimotor circuits, not a demonstrated one-to-one equivalent of macaque FEF.'}
+    ],
+    test:{question:'Does ACC report every failure or specifically evidence that a rule changed?',prediction:'Vary cue ambiguity and reversal probability independently. A rule-change signal should track the inferred reversal after accounting for errors caused by ambiguous input.',controls:'Compare equally surprising rewarded and unrewarded events and include movement and licking covariates.'},
+    related:['md','pfc','sc'],reading:['cole2024','lam2024','huda2020']
+  },
+  fef: {
+    subtitle:'Spatial control shared by looking and attending',
+    anatomy:[
+      {title:'An oculomotor territory with covert effects',text:'FEF participates in saccade control, but its causal effects also extend to visual search during maintained fixation. The graph groups spatial control functions; it does not imply every FEF neuron carries the same signal.',papers:['wardak2006']},
+      {title:'Cortical and subcortical routes',text:'FEF–V4 coupling provides a comparator for pulvinar coordination. FEF also projects to SC, while an identified ascending return route passes through MD. A reciprocal functional arrow need not represent reciprocal direct synapses.',papers:['gregoriou2009','sommer2000','sommer2004a']}
+    ],
+    mechanisms:[
+      {title:'Retinotopically specific bias',text:'Subthreshold FEF microstimulation can enhance V4 responses at a corresponding visual location. This establishes a causal capacity to bias visual processing, with artificial stimulation conditions defining its scope.',papers:['moore2003'],kind:'Causal primate'},
+      {title:'Timing as well as mean activity',text:'Paired FEF–V4 recordings found enhanced gamma coupling during attention. Temporal offsets are consistent with conduction delays, but a lead–lag relation does not identify a monosynaptic source.',papers:['gregoriou2009'],kind:'Directional recording'}
+    ],
+    experiments:[
+      {paper:'wardak2006',question:'Can an eye-movement region matter when the eyes stay still?',design:'FEF was reversibly inactivated during covert visual search and a separate saccade task.',result:'Both tasks showed deficits, including delayed target detection among distractors during fixation.',limit:'This establishes a covert role without eliminating all latent motor planning or microsaccade contributions.'},
+      {paper:'gregoriou2009',question:'Does attention change communication between frontal and visual cortex?',design:'Simultaneous FEF and V4 recordings compared attention inside and outside shared receptive fields.',result:'Attention strengthened interareal coupling, especially at gamma frequencies.',limit:'The recording establishes coordination; stimulation or pathway perturbation is needed to test necessity.'}
+    ],
+    test:{question:'Which FEF population changes detection independently of a saccade plan?',prediction:'Use the same spatial cue with different report effectors. A selection signal should predict perception across reports; a motor signal should follow the prepared action.',controls:'Measure fixation, microsaccades and pupil size, and match reward and target visibility.'},
+    related:['lip','mdpulv','v4','sc','md'],reading:['wardak2006','moore2003','gregoriou2009','fiebelkorn2018','sommer2004a']
+  },
+  lip: {
+    subtitle:'Priority over locations, with several possible readouts',
+    anatomy:[
+      {title:'LIP is a particular parietal area',text:'Macaque LIP is the physiological anchor of this node. Human IPS/PPC labels refer to broader territories. A priority-map interpretation concerns activity across locations, not a literal anatomical map of a single spotlight.',papers:['bisley2003']},
+      {title:'Selection versus the eventual action',text:'Activity favoring a location need not guarantee a saccade or attention shift there. Other populations and the task’s report requirements influence how the priority representation is used.',papers:['bisley2003']}
+    ],
+    mechanisms:[
+      {title:'A distributed priority representation',text:'The relative activity of populations representing competing locations can track where attention is allocated. Reading one cell in isolation misses the competition across the rest of the visual field.',papers:['bisley2003'],kind:'Population recording'},
+      {title:'Causal deployment under competition',text:'Inactivation of LIP delays detection of contralateral targets during covert search. This connects priority-related activity to a behavioral role without establishing that LIP computes all priority inputs locally.',papers:['wardak2004'],kind:'Causal primate'}
+    ],
+    experiments:[
+      {paper:'wardak2004',question:'Is parietal activity necessary for covert search?',design:'LIP was inactivated while macaques searched for targets without making eye movements.',result:'Detection was delayed for targets in contralateral space.',limit:'A search deficit does not uniquely distinguish loss of priority computation from impaired reorienting or readout.'},
+      {paper:'eradath2021',question:'Can pulvinar change coordination without reducing local responses?',design:'V4 and LIP were recorded during passive viewing while dorsal lateral pulvinar was inactivated.',result:'Low-frequency interareal coherence decreased without significant local rate or power changes.',limit:'Passive viewing establishes a network effect, not a task-specific causal attention mechanism.'}
+    ],
+    test:{question:'Does a pulvinar perturbation change the priority code or how it is used?',prediction:'Compare LIP location decoding with its predictive influence on a downstream population. Divergent effects would separate representational quality from effective readout.',controls:'Use matched single-target and competition trials and distinguish choice bias, sensitivity and response latency.'},
+    related:['fef','mdpulv','dpulv','v4'],reading:['bisley2003','wardak2004','fiebelkorn2018','boshra2026']
+  },
+  v4: {
+    subtitle:'Where competition reshapes sensory population responses',
+    anatomy:[
+      {title:'V4 and TEO are grouped, not interchangeable',text:'This node compresses intermediate extrastriate territories for readability. Interpret a result using the actual recorded area: a receptive-field competition experiment in V4 does not automatically describe every TEO population.',papers:['reynolds1999','saalmann2012']},
+      {title:'A response is more than its average size',text:'For comparing attention mechanisms, ask which stimulus dominates the response, how variable that response is, and which fluctuations predict another area. These are distinct measurements rather than alternative names for gain.',papers:['reynolds1999','srinath2021']}
+    ],
+    mechanisms:[
+      {title:'Biased competition',text:'Two stimuli sharing a receptive field alter the response together. Directing attention to one shifts the combined response toward its response in isolation, making a concrete physiological case for competitive weighting.',papers:['reynolds1999'],kind:'Sensory recording'},
+      {title:'A comparator from other visual circuits',text:'MT–SC and V1–MT analyses found better interareal prediction without greater predictive dimensionality. This constrains channel-expansion accounts, without establishing identical geometry or a V4-specific mechanism.',papers:['srinath2021'],kind:'Population analysis'}
+    ],
+    experiments:[
+      {paper:'reynolds1999',question:'Does attention simply add the same amount to every visual response?',design:'Macaque V2/V4 neurons were tested with individual stimuli, pairs, and attention to either member of a pair.',result:'Attention biased the paired response toward the attended stimulus’s isolated response.',limit:'This constrains a computation; it does not identify the source of the control signal.'},
+      {paper:'zhou2016',question:'Does visual pulvinar contribute causally to V4 attention effects?',design:'Ventro-lateral pulvinar was deactivated during visual-attention recordings.',result:'V4 attention modulation and gamma synchrony weakened, while low-frequency activity increased.',limit:'Local excitability and distributed timing changed together, so neither effect alone explains the behavioral deficit.'}
+    ],
+    test:{question:'Does a deficit originate in encoding or in communication?',prediction:'Contrast within-area stimulus decoding with cross-area prediction and behavior. A region can preserve stimulus information while becoming less effective at influencing the selected response.',controls:'Hold contrast and receptive-field overlap constant; estimate correlations and decoders on held-out trials.'},
+    related:['vpulv','fef','lip','v1'],reading:['reynolds1999','mitchell2009','zhou2016','srinath2021']
+  },
+  v1: {
+    subtitle:'Early sensory representation remains sensitive to context',
+    anatomy:[
+      {title:'Early does not mean context-free',text:'V1 is an early cortical stage, but responses can distinguish relevant and irrelevant portions of an object. V2 is a separate area with its own transformations, even though this map compresses them into one node.',papers:['roelfsema1998','semedo2019']},
+      {title:'More than one ascending route',text:'Direct cortical and LP-mediated inputs to higher visual cortex can carry different information in mice. A transthalamic route can add behavioral context rather than duplicate all V1 sensory content.',papers:['blot2021']}
+    ],
+    mechanisms:[
+      {title:'Object-related response enhancement',text:'In curve tracing, V1 neurons representing the relevant curve respond more strongly than neurons representing a distractor. This is an object-related effect at an early stage, not proof that V1 alone performs the selection.',papers:['roelfsema1998'],kind:'Primate recording'},
+      {title:'Local inhibition controls the sign of thalamic impact',text:'In mouse V1, pulvinar input alone can suppress responses; simultaneous VIP recruitment enables stimulus-selective amplification. The evidence supports cooperative circuitry, rather than a simple pulvinar→VIP excitatory chain.',papers:['furutachi2024'],kind:'Causal microcircuit'}
+    ],
+    experiments:[
+      {paper:'roelfsema1998',question:'Can object relevance affect primary visual cortex?',design:'Macaques traced a target curve while ignoring another curve, sometimes crossing it.',result:'Responses along the target curve were enhanced relative to the distractor.',limit:'The experiment measured modulation without identifying the cortical or thalamic feedback source.'},
+      {paper:'furutachi2024',question:'What permits unexpected visual events to recruit stronger V1 responses?',design:'Expected and unexpected visual scenes were combined with thalamic-axon and interneuron perturbations in mice.',result:'Pulvinar input and VIP-dependent disinhibition acted cooperatively.',limit:'Prediction error, novelty and voluntarily attending are different manipulations; do not equate their circuits automatically.'}
+    ],
+    test:{question:'Are expectation and attention implemented by the same local circuit?',prediction:'Cross expected/unexpected with attended/unattended conditions. A shared mechanism predicts a consistent dependence on the same thalamic and inhibitory populations.',controls:'Match stimulus exposure and physical input. Treat the V1 theta reviewed preprint as provisional: its eLife assessment rates the neural–behavioral link incomplete.'},
+    related:['lgn','vpulv','v4','retina'],reading:['roelfsema1998','briggs2013','blot2021','furutachi2024']
+  },
+  md: {
+    subtitle:'Keeping a rule usable, then changing it when needed',
+    anatomy:[
+      {title:'MD and mdPul are different nuclei',text:'MD belongs to a frontal thalamocortical system; mediodorsal pulvinar belongs to posterior attention circuitry in the experiments emphasized here. Similar names should not transfer a result from one nucleus to the other.',papers:['bolkan2017','fiebelkorn2019']},
+      {title:'A reciprocal loop has distinct task phases',text:'The direction of an interaction matters. In mouse working memory, MD→mPFC supports delay maintenance, whereas mPFC→MD supports later choice. “Reciprocal” does not mean that the same operation flows both ways.',papers:['bolkan2017']},
+      {title:'MD also contains an oculomotor relay',text:'In macaques, an identified MD relay carries SC signals to FEF. This pathway concerns movement monitoring and should not be equated with the mouse MD→mPFC populations in rule and working-memory tasks.',papers:['sommer2004a','sommer2004b']}
+    ],
+    mechanisms:[
+      {title:'Signal and noise can require different populations',text:'Mouse MD populations associated with D2 and GRIK4 markers preferentially engage VIP-mediated amplification and PV-mediated suppression. Their necessity differs for sparse relevant cues versus dense conflicting cues.',papers:['mukherjee2021'],kind:'Causal microcircuit'},
+      {title:'Maintenance versus updating',text:'Reduced MD activity can disrupt thalamofrontal coordination and cognition. Projection- and phase-specific interventions are needed to distinguish a maintained representation from a switching operation.',papers:['parnaudeau2013','bolkan2017'],kind:'Causal circuit'}
+    ],
+    experiments:[
+      {paper:'bolkan2017',question:'Does each direction of the MD–PFC loop serve the same role?',design:'Pathway inhibition was restricted to phases of a mouse delayed-choice task.',result:'MD→PFC was important during maintenance, with PFC→MD important for subsequent choice.',limit:'This working-memory result does not imply the same timing in every attention or reversal task.'},
+      {paper:'perakyla2017',question:'Is there human perturbation evidence beyond imaging correlations?',design:'Eight epilepsy participants performed an executive task with MD, adjacent ANT, or no stimulation.',result:'MD-contact stimulation increased working-memory-related errors.',limit:'DBS affects tissue and fibers around contacts; this does not identify a normal endogenous cell-type mechanism.'},
+      {paper:'sommer2004b',question:'Can another MD circuit monitor an impending eye movement?',design:'Macaque MD relay inactivation was tested with two successive saccades to briefly flashed targets.',result:'Updating the second movement using the first was disrupted, supporting corollary discharge.',limit:'This projection-defined oculomotor phenotype should not be assigned to every MD cell or to all cognitive-control deficits.'}
+    ],
+    test:{question:'How does MD distinguish an unreliable cue from an obsolete rule?',prediction:'Vary sensory ambiguity independently of rule reversals and record projection-defined populations. A demixing account predicts separable uncertainty signals with different effects on PFC updating.',controls:'Do not infer general cognitive enhancement from stimulation. Match performance and arousal across conditions and specify the sampled MD subdivision.'},
+    related:['pfc','acc','network','mdpulv','fef','sc'],reading:['parnaudeau2013','bolkan2017','mukherjee2021','lam2024','perakyla2017','sommer2004b']
+  },
+  mdpulv: {
+    subtitle:'A frontoparietal partner whose influence changes over time',
+    anatomy:[
+      {title:'Overlapping labels, not three separate boxes',text:'Mediodorsal pulvinar denotes a sampled territory within the broader dorsal/medial pulvinar landscape. The graph separates it from dorsal and visual pulvinar to organize findings, not to declare non-overlapping nuclear borders.',papers:['fiebelkorn2019','arcaro2018']},
+      {title:'Read the cortical partners with the thalamic site',text:'FEF and LIP recordings define the frontoparietal circuit in the rhythmic-attention study. A finding from pulvinar coupled to visual cortex need not reflect the same cells or computation.',papers:['fiebelkorn2019','saalmann2012']}
+    ],
+    mechanisms:[
+      {title:'Phase-dependent coordination',text:'In macaque spatial attention, theta phase relates to behavioral sensitivity and changing interactions among mdPul, FEF and LIP. This motivates alternating network-state accounts while leaving the rhythm’s generator unresolved.',papers:['fiebelkorn2019'],kind:'Simultaneous recording'},
+      {title:'Brief events are another timescale',text:'Attention-related pulvinar spike bursts can influence cortical processing. A cellular spike burst and a theta cycle are different events; linking them requires measuring their relationship rather than treating them as synonyms.',papers:['boshra2026'],kind:'Mechanistic distinction'}
+    ],
+    experiments:[
+      {paper:'fiebelkorn2019',question:'Is influence within the attention network stable during sustained attention?',design:'Macaque mdPul, FEF and LIP were recorded simultaneously during a spatial-attention task.',result:'Behavior and network interactions varied with theta phase.',limit:'Predictive directionality does not establish a unique pulvinar pacemaker or a direct synapse.'},
+      {paper:'boshra2026',question:'Can brief pulvinar events affect cortex and detection?',design:'Pulvinar and LIP were recorded during fixation; pulvinar microstimulation was interleaved.',result:'Stimulation evoked bursting, synchronized cortical spiking and improved spatially matched detection.',limit:'Rebound, spread and timing constrain interpretation; stimulation does not selectively reproduce only natural bursts.'}
+    ],
+    test:{question:'Does mdPul generate a rhythm, reset it, or follow a distributed rhythm?',prediction:'A timed perturbation should produce different phase-reset patterns across FEF and LIP under these alternatives. Compare recovery of phase with recovery of detection.',controls:'Test spike bursts separately from field-potential phase and remove stimulation artifacts before estimating directionality.'},
+    related:['dpulv','vpulv','fef','lip','md'],reading:['fiebelkorn2018','fiebelkorn2019','boshra2026']
+  },
+  dpulv: {
+    subtitle:'Spatial choice can fail while much of vision remains intact',
+    anatomy:[
+      {title:'Dorsal is a territory-level description',text:'Dorsal pulvinar work samples different injection and recording sites. The dorsal lateral pulvinar in the V4–LIP coordination experiment should not automatically be equated with every dorsal/medial territory studied in spatial choice.',papers:['eradath2021','wilke2010']},
+      {title:'Spatial behavior has several components',text:'Seeing a target, retaining its location, assigning it value and selecting an action are separable. Reward manipulations after inactivation help identify which component is most affected.',papers:['wilke2013']}
+    ],
+    mechanisms:[
+      {title:'Relative desirability of movement goals',text:'After dorsal pulvinar inactivation, monkeys favored ipsilesional options when rewards were equal. Increasing contralesional reward could reduce this bias even though the intervention continued.',papers:['wilke2013'],kind:'Causal primate'},
+      {title:'Competition-sensitive selection',text:'Recent inactivation work separates response bias from perceptual sensitivity. An imbalanced choice distribution should not be described simply as inability to see contralateral space.',papers:['kagan2024'],kind:'Causal primate'}
+    ],
+    experiments:[
+      {paper:'wilke2010',question:'Does the deficit extend across effectors?',design:'Unilateral inactivation was tested across eye movements, manual selection and spontaneous exploration.',result:'Contralateral spatial behavior was disrupted across several domains.',limit:'The tasks mix selection and action programming; a broad spatial phenotype is not one isolated computation.'},
+      {paper:'wilke2013',question:'Can incentive overcome a spatial choice bias?',design:'Delayed saccade choices carried equal or unequal rewards during pulvinar inactivation.',result:'Higher contralesional reward reduced the ipsilesional bias, while spatial memory remained intact.',limit:'Reward compensation does not prove that pulvinar itself computes reward value.'},
+      {paper:'kagan2024',question:'Is biased selection necessarily a sensory deficit?',design:'Signal-detection measures separated spatial choice bias from sensitivity after dorsal pulvinar inactivation.',result:'Spatial selection was biased with relatively preserved perceptual sensitivity.',limit:'This is a task- and intervention-specific dissociation, not a universal claim about every pulvinar lesion.'}
+    ],
+    test:{question:'Which variable best explains a pulvinar-induced bias?',prediction:'Independently vary target contrast, distractor strength, reward and response effector. The pattern of sensitivity, criterion and latency changes constrains sensory, valuation and readout accounts.',controls:'Estimate sensitivity from full hit/false-alarm data and report injection location and spread.'},
+    related:['mdpulv','lip','sc','bg','vpulv'],reading:['wilke2010','wilke2013','kagan2024','eradath2021']
+  },
+  vpulv: {
+    subtitle:'Parallel visual pathways with projection-specific information',
+    anatomy:[
+      {title:'Neither primate pulvinar nor mouse LP is uniform',text:'Mouse LP has territories with different input sources: posterior visual activity is strongly collicular-driven, whereas anterior territories depend more on cortical input. Primate subdivision names cannot simply be substituted for these territories.',papers:['bennett2019']},
+      {title:'An identified secondary visual route',text:'In macaques, physiological identification found pulvinar cells that receive SC input and project to MT. This supports a continuous route through inferior pulvinar, not a blanket SC→dorsal-pulvinar arrow.',papers:['berman2010']}
+    ],
+    mechanisms:[
+      {title:'Parallel channels need not duplicate content',text:'Direct V1 and LP inputs to higher visual cortex can convey different visual and movement-related variables. Specify the projection target before assigning a function to LP output.',papers:['blot2021'],kind:'Projection-specific recording'},
+      {title:'Sensory drive versus state context',text:'In mouse posterior medial cortex, LP input contributes arousal-related modulation while direct cortical input supplies stronger visual drive. This constrains a universal higher-order-thalamus-as-sensory-relay account.',papers:['neske2025'],kind:'Causal boundary condition'}
+    ],
+    experiments:[
+      {paper:'bennett2019',question:'Which input drives each LP territory?',design:'Large-scale circuit mapping and recordings were combined with SC or visual-cortex silencing.',result:'Different territories depended on different drivers and had different visual properties.',limit:'Mouse LP organization is not a one-to-one atlas of primate pulvinar subdivisions.'},
+      {paper:'blot2021',question:'Do direct and transthalamic paths deliver the same information?',design:'Inputs to the same higher visual targets were compared using axonal imaging and perturbation.',result:'LP supplied target-specific visuomotor information distinct from direct V1 signals.',limit:'The measured information depends on target, stimulus and behavior; no single code describes every projection.'},
+      {paper:'neske2025',question:'Can a thalamic input chiefly affect state modulation?',design:'LP versus cortical afferents to mouse posterior medial visual cortex were imaged and silenced.',result:'The inputs had different effects on visual responses and arousal-linked modulation.',limit:'Mouse cortical PM means posterior medial area; it is not primate pulvinar PM.'}
+    ],
+    test:{question:'When does pulvinar carry sensory evidence versus set its operating context?',prediction:'Record identified projections to multiple targets during the same behavior. Sensory decoding, state modulation and causal response effects can then be compared without changing species or task.',controls:'Specify subdivision, cortical layer and behavioral state. Larger axonal signals need not imply stronger postsynaptic influence.'},
+    related:['v1','v4','sc','dpulv','lgn'],reading:['berman2010','bennett2019','blot2021','neske2025','zhou2016']
+  },
+  lgn: {
+    subtitle:'A selective relay whose transmission depends on timing and state',
+    anatomy:[
+      {title:'First-order identifies the driver',text:'Retinal input supplies the principal sensory drive to LGN. Calling it first-order does not imply passive copying: transmission can depend on the temporal structure of afferent spikes and other inputs.',papers:['carandini2007','usrey2015']},
+      {title:'Keep measurements distinct',text:'Mean firing, the chance an input evokes an output spike, field-potential coupling and a BOLD response measure different aspects of a circuit. Agreement or disagreement across them is an empirical question.',papers:['briggs2013','alitto2025']}
+    ],
+    mechanisms:[
+      {title:'Temporal summation filters input',text:'Clustered retinal inputs are more likely to trigger LGN spikes. Macaque recordings support postsynaptic summation as an explanation, without requiring increased amplitude of the second synaptic input.',papers:['carandini2007'],kind:'Synaptic physiology'},
+      {title:'Attentional effects have boundary conditions',text:'Earlier macaque work found reciprocal early modulation of LGN and TRN. A 2025 reexamination found smaller, inconsistent mean-rate effects. Neither result alone fixes the impact of LGN output on cortex.',papers:['mcalonan2008','alitto2025'],kind:'Contrasting recordings'}
+    ],
+    experiments:[
+      {paper:'mcalonan2008',question:'Can spatial attention modulate responses before cortex?',design:'LGN and TRN visual responses were measured during macaque cued attention.',result:'Early LGN responses increased while TRN responses decreased; later LGN modulation returned.',limit:'The temporal pattern suggests multiple influences but does not causally identify their sources.'},
+      {paper:'alitto2025',question:'How large and consistent is direct LGN spike modulation?',design:'Macaque LGN responses were tested using multiple functional analyses.',result:'Attention effects were detectable but much smaller than earlier reports and restricted to subsets of cells.',limit:'Downstream efficacy was not directly measured; a small rate change is not proof of no cortical consequence.'},
+      {paper:'alitto2026',question:'Does stronger oscillatory coherence always mean more visual engagement?',design:'Simultaneous macaque LGN/V1 recordings varied stimulation, attention and arousal.',result:'Beta oscillations/coherence decreased with greater visual engagement.',limit:'The suppression interpretation is a hypothesis; the band label is not a universal functional code.'}
+    ],
+    test:{question:'Can attention change output efficacy without a large mean-rate increase?',prediction:'Combine LGN and V1 recordings with timing-sensitive efficacy measures. Compare rate-matched periods that differ in input clustering or cortical state.',controls:'Account for contrast, pupil size, retinal firing history and cortical feedback; avoid equating coherence with synaptic efficacy.'},
+    related:['retina','trn','v1','vpulv'],reading:['carandini2007','mcalonan2008','briggs2013','alitto2025','alitto2026']
+  },
+  trn: {
+    subtitle:'Inhibition targeted to a channel, with more than one control route',
+    anatomy:[
+      {title:'An inhibitory shell with organized subnetworks',text:'TRN is represented as one node, but visual, auditory and frontal-associated territories should be distinguished. Attention modulation in macaque sensory TRN is an important complement to detailed mouse interventions.',papers:['mcalonan2006','halassa2014']},
+      {title:'A compressed arrow can hide intermediate structures',text:'PFC control of sensory TRN in the mouse filtering circuit uses a basal-ganglia intermediate. Frontal layer-5 direct TRN contacts studied elsewhere target a different circuit context; these findings should not be merged into one direct sensory connection.',papers:['nakajima2019','hadinger2023']}
+    ],
+    mechanisms:[
+      {title:'Suppress the competing channel',text:'Cross-modal selection can recruit sensory TRN to reduce transmission of the distracting modality. Disinhibiting the selected relay and inhibiting a distractor relay are related but distinct operations.',papers:['wimmer2015'],kind:'Causal circuit'},
+      {title:'Region-specific cortical access',text:'Frontal layer-5 cells make specialized TRN contacts, and the contacted TRN cells project to nuclei associated with frontal activity. This does not establish direct PFC→visual-TRN control in the sensory selection task.',papers:['hadinger2023'],kind:'Anatomy and physiology'}
+    ],
+    experiments:[
+      {paper:'wimmer2015',question:'Does an inhibitory thalamic subnetwork matter for choosing a modality?',design:'Mice selected between conflicting visual and auditory cues; visual TRN activity was recorded and manipulated.',result:'TRN influenced sensory gain and selection performance.',limit:'Cross-modal choice is not the same operation as choosing between two visual locations.'},
+      {paper:'nakajima2019',question:'How does PFC recruit sensory TRN when a direct projection is absent?',design:'Tracing and pathway perturbation tested basal-ganglia intermediates in sensory filtering.',result:'An indirect PFC–BG–thalamus circuit supported distractor and background-noise suppression.',limit:'This pathway should not be generalized to every TRN sector or every species.'}
+    ],
+    test:{question:'Do TRN and pulvinar affect different stages of the same selection?',prediction:'In one task, compare early sensory response changes after TRN perturbation with later coordination changes after pulvinar perturbation. Both effects may coexist rather than form a strict sequence.',controls:'Match intervention extent and timing, distinguish arousal from selection, and identify the manipulated TRN sector.'},
+    related:['lgn','bg','pfc','md'],reading:['mcalonan2006','halassa2014','wimmer2015','nakajima2019','hadinger2023']
+  },
+  central: {
+    subtitle:'Availability of processing is a different question from item selection',
+    anatomy:[
+      {title:'A grouped label for distinct intralaminar systems',text:'CL and other intralaminar nuclei are compressed into this contextual node. A stimulation site plus nearby fiber recruitment defines an intervention more precisely than the phrase “central thalamus.”',papers:['redinbaugh2020','schiff2023']},
+      {title:'Three levels of claim',text:'Wake-like physiology under anesthesia, engagement during a healthy task, and improved performance after brain injury are different outcomes. Evidence for one should not be presented as proof of all three.',papers:['redinbaugh2020','khalaf2025','schiff2023']}
+    ],
+    mechanisms:[
+      {title:'State-dependent cortical availability',text:'Macaque CL stimulation under anesthesia restored wake-like cortical processing. This establishes a state intervention; it does not specify which competing visual item should be selected.',papers:['redinbaugh2020'],kind:'Causal state manipulation'},
+      {title:'Recruitable networks after injury',text:'Human CL/tract-targeted stimulation improved processing-speed/executive performance in five trial completers. The appropriate conclusion is feasibility and a promising physiological target, with broader efficacy unresolved.',papers:['schiff2023'],kind:'Early clinical evidence'}
+    ],
+    experiments:[
+      {paper:'redinbaugh2020',question:'Can a thalamic intervention alter global processing state?',design:'Macaque thalamic and layer-specific cortical recordings were combined with CL stimulation under anesthesia.',result:'Stimulation restored wake-like activity and responsiveness.',limit:'Anesthesia recovery is not a demonstration of spatial-attention routing in an awake brain.'},
+      {paper:'schiff2023',question:'Can central-thalamic recruitment improve residual function after injury?',design:'A phase-1 feasibility trial targeted CL and associated fibers in chronic traumatic brain injury.',result:'All five completers improved on the prespecified processing-speed/executive measure after stimulation.',limit:'Small numbers, selected patients and trial design limit general treatment conclusions.'}
+    ],
+    test:{question:'Does increased engagement amplify selective control or merely general responding?',prediction:'Measure cue validity, sensitivity, false alarms and omissions alongside global state. An item-specific improvement should interact with the cued location rather than simply raise response probability.',controls:'Use pupil and movement measures and avoid using one executive task as a complete assay of consciousness.'},
+    related:['md','trn','mdpulv','pfc'],reading:['redinbaugh2020','schiff2023','khalaf2025','whyte2024']
+  },
+  sc: {
+    subtitle:'Covert selection can depend on a subcortical readout',
+    anatomy:[
+      {title:'Visual and orienting components need separation',text:'Connectivity-identified SC→pulvinar→MT cells carry visual signals with little presaccadic activity. An ascending visual pathway and an orienting-related pathway should not be assigned the same function merely because both involve SC.',papers:['berman2010','berman2011']},
+      {title:'More than one downstream partner',text:'SC influences attention-related caudate activity through an unresolved intermediate route. A separate, physiologically identified ascending route reaches FEF through MD and carries prominent presaccadic signals.',papers:['herman2020','sommer2004a']}
+    ],
+    mechanisms:[
+      {title:'Selection beyond classic sensory enhancement',text:'SC inactivation can impair behavior even when attention-related response enhancement in MT/MST survives. A successful cortical encoding signature is therefore insufficient to guarantee that selected evidence guides the report.',papers:['zenon2012'],kind:'Causal dissociation'},
+      {title:'A visual route through inferior pulvinar',text:'SC-recipient pulvinar neurons projecting to MT establish an ascending route. Its existence does not prove that this route explains all covert deficits after SC inactivation.',papers:['berman2010','berman2011'],kind:'Physiological connectivity'}
+    ],
+    experiments:[
+      {paper:'zenon2012',question:'Must an attention deficit eliminate visual cortical enhancement?',design:'SC was inactivated during motion-change detection while MT/MST neurons were recorded.',result:'Behavioral attention was impaired while classic cortical enhancement remained intact.',limit:'The result excludes that measured signature as a sufficient explanation; it does not identify a unique alternative route.'},
+      {paper:'herman2020',question:'Does SC activity affect the basal-ganglia attention code?',design:'Caudate neurons were recorded before and during unilateral SC inactivation.',result:'Same-side SC inactivation altered attention modulation and task-state decoding.',limit:'Dependence can be mediated indirectly and need not reflect a direct SC→caudate synapse.'}
+    ],
+    test:{question:'Does SC change sensory sensitivity, decision criterion or evidence selection?',prediction:'Use competing stimuli with independent changes at each location and model hit and false-alarm patterns. Compare cortical encoding with the evidence that best predicts each reported decision.',controls:'Maintain a nonspatial response and track microsaccades; isolated hit-rate changes cannot distinguish these accounts.'},
+    related:['vpulv','bg','fef','md','dpulv','retina'],reading:['lovejoy2010','zenon2012','berman2010','herman2020','sommer2004a']
+  },
+  bg: {
+    subtitle:'From learned relevance to sensory filtering and orienting choice',
+    anatomy:[
+      {title:'A circuit family, not one nucleus',text:'The caudate recordings, nigro-collicular physiology and mouse sensory-filtering work refer to different basal-ganglia components. The graph’s single box is a space-saving abstraction; pathway endpoints should be read at the nucleus level.',papers:['arcizet2018','hikosaka1983','nakajima2019']},
+      {title:'Covert signals are not automatically motor commands',text:'Caudate neurons can track spatial cues and task epochs while animals maintain fixation and report with a nonspatial movement. Their attention-related activity extends beyond selecting an eye-movement endpoint.',papers:['arcizet2018']}
+    ],
+    mechanisms:[
+      {title:'Control of orienting through SNr',text:'The inhibitory BG→SC arrow refers specifically to substantia nigra pars reticulata output, not an inhibitory projection from striatum directly to SC. Tonic inhibition and changes in it constrain orienting.',papers:['hikosaka1983'],kind:'Established circuit motif'},
+      {title:'A separate sensory-filtering loop',text:'In mice, PFC can recruit sensory TRN through basal-ganglia intermediates. This is a different circuit function from nigro-collicular motor gating, even though both are compressed into the BG node.',papers:['nakajima2019'],kind:'Causal circuit'}
+    ],
+    experiments:[
+      {paper:'arcizet2018',question:'Does striatal activity represent a relevant location without an orienting action?',design:'Caudate neurons were recorded during a fixation task using joystick release as the report.',result:'Activity represented cued location and successive task epochs.',limit:'Representing a variable does not establish that the caudate computed it or was necessary for behavior.'},
+      {paper:'nakajima2019',question:'Can basal-ganglia circuitry regulate what reaches sensory thalamus?',design:'Anatomy and pathway perturbation tested PFC-dependent filtering of distracting and noisy input.',result:'An indirect pathway supported recruitment of sensory inhibition.',limit:'This does not imply the same basal-ganglia cells implement reward learning, saccades and sensory filtering.'}
+    ],
+    test:{question:'Is task-relevance coding inherited from SC or transformed by value and context?',prediction:'Manipulate reward history independently of spatial cue validity while recording both structures. Compare changes in cue coding after SC versus frontal-input perturbations.',controls:'Separate cue location, action identity, reward anticipation and task epoch; these often covary in standard tasks.'},
+    related:['sc','trn','pfc','dpulv'],reading:['arcizet2018','herman2020','nakajima2019','hikosaka1983']
+  },
+  retina: {
+    subtitle:'Parallel input streams and temporal filtering before cortical attention',
+    anatomy:[
+      {title:'An external input node',text:'Retina supplies LGN and SC with visual signals. Its inclusion helps distinguish incoming evidence from later selection. The new retina→SC pathway is supported by mouse afferent physiology; the graph omits other retinal targets.',papers:['carandini2007','gehr2023']},
+      {title:'A spike train is not a static image',text:'Visual information arrives as temporally structured activity. Comparing input spikes with downstream output spikes shows that different circuits can select different portions of the same incoming activity.',papers:['carandini2007']}
+    ],
+    mechanisms:[
+      {title:'History-dependent transmission to LGN',text:'A retinal spike’s probability of producing an LGN spike depends on nearby inputs. Summation can favor clustered input without presynaptic facilitation being the principal explanation.',papers:['carandini2007'],kind:'Primate synaptic physiology'},
+      {title:'Cell-dependent integration in SC',text:'Mouse retinal inputs exhibit different integration properties at excitatory versus inhibitory SC neurons. Early parallel streams can therefore transform input before a cortical attention manipulation is applied.',papers:['gehr2023'],kind:'Mouse sensory physiology'}
+    ],
+    experiments:[
+      {paper:'carandini2007',question:'Why do some retinal spikes pass through LGN and others not?',design:'Macaque retinal afferent potentials and LGN spikes were measured together.',result:'Postsynaptic summation accounted for selective transmission of clustered inputs.',limit:'The stimulus isolated a dominant input; a full natural-scene circuit contains additional interactions.'},
+      {paper:'gehr2023',question:'Does the same class of input affect SC cell types identically?',design:'Retinal afferents and identified excitatory/inhibitory SC neurons were recorded in mice.',result:'Spike integration differed across the two postsynaptic classes.',limit:'This is not evidence that retinal neurons implement voluntary selective attention.'}
+    ],
+    test:{question:'How much apparent thalamic gain is inherited from changes in input timing?',prediction:'Compare input/output transmission after matching retinal rate but varying interspike intervals. A timing effect can survive rate matching without requiring an attentional change in the retina.',controls:'Control contrast, adaptation and eye position; avoid assigning an attention function from sensory physiology alone.'},
+    related:['lgn','sc','v1'],reading:['carandini2007','gehr2023','usrey2015']
+  },
+  network: {
+    subtitle:'A population-level explanation, not an anatomical address',
+    anatomy:[
+      {title:'Why this conceptual node is here',text:'“Selected cortical ensemble” names a task-relevant pattern across neurons. It is useful for separating the presence of information from the ability of another population to use it. It has no separate nuclear border or atlas location.',papers:['semedo2019','panichello2021']},
+      {title:'A statistical channel is not a fiber bundle',text:'A communication subspace is inferred from population relationships. It identifies activity patterns predictive of another area; it does not show that those patterns travel through one physical tract or thalamic nucleus.',papers:['semedo2019']}
+    ],
+    mechanisms:[
+      {title:'Selective interareal prediction',text:'V2 activity can be predicted from a restricted subset of V1 population fluctuations, rather than from the strongest fluctuations within V1. Population structure matters in addition to overall activation.',papers:['semedo2019'],kind:'Population analysis'},
+      {title:'A constraint on channel-expansion accounts',text:'Attention improved cross-area prediction without increasing shared dimensionality. A fixed nonlinear readout is compatible with the findings, even though fitted linear relationships can change.',papers:['srinath2021'],kind:'Boundary condition'}
+    ],
+    experiments:[
+      {paper:'semedo2019',question:'Does all activity in one area predict the next area equally?',design:'Simultaneous macaque visual populations were analyzed with dimensionality reduction.',result:'A restricted subspace captured interareal relationships.',limit:'Prediction, dimensionality and correlation alone do not establish causal routing.'},
+      {paper:'srinath2021',question:'Must better communication require more shared dimensions?',design:'MT–SC and V1–MT interactions were compared across attentional conditions.',result:'Prediction improved without increased predictive dimensionality.',limit:'Linear relationships could differ; a fixed nonlinear channel is an interpretation, not proof of invariant geometry.'}
+    ],
+    test:{question:'Does thalamus change encoding, coordination or both?',prediction:'Fit held-out stimulus/rule decoders and cross-area prediction models before and during a temporally restricted thalamic intervention. Ask which changes explain behavior beyond mean activity and movement.',controls:'Report decoder generalization and population sampling. A low-dimensional summary can hide relevant high-dimensional activity.'},
+    related:['pfc','md','lip','v4'],reading:['semedo2019','panichello2021','srinath2021','schmitt2017','binish2026']
+  }
+};
+
+const readingTrails = [
+  {title:'Three ways pulvinar can matter',text:'Compare rhythmic coordination, spatial choice bias, and projection-specific visual/state signals.',regions:['mdpulv','dpulv','vpulv']},
+  {title:'A rule becomes an action',text:'Follow error detection, thalamic maintenance/updating, and a usable cortical representation.',regions:['acc','md','pfc','network']},
+  {title:'What changes before cortex?',text:'Follow retinal timing, LGN transmission, selective inhibition, and early cortical context.',regions:['retina','lgn','trn','v1']},
+  {title:'Selection without looking',text:'Compare cortical priority, subcortical readout and basal-ganglia relevance signals.',regions:['fef','lip','sc','bg']}
+];
