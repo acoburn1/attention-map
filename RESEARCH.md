@@ -15,3 +15,27 @@ Key additions and corrections:
 - Identify human intracranial recordings separately from imaging, keep clinical stimulation conclusions within the studies' scope, and retain the provisional status of the [V1 theta reviewed preprint](https://elifesciences.org/reviewed-preprints/107731).
 
 `region-content.js` contains the complete additions and their publication links. Existing map coordinates remain schematic. Pulvinar labels overlap, broad cortical/BG nodes compress multiple territories, and mouse LP subdivisions are not a one-to-one primate atlas.
+
+## Weekly update — 5 October 2026
+
+Last successful literature search: **2026-10-05**. First-run window: **2026-09-05 through 2026-10-05**, plus an explicitly labeled earlier addition. This is a targeted search, not a systematic review. Next run should search from **2026-09-28** through its actual run date to overlap by a week and catch delayed indexing.
+
+Searched primary publication and PubMed records for pulvinar/LP, MD, TRN, superior colliculus and their attention/cortical/basal-ganglia interactions, using September 2026 and date variants. Checked existing titles and identifiers before adding references. No existing entries were superseded by these three additions.
+
+Sources and date decisions:
+
+- **Xu, Jasper & Kohn (2026)** — [PubMed / author abstract](https://pubmed.ncbi.nlm.nih.gov/42784457/), DOI `10.1016/j.celrep.2026.117989`. Online September 23. Added to visual pulvinar experiments and the digest. Interpretation is limited to the indexed author abstract; full-text details and numerical estimates were not inferred.
+- **Yu et al. (2026)** — [published full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC13600250/), DOI `10.1126/sciadv.aee2152`. Published September 23; September 25 is the issue/collection date. Use the published paper rather than the November 2025 preprint. Added to MD experiments and the digest.
+- **Ramezanpour et al. (2026)** — [PubMed and figure descriptions](https://pubmed.ncbi.nlm.nih.gov/42668539/) and [publisher discussion](https://doi.org/10.1016/j.isci.2026.116316). Online August 21, September 18 collection: explicitly classified as an earlier paper newly added, not a September discovery. Added to basal-ganglia experiments and the digest. The publisher discussion identifies missing sham and timing blinding; these limitations are retained.
+
+Triage and follow-ups:
+
+- The September SC review by Heymans, Reinhard & Farrow is a review, not a new primary finding; not added as news.
+- MD itch and TRN seizure studies found in the date window were outside this update's attention focus. No equally relevant new LP or SC primary study was verified in this targeted pass; this is not a claim that none exists.
+- Follow up the centromedian ultrasound paper, DOI `10.1016/j.brs.2026.103171`, before including it: the primary full-text endpoint returned 403, and online date/method details need verification. Do not use its September–October issue date as the online publication date.
+- Revisit the existing V1 theta reviewed preprint (`107731`) for a version-of-record or assessment change in a future pass; no status change verified this run.
+- For Xu et al., inspect full methods when accessible before adding subdivision, sample-size or quantitative communication claims. Keep human ultrasound targeting separate from the map's primate pulvinar subdivisions.
+
+Implementation: added a Latest research panel, separate collapsed Developer notes, shareable `#latest` and `#developer-notes` links, and an archive for digest entries beyond the newest six. Three library records and three experiment walkthroughs added; network topology unchanged.
+
+Validation: the documented Node/Playwright suite passed with Microsoft Edge: 17 guides, 41 experiment walkthroughs, 31 pathways and 95 references. Checks include the new digest source/region links, separate paper/addition dates, direct section links, keyboard expansion and focus return, existing filters, and local-file loading. Desktop (1440 px), phone (390 px) and tablet (768 px) layouts were checked for overflow; desktop and phone previews were visually inspected. `git diff --check` passed. Publication will use the existing `main`-branch GitHub Pages deployment; remote `main` matched the local starting commit before publication.

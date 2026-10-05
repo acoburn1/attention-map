@@ -157,6 +157,15 @@
   .reference-tab.active { border-color: #6d9de9; background: rgba(79,140,255,.2); color: #fff; }
   .reference-body { min-height: 0; overflow: auto; padding: 18px 20px 28px; }
   .reference-panel[hidden] { display: none; }
+  .research-list { display: grid; gap: 14px; max-width: 900px; margin: 18px auto; }
+  .research-card { margin: 0; }
+  .research-card h3 { font-size: 20px; }
+  .research-card .research-limit { color: #d7c398; }
+  .research-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--muted); font-size: 11px; margin: 10px 0; }
+  .research-source { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+  .release-note { padding: 16px; border: 1px solid var(--border); border-radius: 10px; margin-top: 12px; }
+  .release-note summary { cursor: pointer; color: #cbd6e8; font-size: 13px; line-height: 1.5; }
+  .release-note li { color: #b7c4d9; font-size: 12px; line-height: 1.7; margin: 8px 0; }
   .reference-intro { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(260px,.6fr); gap: 14px; margin-bottom: 16px; }
   .reference-note { border: 1px solid #334462; background: #131d32; border-radius: 11px; padding: 12px 13px; color: #cbd6e8; font-size: 12px; line-height: 1.5; }
   .reference-note strong { color: #fff; }
@@ -314,6 +323,7 @@
       <button class="header-action" data-open-reference="regions">Region explorer</button>
       <button class="header-action" data-open-reference="synthesis">Synthesis</button>
       <button class="header-action" data-open-reference="library">Reference library</button>
+      <button class="header-action" data-open-reference="latest">Latest research</button>
       <span class="badge">Click nodes or pathways</span>
     </div>
   </header>
@@ -380,6 +390,7 @@
       </div>
 
       <div class="footer-note">Controls: mouse wheel to zoom; drag empty space to pan; click empty space to clear. Keyboard: <span class="keyboard">Esc</span> clears selection.</div>
+      <div class="footer-note"><button class="text-link" data-open-reference="notes">Developer notes</button></div>
     </aside>
 
     <section class="graph-wrap" id="graphWrap">
@@ -416,6 +427,7 @@
       <button class="modal-close" id="referenceClose" aria-label="Close reference">Close</button>
     </div>
     <nav class="reference-tabs" aria-label="Reference sections">
+      <button class="reference-tab" data-reference-tab="latest">Latest research</button>
       <button class="reference-tab" data-reference-tab="regions">Region explorer</button>
       <button class="reference-tab active" data-reference-tab="synthesis">Synthesis</button>
       <button class="reference-tab" data-reference-tab="library">Literature library</button>
@@ -423,6 +435,8 @@
       <button class="reference-tab" data-reference-tab="glossary">Methods & glossary</button>
     </nav>
     <div class="reference-body">
+      <section class="reference-panel" id="reference-latest" aria-labelledby="latestTitle" hidden></section>
+      <section class="reference-panel" id="reference-notes" aria-labelledby="notesTitle" hidden></section>
       <section class="reference-panel" id="reference-regions" hidden></section>
       <section class="reference-panel" id="reference-synthesis"></section>
       <section class="reference-panel" id="reference-library" hidden></section>
@@ -1187,12 +1201,41 @@ function renderGlossary(){
       <tr><td>Modeling</td><td>Computational sufficiency, formal predictions, mechanism comparison</td><td>That the brain implements the modeled mechanism without empirical tests</td></tr>
     </tbody></table>`;
 }
+function displayDate(date){
+  return new Date(date+'T12:00:00Z').toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'});
+}
+function researchUpdateCard(update){
+  const p=papers[update.paper];
+  return `<article class="guide-section research-card" data-update-paper="${esc(update.paper)}">
+    <div class="detail-kicker">${esc(update.category)} · ${esc(p.status)} · ${esc(p.species)}</div>
+    <h3>${esc(update.title)}</h3>
+    <div class="research-meta"><span>Paper published <time datetime="${esc(p.publicationDate)}">${displayDate(p.publicationDate)}</time></span><span>Added to site <time datetime="${esc(update.added)}">${displayDate(update.added)}</time></span></div>
+    <p>${esc(update.finding)}</p><p><strong>Why it matters:</strong> ${esc(update.meaning)}</p>
+    <p class="research-limit"><strong>Keep in mind:</strong> ${esc(update.limit)}</p>
+    <div class="research-source"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)} ↗</a><div class="paper-meta">${esc(p.authors)} · ${esc(p.journal)}</div></div>
+    <div class="claim-links">${update.regions.map(id=>`<button class="citation-chip" data-region-link="${esc(id)}">Explore ${esc(nodeById[id].abbr)} →</button>`).join('')}</div>
+  </article>`;
+}
+function renderResearchUpdates(){
+  const root=document.getElementById('reference-latest');
+  root.innerHTML=`<h2 class="atlas-heading" id="latestTitle">Latest research</h2>
+    <p class="atlas-deck">New evidence, connected to the map.</p>
+    <div class="reference-note">A selective research digest. Paper publication dates and site addition dates are separate; earlier work added to the collection is labeled explicitly. Evidence limits travel with each finding.</div>
+    <div class="research-list">${researchUpdates.slice(0,6).map(researchUpdateCard).join('')}</div>
+    ${researchUpdates.length>6?`<details class="release-note"><summary>Earlier research entries (${researchUpdates.length-6})</summary><div class="research-list">${researchUpdates.slice(6).map(researchUpdateCard).join('')}</div></details>`:''}`;
+  bindRegionLinks(root);
+  document.getElementById('reference-notes').innerHTML=`<h2 class="atlas-heading" id="notesTitle">Developer notes</h2><p class="atlas-deck">A dated record of changes to this site.</p>
+    ${developerNotes.map(note=>`<details class="release-note"><summary><time datetime="${esc(note.date)}">${displayDate(note.date)}</time> · ${esc(note.title)}</summary><ul>${note.changes.map(change=>`<li>${esc(change)}</li>`).join('')}</ul></details>`).join('')}`;
+}
 function setReferenceTab(tab){
   document.querySelectorAll('.reference-tab').forEach(b=>{b.classList.toggle('active',b.dataset.referenceTab===tab);b.setAttribute('aria-pressed',String(b.dataset.referenceTab===tab));});
   document.querySelectorAll('.reference-panel').forEach(p=>p.hidden=p.id!==`reference-${tab}`);
   if(tab==='library') renderLibrary();
   if(tab==='regions') renderRegionExplorer();
-  else clearRegionHash();
+  else {
+    clearRegionHash();
+    if(tab==='latest'||tab==='notes') history.replaceState(null,'',location.pathname+location.search+(tab==='latest'?'#latest':'#developer-notes'));
+  }
   document.querySelector('.reference-body').scrollTop=0;
 }
 function openReference(tab='synthesis',opener=null){
@@ -1219,7 +1262,7 @@ function bindRegionLinks(root){
   root.querySelectorAll('[data-region-link]').forEach(b=>b.addEventListener('click',()=>openRegion(b.dataset.regionLink,b)));
 }
 function clearRegionHash(){
-  if(location.hash.startsWith('#region/')) history.replaceState(null,'',location.pathname+location.search);
+  if(location.hash.startsWith('#region/')||['#latest','#developer-notes'].includes(location.hash)) history.replaceState(null,'',location.pathname+location.search);
 }
 function updateRegionHash(){
   const hash=`#region/${exploredRegion}/${guideSection}`;
@@ -1290,6 +1333,8 @@ function revealNode(id){
   transform={x:0,y:0,k:1};updateTransform();setView('overview');selectItem('node',id);
 }
 function readRegionHash(){
+  if(location.hash==='#latest'){openReference('latest');return;}
+  if(location.hash==='#developer-notes'){openReference('notes');return;}
   const match=location.hash.match(/^#region\/([a-z]+)(?:\/([a-z]+))?$/);
   if(match&&regionGuides[match[1]]&&(!match[2]||guideSections[match[2]])){
     guideSection=match[2]||'anatomy';openRegion(match[1],null,false);
@@ -1304,7 +1349,7 @@ document.addEventListener('keydown',e=>{
   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
 });
 
-renderSynthesis(); renderCenter(); renderGlossary();
+renderSynthesis(); renderCenter(); renderGlossary(); renderResearchUpdates();
 document.getElementById('sidebarPaperCount').textContent=`${paperCatalog.length} papers`;
 document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.openReference==='regions'?openRegion(exploredRegion,b):openReference(b.dataset.openReference,b)));
 document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>{setReferenceTab(b.dataset.referenceTab);if(b.dataset.referenceTab==='regions')updateRegionHash();}));

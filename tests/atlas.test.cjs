@@ -13,7 +13,7 @@ const inline = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]
 new vm.Script(content);
 new vm.Script(inline);
 const data = vm.runInNewContext(content + '\n' + inline.slice(0, inline.indexOf('const svg =')) +
-  '\n({papers, researchPapers, regionGuides, readingTrails, nodes, edges, paperMeta, guidePaperIds, synthesisClaims})');
+  '\n({papers, researchPapers, researchUpdates, developerNotes, regionGuides, readingTrails, nodes, edges, paperMeta, guidePaperIds, synthesisClaims})');
 
 test('every guide, pathway, reading trail and source resolves', () => {
   const nodeIds = new Set(data.nodes.map(n => n.id));
@@ -52,6 +52,16 @@ test('every guide, pathway, reading trail and source resolves', () => {
     assert.ok(data.paperMeta[id]);
   }
   assert.equal(new Set(data.edges.map(e => e.id)).size, data.edges.length);
+  assert.equal(new Set(data.researchUpdates.map(u => u.paper)).size, data.researchUpdates.length);
+  for (const update of data.researchUpdates) {
+    checkPaper(update.paper);
+    const paper = data.papers[update.paper];
+    assert.match(paper.publicationDate, /^\d{4}-\d{2}-\d{2}$/);
+    assert.ok(paper.publicationDate <= update.added, 'No future publications in the digest');
+    assert.ok(paper.status && update.finding && update.meaning && update.limit);
+    update.regions.forEach(id => assert.ok(nodeIds.has(id)));
+    assert.ok(update.regions.some(id => data.guidePaperIds(id).includes(update.paper)), 'Digest study is integrated in a linked guide');
+  }
   const experiments = Object.values(data.regionGuides).reduce((count, guide) => count + guide.experiments.length, 0);
   console.log(`${nodeIds.size} guides, ${experiments} experiment walkthroughs, ${data.edges.length} pathways, ${Object.keys(data.papers).length} references; ${Object.keys(data.researchPapers).length} additions`);
 });
@@ -78,6 +88,22 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     assert.equal(await page.locator('.node').count(), data.nodes.length);
     assert.equal(await page.locator('.edge').count(), data.edges.length);
     if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'map-desktop.png') });
+    await page.locator('[data-open-reference="latest"]').click();
+    assert.equal(await page.locator('.research-card').count(), data.researchUpdates.length);
+    assert.match(await page.locator('#reference-latest').innerText(), /Earlier paper · new to the map/i);
+    if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'latest-desktop.png') });
+    await page.locator('[data-update-paper="yu2026"] [data-region-link="md"]').click();
+    await page.locator('[data-guide-section="experiments"]').click();
+    assert.match(await page.locator('#guideContent').innerText(), /ketamine/);
+    await page.keyboard.press('Escape');
+    await page.locator('[data-open-reference="notes"]').click();
+    assert.equal(await page.locator('#reference-notes details[open]').count(), 0);
+    await page.locator('#reference-notes summary').first().focus();
+    await page.keyboard.press('Enter');
+    assert.ok(await page.locator('#reference-notes ul').first().isVisible());
+    if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'notes-desktop.png') });
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('[data-open-reference="notes"]').evaluate(el => document.activeElement === el), true);
     await page.locator('.node[data-id="md"]').focus();
     await page.keyboard.press('Enter');
     assert.match(await page.locator('#details').innerText(), /Mediodorsal thalamus/);
@@ -162,6 +188,18 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
 
     for (const width of [390, 768]) {
       await page.setViewportSize({ width, height: 844 });
+      await page.goto(`${url}/#latest`);
+      assert.ok(await page.locator('#latestTitle').isVisible());
+      assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
+      if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, `latest-${width}.png`) });
+      await page.locator('[data-update-paper="ramezanpour2026"] [data-region-link="bg"]').click();
+      assert.equal(await page.locator('#atlasRegion').inputValue(), 'bg');
+      await page.goto(`${url}/#developer-notes`);
+      assert.ok(await page.locator('#notesTitle').isVisible());
+      if (!await page.locator('#reference-notes details').first().evaluate(el => el.open)) await page.locator('#reference-notes summary').first().click();
+      assert.ok(await page.locator('#reference-notes ul').first().isVisible());
+      assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
+      if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, `notes-${width}.png`) });
       await page.goto(`${url}/#region/vpulv/experiments`);
       assert.ok(await page.locator('#guideContent').isVisible());
       assert.ok(await page.locator('.reference-shell').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
@@ -170,6 +208,10 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
       await page.locator('[data-reference-tab="library"]').click();
       assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
     }
+    await page.goto(pathToFileURL(path.join(root, 'index.html')).href + '#latest');
+    assert.ok(await page.locator('#latestTitle').isVisible());
+    await page.goto(pathToFileURL(path.join(root, 'index.html')).href + '#developer-notes');
+    assert.ok(await page.locator('#notesTitle').isVisible());
     await page.goto(pathToFileURL(path.join(root, 'index.html')).href + '#region/trn/mechanisms');
     assert.equal(await page.locator('#atlasRegion').inputValue(), 'trn');
     assert.match(await page.locator('#guideContent').innerText(), /competing channel/);
