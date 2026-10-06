@@ -60,3 +60,9 @@ Status and follow-ups:
 - Before adding another theory connection, identify a useful conceptual comparison and verify its sources; there is no feature quota.
 
 Upstream: fast-forwarded from `682e291` to `609b30e` before editing, preserving the user’s subtitle change. Validation: Node/Playwright suite passed with Microsoft Edge (17 guides, 44 experiment walkthroughs, 31 pathways, 98 references). Added theory-source checks plus keyboard disclosure open/close, optional-field fallback, and phone/tablet overflow coverage. Desktop and phone screenshots visually inspected. The sandbox initially blocked browser temporary files; the authorized run outside it passed. git diff --check passed. Publication uses the existing main-branch GitHub Pages workflow.
+
+## Browser refresh follow-up — 6 October 2026
+
+The user reported seeing new papers through the chat link but older content in their regular browser. The deployed files include the new content; both live HTML and research-script responses advertise `Cache-Control: max-age=600`. This supports caching as the likely cause; the user's regular browser cache was not inspected directly. Added a content-derived version to the research script URL, a small refresh command documented in README, and a regression check requiring the URL to match the content. Version calculation normalizes line endings for Windows/Linux consistency. Existing open documents still require reload, and HTML remains subject to GitHub Pages caching.
+
+Validation: all three Node/Playwright checks passed, including citation integrity, navigation, keyboard disclosures, local-file loading, and mobile overflow. No layout or research findings changed. The literature-search checkpoint remains October 6 above.

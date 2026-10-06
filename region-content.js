@@ -367,6 +367,10 @@ const researchUpdates = [
 ];
 
 const developerNotes = [
+  {date:'2026-10-06',title:'Refresh reliability',changes:[
+    'Versioned the research content file so refreshed pages request the matching revision instead of reusing an older cached copy. This covers the literature library, region guides, Latest research and Developer notes.',
+    'Added a content-version check to prevent future updates from shipping with an unchanged script URL. Already-open pages still need a reload; GitHub Pages also briefly caches the page itself.'
+  ]},
   {"date":"2026-10-06","title":"Research follow-up and theory connections","changes":["Added two October primary papers and an explicitly labeled July study. Library and V1, basal-ganglia and central-thalamus guides now include 98 references and 44 experiment walkthroughs.","Added optional, expandable Theory connections to link new findings to earlier explanations. The first connects biased competition with learning-based priorities, with sources and a clear interpretation boundary.","Checked publication dates separately from issue dates, retained the provisional V1 theta label, and preserved the latest subtitle change from GitHub.","Validation: 98 references and all guide links passed integrity checks. Browser tests passed, including keyboard theory disclosures, filters and local-file loading. Desktop, phone and tablet layouts checked; desktop and phone previews visually reviewed."]},
   {date:'2026-10-05',title:'First weekly research update',changes:[
     'Added Latest research with publication dates, evidence labels, source links and related region guides. Older additions are labeled separately; earlier entries remain accessible.',

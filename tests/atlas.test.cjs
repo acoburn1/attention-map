@@ -9,6 +9,11 @@ const { pathToFileURL } = require('node:url');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const content = fs.readFileSync(path.join(root, 'region-content.js'), 'utf8');
+test('research content URL changes when its content changes', () => {
+  const version = require('node:crypto').createHash('sha256').update(content.replace(/\r\n/g, '\n')).digest('hex').slice(0, 12);
+  assert.ok(html.includes(`src="region-content.js?v=${version}"`),
+    'Run node scripts/version-content.cjs after editing region-content.js');
+});
 const inline = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]).join('\n');
 new vm.Script(content);
 new vm.Script(inline);

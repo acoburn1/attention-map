@@ -10,4 +10,6 @@ The literature library supports combined region, topic, evidence-type, species, 
 
 Open `index.html` locally, or serve this directory with a static web server. Keep `region-content.js` alongside it. There is no build step. See [research notes](RESEARCH.md) for the expansion's scope and important interpretive corrections.
 
+After editing `region-content.js`, run `node scripts/version-content.cjs` before validation and commit the updated `index.html` too. This gives each content revision a different script URL so a refreshed page cannot reuse an older revision from the browser cache. The test suite checks that the version matches the content. GitHub Pages also caches the HTML for up to ten minutes; an already-open tab needs a reload, and Ctrl+Shift+R bypasses a stale browser copy.
+
 For development checks, use Node.js with Playwright available and run `node --test tests/atlas.test.cjs`. The browser checks use installed Microsoft Edge by default; set `ATLAS_BROWSER_CHANNEL` to another installed Playwright Chromium channel if needed. They cover citation integrity, all guide sections, filters, deep links, navigation, keyboard focus, local-file loading, and phone/tablet overflow. Set `ATLAS_SCREENSHOT_DIR` to save preview images.
