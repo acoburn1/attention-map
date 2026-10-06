@@ -59,6 +59,11 @@ test('every guide, pathway, reading trail and source resolves', () => {
     assert.match(paper.publicationDate, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(paper.publicationDate <= update.added, 'No future publications in the digest');
     assert.ok(paper.status && update.finding && update.meaning && update.limit);
+    if (update.theory) {
+      assert.ok(update.theory.background && update.theory.change && update.theory.boundary);
+      assert.ok(update.theory.papers.length > 1);
+      update.theory.papers.forEach(checkPaper);
+    }
     update.regions.forEach(id => assert.ok(nodeIds.has(id)));
     assert.ok(update.regions.some(id => data.guidePaperIds(id).includes(update.paper)), 'Digest study is integrated in a linked guide');
   }
@@ -92,6 +97,19 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     assert.equal(await page.locator('.research-card').count(), data.researchUpdates.length);
     assert.match(await page.locator('#reference-latest').innerText(), /Earlier paper · new to the map/i);
     if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'latest-desktop.png') });
+    const theory = page.locator('[data-update-paper="tomic2026"] .theory-connection');
+    assert.equal(await theory.evaluate(el => el.open), false);
+    await theory.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    assert.ok(await theory.locator('.theory-content').isVisible());
+    assert.equal(await theory.locator('a').count(), 3);
+    assert.match(await theory.innerText(), /Editorial synthesis/);
+    if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'theory-desktop.png') });
+    await theory.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await theory.evaluate(el => el.open), false);
+    assert.equal(await page.locator('[data-update-paper="xu2026"] .theory-connection').count(), 0);
+
     await page.locator('[data-update-paper="yu2026"] [data-region-link="md"]').click();
     await page.locator('[data-guide-section="experiments"]').click();
     assert.match(await page.locator('#guideContent').innerText(), /ketamine/);
@@ -192,6 +210,12 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
       assert.ok(await page.locator('#latestTitle').isVisible());
       assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
       if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, `latest-${width}.png`) });
+
+      const mobileTheory = page.locator('[data-update-paper="tomic2026"] .theory-connection');
+      if (!await mobileTheory.evaluate(el => el.open)) await mobileTheory.locator('summary').click();
+      assert.ok(await mobileTheory.locator('.theory-content').isVisible());
+      assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
+      if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'theory-' + width + '.png') });
       await page.locator('[data-update-paper="ramezanpour2026"] [data-region-link="bg"]').click();
       assert.equal(await page.locator('#atlasRegion').inputValue(), 'bg');
       await page.goto(`${url}/#developer-notes`);

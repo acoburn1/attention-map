@@ -39,3 +39,24 @@ Triage and follow-ups:
 Implementation: added a Latest research panel, separate collapsed Developer notes, shareable `#latest` and `#developer-notes` links, and an archive for digest entries beyond the newest six. Three library records and three experiment walkthroughs added; network topology unchanged.
 
 Validation: the documented Node/Playwright suite passed with Microsoft Edge: 17 guides, 41 experiment walkthroughs, 31 pathways and 95 references. Checks include the new digest source/region links, separate paper/addition dates, direct section links, keyboard expansion and focus return, existing filters, and local-file loading. Desktop (1440 px), phone (390 px) and tablet (768 px) layouts were checked for overflow; desktop and phone previews were visually inspected. `git diff --check` passed. Publication will use the existing `main`-branch GitHub Pages deployment; remote `main` matched the local starting commit before publication.
+
+## Research follow-up — 6 October 2026
+
+Last successful literature search: **2026-10-06**. Searched **2026-09-28 through 2026-10-06** (overlap with yesterday), plus pending older-paper checks. Next run: start **2026-09-29**, ending on its actual run date. This additional run follows the updated task instructions; it does not change the weekly cadence.
+
+Searches covered pulvinar/LP, MD, TRN, SC and attention with late-September/October date terms, then exact-title searches on primary publisher pages and PubMed. No new narrowly relevant MD/TRN/LP paper was verified in this pass; this is a targeted search, not an exhaustive absence claim.
+
+Added:
+- **Sepe, Panormita et al.** — [primary article](https://academic.oup.com/cercor/article/36/9/bhag138/8864861), DOI `10.1093/cercor/bhag138`. Published **October 5**, despite the September issue label. Verified against publisher abstract, methods and discussion. Added to V1 experiments and linked to SC as a question, not a demonstrated route.
+- **Tomić, Raimundo & Bays** — [PubMed author abstract](https://pubmed.ncbi.nlm.nih.gov/42823538/) and [publisher record](https://www.nature.com/articles/s41562-026-02573-7), DOI `10.1038/s41562-026-02573-7`. Version of record **October 1**; do not cite the 2025/May 2026 preprint instead. Added as a behavioral comparator in the basal-ganglia guide, without assigning its model to that structure.
+- **Caulfield et al.** — [PubMed record and author abstract](https://pubmed.ncbi.nlm.nih.gov/42480914/), DOI `10.1016/j.brs.2026.103171`. Online **July 21**, not its September–October issue date. Resolves yesterday's bibliographic/method checkpoint via the indexed primary abstract. Full text remains inaccessible; only abstract-supported design and outcomes are used. Added to central-thalamus experiments, explicitly as an earlier paper.
+
+New feature: optional Theory connections in the digest. The initial entry places the reward study beside the 1995 biased-competition framework and [Reynolds et al. (1999)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6782185/). This is labeled editorial synthesis, not an assertion that the newer model replaces the earlier theory or identifies its circuit. Native disclosure controls support keyboard opening/closing without motion.
+
+Status and follow-ups:
+- eLife `107731`: direct access hit a client challenge; the indexed publisher version history still lists reviewed preprint v1 (August 29, 2025). No version-of-record change verified; retain provisional status.
+- The October 5 Goodale/Corneil item is commentary on Sepe et al., not a separate primary result. The primary methods specify 3–4 weeks postlesion; avoid propagating the commentary's two-week shorthand.
+- Keep yesterday's Xu full-methods follow-up open. The centromedian study still warrants full-text review before dose-response, targeting-specificity or safety expansion.
+- Before adding another theory connection, identify a useful conceptual comparison and verify its sources; there is no feature quota.
+
+Upstream: fast-forwarded from `682e291` to `609b30e` before editing, preserving the user’s subtitle change. Validation: Node/Playwright suite passed with Microsoft Edge (17 guides, 44 experiment walkthroughs, 31 pathways, 98 references). Added theory-source checks plus keyboard disclosure open/close, optional-field fallback, and phone/tablet overflow coverage. Desktop and phone screenshots visually inspected. The sandbox initially blocked browser temporary files; the authorized run outside it passed. git diff --check passed. Publication uses the existing main-branch GitHub Pages workflow.

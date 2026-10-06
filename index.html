@@ -1204,6 +1204,15 @@ function renderGlossary(){
 function displayDate(date){
   return new Date(date+'T12:00:00Z').toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'});
 }
+function theoryConnectionHtml(theory){
+  if(!theory) return '';
+  return `<details class="release-note theory-connection"><summary>Theory connection · ${esc(theory.title)}</summary>
+    <div class="theory-content"><p class="paper-meta">Editorial synthesis · sources below</p>
+    <p><strong>Earlier framework:</strong> ${esc(theory.background)}</p>
+    <p><strong>What this adds:</strong> ${esc(theory.change)}</p>
+    <p class="research-limit"><strong>Still unresolved:</strong> ${esc(theory.boundary)}</p>
+    ${citationLinks(theory.papers)}</div></details>`;
+}
 function researchUpdateCard(update){
   const p=papers[update.paper];
   return `<article class="guide-section research-card" data-update-paper="${esc(update.paper)}">
@@ -1214,6 +1223,7 @@ function researchUpdateCard(update){
     <p class="research-limit"><strong>Keep in mind:</strong> ${esc(update.limit)}</p>
     <div class="research-source"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)} ↗</a><div class="paper-meta">${esc(p.authors)} · ${esc(p.journal)}</div></div>
     <div class="claim-links">${update.regions.map(id=>`<button class="citation-chip" data-region-link="${esc(id)}">Explore ${esc(nodeById[id].abbr)} →</button>`).join('')}</div>
+    ${theoryConnectionHtml(update.theory)}
   </article>`;
 }
 function renderResearchUpdates(){

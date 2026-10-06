@@ -6,7 +6,7 @@ Select a region for its short overview, then choose **Explore in depth** for ori
 
 The literature library supports combined region, topic, evidence-type, species, and text filters. Guide links preserve the selected region and section, for example `#region/md/experiments`. Nodes and pathways can be selected with Tab followed by Enter or Space; Escape closes the reference panel.
 
-**Latest research** (`#latest`) connects new papers to the map, with separate publication and site addition dates. Earlier papers added to the collection are labeled explicitly. **Developer notes** (`#developer-notes`), linked from the sidebar footer, keeps weekly changes in collapsed entries. Both sections are maintained in `region-content.js`; the digest keeps six entries visible and retains older entries in an expandable archive.
+**Latest research** (`#latest`) connects new papers to the map, with separate publication and site addition dates. Earlier papers added to the collection are labeled explicitly. **Developer notes** (`#developer-notes`), linked from the sidebar footer, keeps weekly changes in collapsed entries. Selected entries also offer expandable **Theory connections**, with earlier evidence, what the new finding adds, and what remains unresolved. Both sections are maintained in `region-content.js`; the digest keeps six entries visible and retains older entries in an expandable archive.
 
 Open `index.html` locally, or serve this directory with a static web server. Keep `region-content.js` alongside it. There is no build step. See [research notes](RESEARCH.md) for the expansion's scope and important interpretive corrections.
 
