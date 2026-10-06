@@ -242,6 +242,22 @@
   .guide-section dt { color: #91a8ce; font-weight: 700; }
   .guide-section dd { margin: 0; color: #ccd8e9; }
   .guide-section dd:last-child { color: #e0c78d; }
+  .history-intro { border-left: 3px solid #b378ff; }
+  .history-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); gap: 14px; margin: 20px 0; }
+  .history-grid .guide-section { margin: 0; }
+  .history-grid button { text-align: left; }
+  .history-reading { max-width: 900px; }
+  .history-timeline { list-style: none; margin: 20px 0; padding: 0 0 0 19px; border-left: 2px solid #795aa7; }
+  .history-timeline > li { position: relative; }
+  .history-timeline > li::before { content: ''; position: absolute; left: -25px; top: 21px; width: 10px; height: 10px; border-radius: 50%; background: #c49aff; border: 1px solid #10182a; }
+  .history-date { display: block; color: #d5b7ff; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+  .history-timeline .detail-kicker { margin-bottom: 8px; }
+  .history-timeline h4 { margin: 0 0 9px; font-size: 15px; }
+  .history-context { margin: 16px 0; }
+  .history-context p { margin: 5px 0; }
+  .history-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 16px 0; }
+  .history-toolbar select { max-width: 100%; padding: 8px; background: #111a30; color: var(--text); border: 1px solid #344461; border-radius: 6px; }
+  .history-overview-link { margin-top: 12px; }
   .atlas-side h3 { color: #93a8c8; font-size: 11px; text-transform: uppercase; letter-spacing: .07em; margin: 0 0 10px; }
   .atlas-side .brain-grid { grid-template-columns: 1fr; }
   .atlas-side .brain-schematic-note { font-size: 10.5px; }
@@ -321,6 +337,7 @@
       </span>
       <span class="badge">Research expanded October 2026</span>
       <button class="header-action" data-open-reference="regions">Region explorer</button>
+      <button class="header-action" data-open-reference="theory">Theory development</button>
       <button class="header-action" data-open-reference="synthesis">Synthesis</button>
       <button class="header-action" data-open-reference="library">Reference library</button>
       <button class="header-action" data-open-reference="latest">Latest research</button>
@@ -429,6 +446,7 @@
     <nav class="reference-tabs" aria-label="Reference sections">
       <button class="reference-tab" data-reference-tab="latest">Latest research</button>
       <button class="reference-tab" data-reference-tab="regions">Region explorer</button>
+      <button class="reference-tab" data-reference-tab="theory">Theory development</button>
       <button class="reference-tab active" data-reference-tab="synthesis">Synthesis</button>
       <button class="reference-tab" data-reference-tab="library">Literature library</button>
       <button class="reference-tab" data-reference-tab="center">Conte Center lens</button>
@@ -436,7 +454,8 @@
     </nav>
     <div class="reference-body">
       <section class="reference-panel" id="reference-latest" aria-labelledby="latestTitle" hidden></section>
-      <section class="reference-panel" id="reference-notes" aria-labelledby="notesTitle" hidden></section>
+<section class="reference-panel" id="reference-notes" aria-labelledby="notesTitle" hidden></section>
+<section class="reference-panel" id="reference-theory" aria-labelledby="theoryTitle" hidden></section>
       <section class="reference-panel" id="reference-regions" hidden></section>
       <section class="reference-panel" id="reference-synthesis"></section>
       <section class="reference-panel" id="reference-library" hidden></section>
@@ -446,7 +465,7 @@
   </div>
 </div>
 
-<script src="region-content.js?v=fc30c59033c3"></script>
+<script src="region-content.js?v=c96143ccd189"></script>
 <script>
 const papers = {
   saalmann2012: {
@@ -971,7 +990,7 @@ const groups = [
 const nodeById = Object.fromEntries(nodes.map(n => [n.id,n]));
 function guidePaperIds(id){
   const g=regionGuides[id];
-  return [...new Set([...(nodeById[id]?.papers||[]),...g.anatomy.flatMap(s=>s.papers),...g.mechanisms.flatMap(s=>s.papers),...g.experiments.map(s=>s.paper),...g.reading,...edges.filter(e=>e.s===id||e.t===id).flatMap(e=>e.papers)])];
+  return [...new Set([...(nodeById[id]?.papers||[]),...g.anatomy.flatMap(s=>s.papers),...g.mechanisms.flatMap(s=>s.papers),...g.experiments.map(s=>s.paper),...g.reading,...edges.filter(e=>e.s===id||e.t===id).flatMap(e=>e.papers),...regionTheory[id].histories.flatMap(key=>theoryHistories[key].milestones.flatMap(m=>m.papers))])];
 }
 const svg = document.getElementById('graph');
 const viewport = document.getElementById('viewport');
@@ -1215,6 +1234,7 @@ function theoryConnectionHtml(theory){
 }
 function researchUpdateCard(update){
   const p=papers[update.paper];
+  const histories=Object.entries(theoryHistories).filter(([,h])=>h.milestones.some(m=>m.papers.includes(update.paper)));
   return `<article class="guide-section research-card" data-update-paper="${esc(update.paper)}">
     <div class="detail-kicker">${esc(update.category)} · ${esc(p.status)} · ${esc(p.species)}</div>
     <h3>${esc(update.title)}</h3>
@@ -1224,6 +1244,7 @@ function researchUpdateCard(update){
     <div class="research-source"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)} ↗</a><div class="paper-meta">${esc(p.authors)} · ${esc(p.journal)}</div></div>
     <div class="claim-links">${update.regions.map(id=>`<button class="citation-chip" data-region-link="${esc(id)}">Explore ${esc(nodeById[id].abbr)} →</button>`).join('')}</div>
     ${theoryConnectionHtml(update.theory)}
+    ${histories.length?`<div class="claim-links">${histories.map(([id])=>`<button class="citation-chip" data-history-link="${id}">Read the circuit’s theory history →</button>`).join('')}</div>`:''}
   </article>`;
 }
 function renderResearchUpdates(){
@@ -1234,6 +1255,7 @@ function renderResearchUpdates(){
     <div class="research-list">${researchUpdates.slice(0,6).map(researchUpdateCard).join('')}</div>
     ${researchUpdates.length>6?`<details class="release-note"><summary>Earlier research entries (${researchUpdates.length-6})</summary><div class="research-list">${researchUpdates.slice(6).map(researchUpdateCard).join('')}</div></details>`:''}`;
   bindRegionLinks(root);
+  bindHistoryLinks(root);
   document.getElementById('reference-notes').innerHTML=`<h2 class="atlas-heading" id="notesTitle">Developer notes</h2><p class="atlas-deck">A dated record of changes to this site.</p>
     ${developerNotes.map(note=>`<details class="release-note"><summary><time datetime="${esc(note.date)}">${displayDate(note.date)}</time> · ${esc(note.title)}</summary><ul>${note.changes.map(change=>`<li>${esc(change)}</li>`).join('')}</ul></details>`).join('')}`;
 }
@@ -1242,6 +1264,7 @@ function setReferenceTab(tab){
   document.querySelectorAll('.reference-panel').forEach(p=>p.hidden=p.id!==`reference-${tab}`);
   if(tab==='library') renderLibrary();
   if(tab==='regions') renderRegionExplorer();
+  else if(tab==='theory') renderTheoryExplorer();
   else {
     clearRegionHash();
     if(tab==='latest'||tab==='notes') history.replaceState(null,'',location.pathname+location.search+(tab==='latest'?'#latest':'#developer-notes'));
@@ -1267,12 +1290,71 @@ function closeReference(){
 
 let exploredRegion='mdpulv';
 let guideSection='anatomy';
-const guideSections={anatomy:'Orientation',mechanisms:'Mechanisms',experiments:'Experiments',questions:'Open questions'};
+const guideSections={anatomy:'Orientation',history:'Theory development',mechanisms:'Mechanisms',experiments:'Experiments',questions:'Open questions'};
+let theorySelection=null, theoryConnection=null;
+function historyLinks(ids){
+  return `<div class="claim-links">${ids.map(id=>`<button class="citation-chip" data-history-link="${id}">${esc(theoryHistories[id].title)} →</button>`).join('')}</div>`;
+}
+function historyTimelineHtml(id){
+  const h=theoryHistories[id];
+  return `<section class="history-reading" data-history="${id}" aria-label="${esc(h.title)}">
+    <h3>${esc(h.title)}</h3><p class="atlas-deck">${esc(h.subtitle)}</p>
+    <p class="atlas-note">Selected milestones · interpretation of change is editorial synthesis. Dates identify the cited work, not when the whole field adopted an idea.</p>
+    <ol class="history-timeline">${h.milestones.map(m=>`<li><article class="guide-section">
+      <span class="history-date">${esc(m.date)}</span><div class="detail-kicker">${esc(m.kind)}</div>
+      <h4>${esc(m.title)}</h4><p>${esc(m.text)}</p><p><strong>What changed:</strong> ${esc(m.change)}</p>
+      ${citationLinks(m.papers)}</article></li>`).join('')}</ol>
+    <article class="guide-section history-intro"><h3>Where this leaves the theory</h3><p>${esc(h.current)}</p><p class="research-limit"><strong>Still unresolved:</strong> ${esc(h.unresolved)}</p><p class="paper-meta">Synthesis of the sources above · reviewed October 6, 2026</p></article>
+  </section>`;
+}
+function regionHistoryHtml(id){
+  const r=regionTheory[id];
+  return `<article class="guide-section history-intro"><div class="detail-kicker">How the role changed · ${esc(nodeById[id].abbr)}</div><h3>${esc(r.shift)}</h3><p>${esc(r.meaning)}</p><p class="paper-meta">Region-specific interpretation of the linked circuit histories.</p></article>
+    ${historyTimelineHtml(r.histories[0])}
+    ${r.histories.length>1?`<div class="guide-section"><h3>Other parts of this region’s story</h3>${historyLinks(r.histories.slice(1))}</div>`:''}
+    <details class="release-note"><summary>Theory context for connected pathways</summary><div class="theory-content">${edges.filter(e=>e.s===id||e.t===id).map(e=>`<p><button class="text-link" data-connection-history="${e.id}">${esc(nodeById[e.s].abbr)} ${e.dir==='both'?'↔':'→'} ${esc(nodeById[e.t].abbr)} · ${esc(e.label)}</button></p>`).join('')}</div></details>
+    <button class="text-link history-overview-link" data-history-link="">Browse all ten circuit histories →</button>`;
+}
+function bindHistoryLinks(root){
+  root.querySelectorAll('[data-history-link]').forEach(b=>b.addEventListener('click',()=>openTheory(b.dataset.historyLink||null,b)));
+  root.querySelectorAll('[data-connection-history]').forEach(b=>b.addEventListener('click',()=>openTheory(null,b,b.dataset.connectionHistory)));
+  root.querySelectorAll('[data-region-history]').forEach(b=>b.addEventListener('click',()=>{guideSection='history';openRegion(b.dataset.regionHistory,b);}));
+}
+function openTheory(id=null,opener=null,connection=null,updateUrl=true){
+  if((id&&!theoryHistories[id])||(connection&&!connectionTheory[connection])) return;
+  theorySelection=id;theoryConnection=connection;
+  openReference('theory',opener);
+  const hash=connection?`#connection/${connection}/history`:id?`#theory/${id}`:'#theory';
+  if(updateUrl&&location.hash!==hash) history.pushState(null,'',hash);
+}
+function renderTheoryExplorer(){
+  const root=document.getElementById('reference-theory');
+  const edge=theoryConnection?edges.find(e=>e.id===theoryConnection):null;
+  const id=edge?connectionTheory[edge.id][0]:theorySelection;
+  const h=id?theoryHistories[id]:null;
+  root.innerHTML=`<h2 class="atlas-heading" id="theoryTitle">Theory development</h2><p class="atlas-deck">How the proposed roles changed as the evidence changed.</p>
+    <div class="reference-note">These are selective circuit histories, not a claim that one theory replaced every alternative. <strong>Original proposals, recordings, interventions and methodological challenges are labeled separately.</strong> Shared histories connect regions; they do not establish every arrow on the map.</div>
+    ${edge?`<article class="guide-section history-context"><div class="detail-kicker">Connection context · ${esc(edge.strength)} evidence on the map</div><h3>${esc(nodeById[edge.s].abbr)} ${edge.dir==='both'?'↔':edge.dir==='inhibitory'?'⊣':'→'} ${esc(nodeById[edge.t].abbr)} · ${esc(edge.label)}</h3><p>${esc(edge.summary)}</p><p class="research-limit"><strong>Boundary for this arrow:</strong> ${esc(edge.caveat)}</p><p>The history below explains the surrounding circuit. Its stronger findings must not be transferred automatically to this particular connection.</p>${citationLinks(edge.papers)}<div class="claim-links">${[edge.s,edge.t].map(n=>`<button class="citation-chip" data-region-history="${n}">${esc(nodeById[n].abbr)} theory context →</button>`).join('')}</div></article>`:''}
+    ${h?`<div class="history-toolbar"><button class="tool-btn" data-history-link="">← All circuit histories</button></div><p class="atlas-deck history-reading">${esc(h.summary)}</p><div class="claim-links">${h.regions.map(n=>`<button class="citation-chip" data-region-history="${n}">${esc(nodeById[n].abbr)} context</button>`).join('')}</div>${historyTimelineHtml(id)}
+      ${edge&&connectionTheory[edge.id].length>1?`<h3>Another relevant history</h3>${historyLinks(connectionTheory[edge.id].slice(1))}`:''}`:
+      `<div class="history-toolbar"><label for="historyRegion">Start with a region</label><select id="historyRegion"><option value="">All regions and circuits</option>${nodes.map(n=>`<option value="${n.id}">${esc(n.name)}</option>`).join('')}</select><span id="historyCount" class="atlas-note" aria-live="polite">10 circuit histories</span></div>
+      <div class="history-grid">${Object.entries(theoryHistories).map(([key,item])=>`<article class="guide-section" data-history-card="${key}"><div class="detail-kicker">${esc(item.milestones[0].date)} → ${esc(item.milestones.at(-1).date)}</div><h3>${esc(item.title)}</h3><p class="paper-meta">${esc(item.subtitle)}</p><p>${esc(item.summary)}</p><button class="text-link" data-history-link="${key}">Trace the evidence →</button></article>`).join('')}</div>`}`;
+  root.querySelector('#historyRegion')?.addEventListener('change',e=>{
+    const selectedRegion=e.target.value;
+    let count=0;
+    root.querySelectorAll('[data-history-card]').forEach(card=>{
+      card.hidden=!!selectedRegion&&!regionTheory[selectedRegion].histories.includes(card.dataset.historyCard);
+      if(!card.hidden) count++;
+    });
+    root.querySelector('#historyCount').textContent=`${count} circuit ${count===1?'history':'histories'}`;
+  });
+  bindHistoryLinks(root);
+}
 function bindRegionLinks(root){
   root.querySelectorAll('[data-region-link]').forEach(b=>b.addEventListener('click',()=>openRegion(b.dataset.regionLink,b)));
 }
 function clearRegionHash(){
-  if(location.hash.startsWith('#region/')||['#latest','#developer-notes'].includes(location.hash)) history.replaceState(null,'',location.pathname+location.search);
+  if(/^#(?:region\/|theory(?:\/|$)|connection\/)/.test(location.hash)||['#latest','#developer-notes'].includes(location.hash)) history.replaceState(null,'',location.pathname+location.search);
 }
 function updateRegionHash(){
   const hash=`#region/${exploredRegion}/${guideSection}`;
@@ -1297,7 +1379,7 @@ function experimentCard(s){
 function renderRegionExplorer(){
   const n=nodeById[exploredRegion], g=regionGuides[exploredRegion];
   const root=document.getElementById('reference-regions');
-  const content=guideSection==='experiments'?g.experiments.map(experimentCard).join(''):guideSection==='questions'?`
+  const content=guideSection==='history'?regionHistoryHtml(n.id):guideSection==='experiments'?g.experiments.map(experimentCard).join(''):guideSection==='questions'?`
     <article class="guide-section"><div class="detail-kicker">Proposed test · synthesis, not a published finding</div><h3>${esc(g.test.question)}</h3><dl><dt>Compare</dt><dd>${esc(g.test.prediction)}</dd><dt>Controls & limits</dt><dd>${esc(g.test.controls)}</dd></dl></article>
     <article class="guide-section"><h3>Keep this boundary in mind</h3><p>${esc(n.caveat)}</p>${n.questions.length?`<ul>${n.questions.map(q=>`<li><p>${esc(q)}</p></li>`).join('')}</ul>`:''}</article>
   `:g[guideSection].map(guideSectionCard).join('');
@@ -1307,6 +1389,7 @@ function renderRegionExplorer(){
       <div class="detail-kicker">Region guide · ${nodes.findIndex(x=>x.id===n.id)+1} of ${nodes.length}${n.id==='network'?' · Conceptual element':''}</div>
       <h2 class="atlas-heading">${esc(n.name)}</h2><p class="atlas-deck">${esc(g.subtitle)}</p>
       <div>${n.circuits.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}<span class="pill">${g.experiments.length} experiment walkthroughs</span></div>
+      ${guideSection==='anatomy'?`<div class="reference-note history-context"><strong>How the interpretation changed</strong><p>${esc(regionTheory[n.id].shift)}</p><button class="text-link" data-region-history="${n.id}">Follow the evidence through time →</button></div>`:''}
       <nav class="atlas-tabs" aria-label="Region guide sections">${Object.entries(guideSections).map(([id,label])=>`<button class="view-btn${id===guideSection?' active':''}" data-guide-section="${id}" aria-pressed="${id===guideSection}">${label}</button>`).join('')}</nav>
       <div id="guideContent">${content}</div>
       <div class="atlas-note">Sections link to supporting primary papers or explicitly labeled reviews. Experiment limitations are part of the interpretation. Open-question tests are proposed comparisons, not reported results.</div>
@@ -1336,6 +1419,7 @@ function renderRegionExplorer(){
     catch{input.focus();input.select();message.textContent='Link selected. Copy it with Ctrl+C or ⌘C.';}
   });
   bindRegionLinks(root);
+  bindHistoryLinks(root);
 }
 function revealNode(id){
   document.getElementById('search').value='';
@@ -1345,10 +1429,14 @@ function revealNode(id){
 function readRegionHash(){
   if(location.hash==='#latest'){openReference('latest');return;}
   if(location.hash==='#developer-notes'){openReference('notes');return;}
-  const match=location.hash.match(/^#region\/([a-z]+)(?:\/([a-z]+))?$/);
+  const theoryMatch=location.hash.match(/^#theory(?:\/([a-z]+))?$/);
+  if(theoryMatch&&(!theoryMatch[1]||theoryHistories[theoryMatch[1]])){openTheory(theoryMatch[1]||null,null,null,false);return;}
+  const connectionMatch=location.hash.match(/^#connection\/([a-z0-9-]+)\/history$/);
+  if(connectionMatch&&connectionTheory[connectionMatch[1]]){openTheory(null,null,connectionMatch[1],false);return;}
+  const match=location.hash.match(/^#region\/([a-z0-9]+)(?:\/([a-z]+))?$/);
   if(match&&regionGuides[match[1]]&&(!match[2]||guideSections[match[2]])){
     guideSection=match[2]||'anatomy';openRegion(match[1],null,false);
-  }else if(!referenceModal.hidden&&!document.getElementById('reference-regions').hidden){closeReference();}
+  }else if(!referenceModal.hidden&&(!document.getElementById('reference-regions').hidden||!document.getElementById('reference-theory').hidden)){closeReference();}
 }
 window.addEventListener('hashchange',readRegionHash);
 document.addEventListener('keydown',e=>{
@@ -1361,8 +1449,8 @@ document.addEventListener('keydown',e=>{
 
 renderSynthesis(); renderCenter(); renderGlossary(); renderResearchUpdates();
 document.getElementById('sidebarPaperCount').textContent=`${paperCatalog.length} papers`;
-document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.openReference==='regions'?openRegion(exploredRegion,b):openReference(b.dataset.openReference,b)));
-document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>{setReferenceTab(b.dataset.referenceTab);if(b.dataset.referenceTab==='regions')updateRegionHash();}));
+document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.openReference==='regions'?openRegion(exploredRegion,b):b.dataset.openReference==='theory'?openTheory(null,b):openReference(b.dataset.openReference,b)));
+document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.referenceTab==='theory'){openTheory(null,b);return;}setReferenceTab(b.dataset.referenceTab);if(b.dataset.referenceTab==='regions')updateRegionHash();}));
 document.getElementById('referenceClose').addEventListener('click',closeReference);
 referenceModal.addEventListener('click',e=>{if(e.target===referenceModal)closeReference();});
 
@@ -1379,17 +1467,20 @@ function showOverview(){
       <li>Pulvinar, MD, TRN, LGN, and central thalamus have distinct circuit motifs; “thalamic gating” is too vague without a nucleus and measure.</li>
     </ul></div>
     <button class="reference-btn explore-button" data-overview-reference="regions"><span>Explore ${nodes.length} region guides<small>Anatomy · mechanisms · experiments · open questions</small></span><span>→</span></button>
+    <button class="reference-btn explore-button" data-history-link=""><span>Theory development<small>Ten histories · changing roles · competing explanations</small></span><span>→</span></button>
     <div class="detail-block"><button class="reference-btn" data-overview-reference="synthesis"><span>Read the 12-claim evidence synthesis</span><span>open</span></button><button class="reference-btn" style="margin-top:7px" data-overview-reference="library"><span>Search ${paperCatalog.length} curated references</span><span>open</span></button></div>
     <div class="detail-block"><h3>Species markers</h3><p>Small dots on nodes indicate where much of the highlighted evidence comes from: white = mouse, yellow = macaque, red = human, cyan = tree shrew, green = ferret. These colors are intentionally separate from the brain-region colors. A node can be supported across several species.</p></div>
     <div class="detail-block"><h3>Coverage and honesty note</h3><p>The library combines the supplied attention ledger with a broader primary-source review and work from the Princeton Thalamus Conte Center investigators. Reviews are labeled as orientation; the V1 theta reviewed preprint is explicitly provisional. Clinical imaging, cross-species homology, coherence, and directional analyses are not presented as stronger causal evidence than their methods allow.</p></div>
     <div class="footer-note">This is a conceptual literature map. Coordinates are chosen for readability and do not represent anatomical position, distance, laterality or cortical layer.</div>`;
   details.querySelectorAll('[data-overview-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.overviewReference==='regions'?openRegion(exploredRegion,b):openReference(b.dataset.overviewReference,b)));
+  bindHistoryLinks(details);
 }
 function showNode(n){
   details.innerHTML=`
     <div class="detail-head"><div><div class="detail-kicker">Region / network element</div><h2 class="detail-title">${esc(n.name)}</h2><div>${n.circuits.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}</div></div></div>
     <div class="detail-block"><h3>Role in this literature</h3><p>${esc(n.role)}</p></div>
     <button class="reference-btn explore-button" id="exploreSelectedRegion"><span>Explore ${esc(n.abbr)} in depth<small>Mechanisms · ${regionGuides[n.id].experiments.length} experiments · reading order</small></span><span>→</span></button>
+    <div class="detail-block"><h3>How its proposed role changed</h3><p>${esc(regionTheory[n.id].shift)}</p><button class="text-link" data-region-history="${n.id}">Read the theory development →</button></div>
     ${brainLocatorHtml(n)}
     <div class="detail-block"><h3>What the evidence supports</h3><p>${esc(n.evidence)}</p></div>
     <div class="detail-block"><h3>Important limitation</h3><p class="warning">${esc(n.caveat)}</p></div>
@@ -1398,6 +1489,7 @@ function showNode(n){
     <div class="detail-block"><h3>Selected references</h3>${paperHtml(n.papers)}</div>`;
   details.querySelectorAll('.link-edge').forEach(b=>b.addEventListener('click',()=>selectItem('edge',b.dataset.edge)));
   details.querySelector('#exploreSelectedRegion').addEventListener('click',e=>{guideSection='anatomy';openRegion(n.id,e.currentTarget);});
+  bindHistoryLinks(details);
 }
 function showEdge(e){
   const s=nodeById[e.s], t=nodeById[e.t];
@@ -1409,9 +1501,11 @@ function showEdge(e){
     <div class="detail-block"><h3>Interpretation</h3><p>${esc(e.summary)}</p></div>
     <div class="detail-block"><h3>Candidate mechanism</h3><p>${esc(e.mechanism)}</p></div>
     <div class="detail-block"><h3>Do not overread this arrow</h3><p class="warning">${esc(e.caveat)}</p></div>
+    <button class="reference-btn explore-button" data-connection-history="${e.id}"><span>How this circuit’s interpretation developed<small>${esc(theoryHistories[connectionTheory[e.id][0]].title)}</small></span><span>→</span></button>
     <div class="detail-block"><h3>Endpoints</h3><p><button class="link-node text-link" data-node="${s.id}">${esc(s.name)}</button> · <button class="link-node text-link" data-node="${t.id}">${esc(t.name)}</button></p></div>
     <div class="detail-block"><h3>Selected supporting references</h3>${paperHtml(e.papers)}</div>`;
   details.querySelectorAll('.link-node').forEach(b=>b.addEventListener('click',()=>selectItem('node',b.dataset.node)));
+  bindHistoryLinks(details);
 }
 
 function selectItem(type,id){

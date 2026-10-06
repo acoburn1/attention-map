@@ -18,7 +18,7 @@ const inline = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]
 new vm.Script(content);
 new vm.Script(inline);
 const data = vm.runInNewContext(content + '\n' + inline.slice(0, inline.indexOf('const svg =')) +
-  '\n({papers, researchPapers, researchUpdates, developerNotes, regionGuides, readingTrails, nodes, edges, paperMeta, guidePaperIds, synthesisClaims})');
+  '\n({papers, researchPapers, researchUpdates, developerNotes, theoryHistories, regionTheory, connectionTheory, regionGuides, readingTrails, nodes, edges, paperMeta, guidePaperIds, synthesisClaims})');
 
 test('every guide, pathway, reading trail and source resolves', () => {
   const nodeIds = new Set(data.nodes.map(n => n.id));
@@ -47,6 +47,28 @@ test('every guide, pathway, reading trail and source resolves', () => {
   for (const edge of data.edges) {
     assert.ok(nodeIds.has(edge.s) && nodeIds.has(edge.t));
     edge.papers.forEach(checkPaper);
+  }
+  assert.deepEqual(Object.keys(data.regionTheory).sort(), [...nodeIds].sort());
+  assert.deepEqual(Object.keys(data.connectionTheory).sort(), Array.from(data.edges, e => e.id).sort());
+  for (const [id, history] of Object.entries(data.theoryHistories)) {
+    assert.ok(history.summary && history.current && history.unresolved, `Missing synthesis: ${id}`);
+    assert.ok(history.milestones.length >= 3);
+    history.regions.forEach(region => {
+      assert.ok(nodeIds.has(region));
+      assert.ok(data.regionTheory[region].histories.includes(id), `History ${id} must be reachable from ${region}`);
+    });
+    for (const milestone of history.milestones) {
+      assert.ok(milestone.date && milestone.kind && milestone.text && milestone.change && milestone.papers.length);
+      milestone.papers.forEach(checkPaper);
+    }
+  }
+  for (const [id, context] of Object.entries(data.regionTheory)) {
+    assert.ok(context.shift && context.meaning && context.histories.length);
+    context.histories.forEach(key => assert.ok(data.theoryHistories[key], `${id} missing ${key}`));
+  }
+  for (const histories of Object.values(data.connectionTheory)) {
+    assert.ok(histories.length);
+    histories.forEach(key => assert.ok(data.theoryHistories[key]));
   }
   for (const trail of data.readingTrails) trail.regions.forEach(id => assert.ok(nodeIds.has(id)));
   for (const claim of data.synthesisClaims) claim.papers.forEach(checkPaper);
@@ -94,6 +116,7 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     page.on('pageerror', error => errors.push(error.message));
     const url = `http://127.0.0.1:${server.address().port}`;
+    if (process.env.ATLAS_SCREENSHOT_DIR) fs.mkdirSync(process.env.ATLAS_SCREENSHOT_DIR, { recursive: true });
     await page.goto(url);
     assert.equal(await page.locator('.node').count(), data.nodes.length);
     assert.equal(await page.locator('.edge').count(), data.edges.length);
@@ -137,12 +160,17 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
 
     for (const n of data.nodes) {
       await page.locator('#atlasRegion').selectOption(n.id);
-      for (const section of ['anatomy', 'mechanisms', 'experiments', 'questions']) {
+      for (const section of ['anatomy', 'history', 'mechanisms', 'experiments', 'questions']) {
         await page.locator(`[data-guide-section="${section}"]`).click();
         const text = await page.locator('#guideContent').innerText();
         assert.ok(text.length > 100, `${n.id}/${section} rendered`);
         assert.ok(!text.includes('undefined'));
         assert.match(page.url(), new RegExp(`#region/${n.id}/${section}$`));
+        if (section === 'history') {
+          assert.match(text, /What changed:/);
+          assert.match(text, /Still unresolved:/);
+          assert.equal(await page.locator('#guideContent [data-history]').getAttribute('data-history'), data.regionTheory[n.id].histories[0]);
+        }
       }
     }
     await page.locator('#atlasRegion').selectOption('dpulv');
@@ -209,8 +237,70 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     await page.locator('#reset').click();
     await page.locator('#search').fill('');
 
+    // History is reachable from the map, not just from direct URLs.
+    await page.locator('.node[data-id="md"]').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('#details [data-region-history="md"]').click();
+    assert.match(page.url(), /#region\/md\/history$/);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#details [data-region-history="md"]').evaluate(el => el === document.activeElement), true);
+    await page.locator('.edge[data-id="md-pfc"]').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('#details [data-connection-history="md-pfc"]').click();
+    assert.match(page.url(), /#connection\/md-pfc\/history$/);
+    assert.match(await page.locator('#reference-theory').innerText(), /Boundary for this arrow/);
+    await page.keyboard.press('Escape');
+    await page.locator('[data-open-reference="theory"]').click();
+    assert.equal(await page.locator('[data-history-card]:visible').count(), 10);
+    await page.locator('#historyRegion').selectOption('central');
+    assert.equal(await page.locator('[data-history-card]:visible').count(), 1);
+    assert.match(await page.locator('[data-history-card]:visible').innerText(), /Being available to attend/);
+    await page.locator('#historyRegion').selectOption('');
+    if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'history-hub-desktop.png') });
+    await page.locator('[data-history-card="sampling"] button').focus();
+    await page.keyboard.press('Enter');
+    assert.match(page.url(), /#theory\/sampling$/);
+    assert.match(await page.locator('#reference-theory').innerText(), /Methodological challenge/i);
+    await page.goBack();
+    await page.waitForFunction(() => location.hash === '#theory' && !!document.querySelector('#historyRegion'));
+
+    for (const [id, history] of Object.entries(data.theoryHistories)) {
+      await page.goto(`${url}/#theory/${id}`);
+      assert.equal(await page.locator('#reference-theory .history-timeline > li').count(), history.milestones.length);
+      assert.ok(!(await page.locator('#reference-theory').innerText()).includes('undefined'));
+      assert.equal(await page.locator('#reference-theory .history-timeline a').count(), history.milestones.reduce((n, m) => n + m.papers.length, 0));
+    }
+    for (const edge of data.edges) {
+      await page.goto(`${url}/#connection/${edge.id}/history`);
+      assert.ok((await page.locator('#reference-theory').innerText()).includes(edge.caveat), `${edge.id} retains its limits`);
+      assert.equal(await page.locator('#reference-theory [data-history]').getAttribute('data-history'), data.connectionTheory[edge.id][0]);
+    }
+    for (const node of data.nodes) {
+      await page.goto(`${url}/#region/${node.id}/history`);
+      if (node.id === 'v1') await page.reload();
+      assert.equal(await page.locator('#atlasRegion').inputValue(), node.id);
+      assert.ok((await page.locator('#guideContent').innerText()).includes(data.regionTheory[node.id].shift));
+    }
+    await page.goto(`${url}/#theory/control`);
+    if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'history-timeline-desktop.png') });
+    await page.locator('#reference-theory [data-region-history="md"]').click();
+    assert.match(page.url(), /#region\/md\/history$/);
+    if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'history-region-desktop.png') });
+    await page.goto(`${url}/#latest`);
+    await page.locator('[data-update-paper="tomic2026"] [data-history-link]').click();
+    assert.match(page.url(), /#theory\/competition$/);
+
     for (const width of [390, 768]) {
       await page.setViewportSize({ width, height: 844 });
+      for (const [route, name] of [['#theory','hub'], ['#theory/sampling','timeline'], ['#region/md/history','region'], ['#connection/sc-dpulv/history','connection']]) {
+        await page.goto(`${url}/${route}`);
+        assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1), `${route} fits ${width}`);
+        if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, `history-${name}-${width}.png`) });
+        if (name === 'timeline') {
+          await page.locator('#reference-theory .history-timeline > li').first().scrollIntoViewIfNeeded();
+          if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, `history-milestone-${width}.png`) });
+        }
+      }
       await page.goto(`${url}/#latest`);
       assert.ok(await page.locator('#latestTitle').isVisible());
       assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
@@ -244,6 +334,8 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     await page.goto(pathToFileURL(path.join(root, 'index.html')).href + '#region/trn/mechanisms');
     assert.equal(await page.locator('#atlasRegion').inputValue(), 'trn');
     assert.match(await page.locator('#guideContent').innerText(), /competing channel/);
+    await page.goto(pathToFileURL(path.join(root, 'index.html')).href + '#theory/sampling');
+    assert.match(await page.locator('#reference-theory').innerText(), /Brookshire/);
     assert.deepEqual(errors, []);
   } finally {
     if (browser) await browser.close();
