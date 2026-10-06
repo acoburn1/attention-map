@@ -170,10 +170,10 @@
   .reference-note { border: 1px solid #334462; background: #131d32; border-radius: 11px; padding: 12px 13px; color: #cbd6e8; font-size: 12px; line-height: 1.5; }
   .reference-note strong { color: #fff; }
   .claim-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
-  .claim-card, .project-card, .glossary-card { border: 1px solid #30405c; background: #111a2e; border-radius: 12px; padding: 13px; }
+  .claim-card, .glossary-card { border: 1px solid #30405c; background: #111a2e; border-radius: 12px; padding: 13px; }
   .claim-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-  .claim-card h3, .project-card h3, .glossary-card h3 { margin: 0; color: #f0f4fb; font-size: 13px; line-height: 1.35; text-transform: none; letter-spacing: 0; }
-  .claim-card p, .project-card p, .glossary-card p { margin: 7px 0 0; color: #b7c4d9; font-size: 11.7px; line-height: 1.5; }
+  .claim-card h3, .glossary-card h3 { margin: 0; color: #f0f4fb; font-size: 13px; line-height: 1.35; text-transform: none; letter-spacing: 0; }
+  .claim-card p, .glossary-card p { margin: 7px 0 0; color: #b7c4d9; font-size: 11.7px; line-height: 1.5; }
   .confidence { flex: 0 0 auto; border-radius: 999px; padding: 4px 7px; font-size: 9.5px; font-weight: 750; text-transform: uppercase; letter-spacing: .05em; }
   .confidence.strong { color: #aef3da; background: rgba(55,200,171,.14); border: 1px solid rgba(55,200,171,.45); }
   .confidence.converging { color: #d8c0ff; background: rgba(179,120,255,.14); border: 1px solid rgba(179,120,255,.45); }
@@ -192,11 +192,7 @@
   .library-paper h3 a:hover { text-decoration: underline; }
   .paper-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
   .paper-tag { border: 1px solid #374762; color: #9aabc5; border-radius: 999px; padding: 3px 6px; font-size: 9.4px; }
-  .paper-tag.center { color: #d6bdff; border-color: rgba(179,120,255,.5); background: rgba(179,120,255,.08); }
   .paper-tag.causal { color: #aef0da; border-color: rgba(55,200,171,.5); }
-  .project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
-  .project-number { color: #8eb9ff; text-transform: uppercase; letter-spacing: .08em; font-size: 9.8px; font-weight: 750; margin-bottom: 5px; }
-  .project-card a { display: inline-block; margin-top: 9px; font-size: 10.5px; }
   .glossary-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
   .scope-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11.3px; }
   .scope-table th, .scope-table td { border-bottom: 1px solid #2d3d58; padding: 9px 8px; text-align: left; vertical-align: top; line-height: 1.45; }
@@ -306,7 +302,7 @@
     .details { border-top: 1px solid var(--border); }
     .reference-modal { padding: 8px; }
     .reference-shell { height: calc(100vh - 16px); border-radius: 12px; }
-    .reference-intro, .claim-grid, .project-grid, .library-list { grid-template-columns: 1fr; }
+    .reference-intro, .claim-grid, .library-list { grid-template-columns: 1fr; }
     .library-controls { grid-template-columns: 1fr 1fr; }
     .glossary-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -375,7 +371,6 @@
         <div class="reference-actions">
           <button class="reference-btn" data-open-reference="synthesis"><span>Evidence synthesis</span><span>12 claims</span></button>
           <button class="reference-btn" data-open-reference="library"><span>Searchable literature</span><span id="sidebarPaperCount">—</span></button>
-          <button class="reference-btn" data-open-reference="center"><span>Conte Center lens</span><span>5 projects + cores</span></button>
           <button class="reference-btn" data-open-reference="glossary"><span>Methods & glossary</span><span>read with care</span></button>
         </div>
       </div>
@@ -449,7 +444,6 @@
       <button class="reference-tab" data-reference-tab="theory">Theory development</button>
       <button class="reference-tab active" data-reference-tab="synthesis">Synthesis</button>
       <button class="reference-tab" data-reference-tab="library">Literature library</button>
-      <button class="reference-tab" data-reference-tab="center">Conte Center lens</button>
       <button class="reference-tab" data-reference-tab="glossary">Methods & glossary</button>
     </nav>
     <div class="reference-body">
@@ -459,13 +453,12 @@
       <section class="reference-panel" id="reference-regions" hidden></section>
       <section class="reference-panel" id="reference-synthesis"></section>
       <section class="reference-panel" id="reference-library" hidden></section>
-      <section class="reference-panel" id="reference-center" hidden></section>
       <section class="reference-panel" id="reference-glossary" hidden></section>
     </div>
   </div>
 </div>
 
-<script src="region-content.js?v=c96143ccd189"></script>
+<script src="region-content.js?v=68e3eedf1749"></script>
 <script>
 const papers = {
   saalmann2012: {
@@ -764,7 +757,6 @@ addPaperMeta(['saalmann2012','komura2013','briggs2013','fiebelkorn2018','fiebelk
 addPaperMeta(['mante2013','sussillo2013','zhang2025'],{methods:['Modeling']});
 addPaperMeta(['fanyiwi2025'],{methods:['Reviewed preprint'],provisional:true});
 
-addPaperMeta(['saalmann2012','schmitt2017','rikhye2018','fiebelkorn2019','wimmer2015','mukherjee2021','eradath2021','griffiths2022','furutachi2024','huang2024','lam2024','boshra2026','hadinger2023','arcaro2015','arcaro2018','briggs2013','halassa2014','fiebelkorn2013','fiebelkorn2018','fiebelkorntheory2019','kastner2020','boshra2022','raposo2025','boroujeni2026','alitto2025','alitto2026','fanyiwi2025','halassakastner2017','sherman2024','usrey2015','wolff2024','zhang2025'],{center:true});
 addPaperMeta(['lam2024','fanyiwi2025','whyte2024','saalmann2012','boshra2022','sussillo2013','raposo2025','boroujeni2026','eradath2021','boshra2026','mante2013','lennert2011','komura2013','fiebelkorntheory2019','buzsaki2012'],{ledger:true});
 
 const synthesisClaims = [
@@ -780,16 +772,6 @@ const synthesisClaims = [
   {title:'Selective attention and arousal interact but are not identical',confidence:'strong',text:'Central and intralaminar thalamus regulate broad engagement and conscious state. Some higher-order thalamic projections also carry state-related signals, while others support network- or representation-specific control. Arousal can change the operating regime of attention without specifying which visual item wins; clinical stimulation findings remain bounded by trial design.',papers:['redinbaugh2020','khalaf2025','whyte2024','neske2025','schiff2023']},
   {title:'Clinical thalamocortical dysconnectivity is robust but not yet mechanistic',confidence:'converging',text:'Psychosis studies repeatedly identify reduced prefrontal–thalamic and altered sensory/somatomotor coupling, with substantial individual and nuclear heterogeneity. Imaging associations do not establish that one thalamic circuit causes symptoms.',papers:['woodward2012','sheffield2020','huangwoodward2024']},
   {title:'Cross-species translation must preserve circuit identity',confidence:'mixed',text:'Rodent LP, primate pulvinar subdivisions, tree-shrew nuclei, and human imaging parcels are related but not interchangeable. Homology is strongest when connectivity, retinotopy, cell types, task computation, and causal phenotype converge.',papers:['arcaro2015','furutachi2024','lam2024','usrey2015']}
-];
-
-const centerProjects = [
-  {label:'Project 1 · Usrey',title:'Pulvinar microcircuits and early visual cortex',text:'Multielectrode recording and causal perturbation ask how pulvinar and early visual cortex communicate during sensory control. The strongest adjacent literature covers LGN–V1 efficacy, pulvinar bursts, and corticothalamic timing.'},
-  {label:'Project 2 · Kastner',title:'Comparative PUL and MD physiology in macaque',text:'Simultaneous recordings compare pulvinar and MD with posterior parietal and prefrontal targets during cognitive control. This directly addresses whether the two higher-order nuclei share a control principle while carrying different variables.'},
-  {label:'Project 3 · Halassa',title:'Causal thalamocortical engagement in tree shrew',text:'The project compares MD–PFC and pulvinar–visual circuits with causal and microcircuit access during attention and hierarchical reasoning, extending rodent MD/TRN mechanisms into a visual mammal.'},
-  {label:'Project 4 · Arcaro & Collins',title:'Human higher-order thalamic organization',text:'High-resolution imaging links task functions to thalamic topography and cortical networks, with explicit cross-species translation and attention to human-specific organization.'},
-  {label:'Project 5 · Woodward',title:'Higher-order thalamus in schizophrenia',text:'The clinical project tests whether PUL/MD circuit principles help explain cognitive impairment in schizophrenia. Current imaging findings motivate hypotheses but do not yet establish circuit-level causality.'},
-  {label:'Core B · Kopell',title:'Biophysical timing and rhythms',text:'Models connect spike timing and multiple rhythms to PUL/MD–cortical communication. This is where competing interpretations of theta, alpha/beta state, and burst timing can become experimentally testable.'},
-  {label:'Core C · Chen',title:'Shared analysis and computational models',text:'Cross-project analytical infrastructure is intended to compare recordings and imaging across species and to coordinate data-driven and biophysical models.'}
 ];
 
 const glossary = [
@@ -1163,7 +1145,7 @@ function renderSynthesis(){
 function libraryCard(p){
   const tags=[...p.topics,...p.methods,speciesBucket(p)];
   const regions=nodes.filter(n=>guidePaperIds(n.id).includes(p.id));
-  return `<article class="library-paper"><h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}</div><div class="paper-note">${esc(p.note)}</div><div class="paper-tags">${p.ledger?'<span class="paper-tag">Your ledger</span>':''}${p.center?'<span class="paper-tag center">Conte investigator</span>':''}${p.provisional?'<span class="paper-tag">Provisional</span>':''}${tags.map(t=>`<span class="paper-tag ${t.includes('Causal')?'causal':''}">${esc(t)}</span>`).join('')}</div>${regions.length?`<div class="paper-regions">${regions.map(n=>`<button class="citation-chip" data-region-link="${n.id}">Explore ${esc(n.abbr)}</button>`).join('')}</div>`:''}</article>`;
+  return `<article class="library-paper"><h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3><div class="paper-meta">${esc(p.authors)} · ${p.year} · ${esc(p.journal)} · ${esc(p.species)}</div><div class="paper-note">${esc(p.note)}</div><div class="paper-tags">${p.ledger?'<span class="paper-tag">Your ledger</span>':''}${p.provisional?'<span class="paper-tag">Provisional</span>':''}${tags.map(t=>`<span class="paper-tag ${t.includes('Causal')?'causal':''}">${esc(t)}</span>`).join('')}</div>${regions.length?`<div class="paper-regions">${regions.map(n=>`<button class="citation-chip" data-region-link="${n.id}">Explore ${esc(n.abbr)}</button>`).join('')}</div>`:''}</article>`;
 }
 let libraryFilters={q:'',topic:'',method:'',species:'',region:''};
 function renderLibrary(region=null){
@@ -1201,12 +1183,6 @@ function updateLibrary(){
   document.getElementById('librarySummary').textContent=`${matches.length} of ${paperCatalog.length} references · reviews provide orientation; claim-level support prioritizes primary studies`;
   document.getElementById('libraryList').innerHTML=matches.length?matches.map(libraryCard).join(''):'<div class="empty">No references match those filters.</div>';
   bindRegionLinks(document.getElementById('libraryList'));
-}
-function renderCenter(){
-  document.getElementById('reference-center').innerHTML=`
-    <div class="reference-intro"><div class="reference-note"><strong>Why this lens is useful.</strong> The Princeton Thalamus Conte Center explicitly compares PUL and MD across macaque, tree shrew, and human work while linking healthy cognition to schizophrenia. Its project structure exposes the field’s major translation gaps.</div><div class="reference-note"><strong>Important limit.</strong> These projects are an active research agenda, not settled findings. The literature library distinguishes completed studies from center aims.</div></div>
-    <div class="project-grid">${centerProjects.map(p=>`<article class="project-card"><div class="project-number">${esc(p.label)}</div><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></article>`).join('')}</div>
-    <div class="reference-note" style="margin-top:12px"><strong>Center sources:</strong> <a href="https://conte.thalamus.princeton.edu/projects" target="_blank" rel="noopener">scientific projects</a> · <a href="https://conte.thalamus.princeton.edu/cores" target="_blank" rel="noopener">modeling and analysis cores</a></div>`;
 }
 function renderGlossary(){
   document.getElementById('reference-glossary').innerHTML=`
@@ -1447,7 +1423,7 @@ document.addEventListener('keydown',e=>{
   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
 });
 
-renderSynthesis(); renderCenter(); renderGlossary(); renderResearchUpdates();
+renderSynthesis(); renderGlossary(); renderResearchUpdates();
 document.getElementById('sidebarPaperCount').textContent=`${paperCatalog.length} papers`;
 document.querySelectorAll('[data-open-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.openReference==='regions'?openRegion(exploredRegion,b):b.dataset.openReference==='theory'?openTheory(null,b):openReference(b.dataset.openReference,b)));
 document.querySelectorAll('.reference-tab').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.referenceTab==='theory'){openTheory(null,b);return;}setReferenceTab(b.dataset.referenceTab);if(b.dataset.referenceTab==='regions')updateRegionHash();}));
@@ -1470,7 +1446,7 @@ function showOverview(){
     <button class="reference-btn explore-button" data-history-link=""><span>Theory development<small>Ten histories · changing roles · competing explanations</small></span><span>→</span></button>
     <div class="detail-block"><button class="reference-btn" data-overview-reference="synthesis"><span>Read the 12-claim evidence synthesis</span><span>open</span></button><button class="reference-btn" style="margin-top:7px" data-overview-reference="library"><span>Search ${paperCatalog.length} curated references</span><span>open</span></button></div>
     <div class="detail-block"><h3>Species markers</h3><p>Small dots on nodes indicate where much of the highlighted evidence comes from: white = mouse, yellow = macaque, red = human, cyan = tree shrew, green = ferret. These colors are intentionally separate from the brain-region colors. A node can be supported across several species.</p></div>
-    <div class="detail-block"><h3>Coverage and honesty note</h3><p>The library combines the supplied attention ledger with a broader primary-source review and work from the Princeton Thalamus Conte Center investigators. Reviews are labeled as orientation; the V1 theta reviewed preprint is explicitly provisional. Clinical imaging, cross-species homology, coherence, and directional analyses are not presented as stronger causal evidence than their methods allow.</p></div>
+    <div class="detail-block"><h3>Coverage and honesty note</h3><p>The library combines foundational work and current primary research on visual attention and thalamocortical circuits. Reviews are labeled as orientation; the V1 theta reviewed preprint is explicitly provisional. Clinical imaging, cross-species homology, coherence, and directional analyses are not presented as stronger causal evidence than their methods allow.</p></div>
     <div class="footer-note">This is a conceptual literature map. Coordinates are chosen for readability and do not represent anatomical position, distance, laterality or cortical layer.</div>`;
   details.querySelectorAll('[data-overview-reference]').forEach(b=>b.addEventListener('click',()=>b.dataset.overviewReference==='regions'?openRegion(exploredRegion,b):openReference(b.dataset.overviewReference,b)));
   bindHistoryLinks(details);

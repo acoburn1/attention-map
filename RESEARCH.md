@@ -1,5 +1,9 @@
 # Research expansion — 2 October 2026
 
+## Research direction, not a website feature
+
+The Princeton Thalamus Conte Center is background context for finding relevant research, not a reader-facing component of this site. Use its research themes and primary publications as leads, alongside the broader literature. Do not reintroduce a center lens, project/cores directory, investigator badges, or institutional framing in the public interface. Evaluate and cite papers on their scientific relevance and evidence. This reflects the user's clarification on October 6, 2026.
+
 The region explorer supplements the short map panels with orientation, mechanisms, experiment walkthroughs, and proposed discriminating tests for all 17 elements. Source links are attached to the relevant passages. The reference library includes the original collection and 35 additional primary papers, spanning foundational physiology through 2026.
 
 This was a targeted literature review, not an exhaustive systematic review. Searches focused on the questions raised by the existing map and on underrepresented cortical, basal-ganglia, retinal, and projection-specific thalamic evidence. Publication pages, PubMed records, and available full text were used to check bibliographic information, species, interventions, findings, and the scope of interpretation. Reviews provide orientation; proposed tests are editorial synthesis.
@@ -72,5 +76,7 @@ Validation: all three Node/Playwright checks passed, including citation integrit
 At the user's request, added a substantial historical synthesis as a permanent site section: ten circuit histories, 47 milestones, 65 cited sources, region-specific interpretations for all 17 nodes and contextual links for all 31 connections. Ten foundational/theoretical/methodological papers bring the library to 108 references. Existing 44 experiment walkthroughs remain available. The site update date is October 6; paper dates span 1971–2026. Older additions are not news. See THEORY.md for source review, interpretive decisions, access limitations and future maintenance.
 
 The core interface now exposes Theory development in the header, reference navigation, map overview, node and edge panels, every region guide and relevant Latest research cards. Histories distinguish original proposals, correlations, interventions, method challenges and editorial synthesis. The SC–dorsal-pulvinar and other hypothetical arrows retain their limitations. Citation associations include theory sources in related-region library filtering.
+
+Interface correction, October 6: removed the Conte Center lens, project/cores content, library affiliation badges and overview institutional framing. The underlying papers and scientific material remain. Research direction is recorded above so future updates keep the center in its intended background role.
 
 Validation: data and browser checks cover every history, every region's history and every connection route, all milestone source references, filtering, map entry points, keyboard interaction, browser Back, local files and responsive overflow at 390/768 px. Desktop and phone screenshots reviewed. The expanded route checks caught and fixed the existing V1/V4 guide-link parser's rejection of digits. This historical review does not advance or replace the weekly literature-search checkpoint above.

@@ -554,6 +554,9 @@ const researchUpdates = [
 ];
 
 const developerNotes = [
+  {date:'2026-10-06',title:'Simplified research navigation',changes:[
+    'Removed an institution-specific research lens and affiliation badges from the interface. The literature library, region guides and circuit histories retain the underlying scientific sources.'
+  ]},
   {date:'2026-10-06',title:'Theory development throughout the map',changes:[
     'Added ten circuit histories with 47 milestones and 65 cited sources, covering how evidence supported, refined or challenged proposed roles over time. Each history distinguishes original theories, recordings, interventions and unresolved interpretations.',
     'Integrated tailored context into all 17 region guides and history links into all 31 map connections. Added a main Theory development section, region filter, shareable links and links from relevant Latest research entries.',
