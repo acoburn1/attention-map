@@ -34,3 +34,7 @@ Existing library evidence was reused at its documented scope, with targeted prim
 Add a milestone when evidence changes or meaningfully constrains an interpretation; do not append every new paper. Explain whether the work supports, refines, challenges, or addresses a different question from earlier accounts. Preserve earlier proposals and substantive counterevidence. Cite an original proposal as theory and keep empirical studies separate. Keep species, tasks, subdivisions, publication dates and limits explicit.
 
 After edits, run `node scripts/version-content.cjs` and the README's browser/data tests. The tests require region/edge coverage, resolvable history citations, source links, deep links, filter behavior, map entry points, browser Back, keyboard access, local-file loading and mobile overflow checks. Inspect changed desktop/mobile layouts before publication. This historical synthesis does not advance the weekly literature-search checkpoint.
+
+## Update — 12 October 2026
+
+Added one SC sensory-anticipation milestone citing [Chen et al.](https://www.nature.com/articles/s41593-026-02480-0): human imaging supports a predictive interpretation but cannot establish its causal source or validate the wider allostatic theory. Current totals: 48 milestones and 66 history sources; 110 library records overall. The original October 6 counts above describe that release.
