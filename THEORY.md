@@ -38,3 +38,7 @@ After edits, run `node scripts/version-content.cjs` and the README's browser/dat
 ## Update — 12 October 2026
 
 Added one SC sensory-anticipation milestone citing [Chen et al.](https://www.nature.com/articles/s41593-026-02480-0): human imaging supports a predictive interpretation but cannot establish its causal source or validate the wider allostatic theory. Current totals: 48 milestones and 66 history sources; 110 library records overall. The original October 6 counts above describe that release.
+
+## Update — 19 October 2026
+
+Added Hosford et al. to the routing history and linked that history from TRN. This is an older-online, auditory-task comparison, not a newly discovered visual-attention pathway. Current totals: 49 milestones, 67 history sources and 112 library records. Retained all existing map arrows and their evidence boundaries. Banerjee et al. is integrated into SC experiments; its model-based explanation is not labeled causal wiring evidence.
