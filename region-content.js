@@ -1,6 +1,7 @@
 // Curated additions; weekly source checks and search checkpoints are in RESEARCH.md.
 // Section citations support the adjacent text; questions are explicitly proposed tests.
 const researchPapers = {
+  vaughn2026: {title:'Photomapping electrically coupled networks of the mature thalamus and cortex',authors:'Vaughn, Uygun, Basheer, Bender & Haas',year:2026,journal:'Science Advances',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/42873885/',publicationDate:'2026-10-14',status:'Peer-reviewed',note:'Photostimulation and spike timing mapped electrical coupling in mature TRN slices; attention was not tested.',topics:['TRN / sensory gating','Methods / dynamics'],methods:['Synaptic physiology','Recording']},
   banerjee2026: {title:'Pooled versus structured inhibition drives stimulus competition across distinct spatial scales in the superior colliculus',authors:'Banerjee, Kothari & Mysore',year:2026,journal:'Journal of Neuroscience',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/42855310/',publicationDate:'2026-10-09',status:'Peer-reviewed',note:'Local and distant visual competition followed different rules; inhibitory architecture was inferred with models.',topics:['Orienting / basal ganglia','Methods / dynamics'],methods:['Recording','Modeling']},
   hosford2026: {title:'Control of representation updating by higher-order thalamus enables history-based decision-making',authors:'Hosford, Mei et al.',year:2026,journal:'Neuron',species:'Mouse',url:'https://doi.org/10.1016/j.neuron.2026.04.045',publicationDate:'2026-05-29',status:'Peer-reviewed',note:'PPC–LP interactions supported sensory-history maintenance; TRN inhibition facilitated updating in an auditory paradigm.',topics:['Pulvinar','TRN / sensory gating','Cortical selection'],methods:['Causal circuit','Recording','Modeling']},
   chen2026sc: {"title":"Modality-specific reactive and predictive responses in the human superior colliculus","authors":"Chen et al.","year":2026,"journal":"Nature Neuroscience","species":"Human","url":"https://www.nature.com/articles/s41593-026-02480-0","publicationDate":"2026-10-07","status":"Peer-reviewed","note":"Human SC imaging links depth-dependent activity to expected sensory modality; correlation does not locate the prediction generator.","topics":["Orienting / basal ganglia","Methods / dynamics"],"methods":["Human imaging"]},
@@ -261,6 +262,7 @@ const regionGuides = {
   trn: {
     subtitle:'Inhibition targeted to a channel, with more than one control route',
     anatomy:[
+      {title:'Electrical coupling within TRN',text:'TRN neurons also connect through electrical synapses. Mapping these local networks complements the chemical inhibitory outputs shown on the map; it does not identify an attentional control signal.',papers:['vaughn2026']},
       {title:'An inhibitory shell with organized subnetworks',text:'TRN is represented as one node, but visual, auditory and frontal-associated territories should be distinguished. Attention modulation in macaque sensory TRN is an important complement to detailed mouse interventions.',papers:['mcalonan2006','halassa2014']},
       {title:'A compressed arrow can hide intermediate structures',text:'PFC control of sensory TRN in the mouse filtering circuit uses a basal-ganglia intermediate. Frontal layer-5 direct TRN contacts studied elsewhere target a different circuit context; these findings should not be merged into one direct sensory connection.',papers:['nakajima2019','hadinger2023']}
     ],
@@ -270,6 +272,7 @@ const regionGuides = {
       {title:'Region-specific cortical access',text:'Frontal layer-5 cells make specialized TRN contacts, and the contacted TRN cells project to nuclei associated with frontal activity. This does not establish direct PFC→visual-TRN control in the sensory selection task.',papers:['hadinger2023'],kind:'Anatomy and physiology'}
     ],
     experiments:[
+      {paper:'vaughn2026',question:'How can electrical connections be mapped in mature TRN?',design:'Mouse brain slices; focal opsin stimulation and spike-latency measurements, with paired-recording and connexin controls.',result:'Detected coupling across genetic subtypes and distances up to 100 micrometers.',limit:'In-vitro connectivity does not demonstrate task-dependent synchronization or a causal attention role.'},
       {paper:'wimmer2015',question:'Does an inhibitory thalamic subnetwork matter for choosing a modality?',design:'Mice selected between conflicting visual and auditory cues; visual TRN activity was recorded and manipulated.',result:'TRN influenced sensory gain and selection performance.',limit:'Cross-modal choice is not the same operation as choosing between two visual locations.'},
       {paper:'nakajima2019',question:'How does PFC recruit sensory TRN when a direct projection is absent?',design:'Tracing and pathway perturbation tested basal-ganglia intermediates in sensory filtering.',result:'An indirect PFC–BG–thalamus circuit supported distractor and background-noise suppression.',limit:'This pathway should not be generalized to every TRN sector or every species.'}
     ],
@@ -556,6 +559,7 @@ const connectionTheory = {
 
 // Newest site updates first. Paper dates are stored separately from addition dates.
 const researchUpdates = [
+  {paper:'vaughn2026',added:'2026-10-26',category:'New paper',title:'Mapping electrical connections within TRN',regions:['trn'],finding:'A photostimulation method mapped electrically coupled neurons in mature mouse TRN.',meaning:'Adds internal connectivity to the map’s account of inhibitory control.',limit:'Brain-slice measurements, not an attention experiment. Online October 14; October 16 issue.'},
   {paper:'banerjee2026',added:'2026-10-19',category:'New paper',title:'Nearby and distant stimuli compete differently',regions:['sc'],finding:'Mouse SC recordings showed local averaging but divisive competition across receptive-field boundaries.',meaning:'A single competition rule may miss differences between spatial scales.',limit:'Recording and modeling support candidate mechanisms, not causal identification of inhibitory circuits.'},
   {paper:'hosford2026',added:'2026-10-19',category:'Earlier paper · new to the map',title:'Keeping sensory history—and knowing when to update it',regions:['vpulv','trn'],finding:'Mouse LP–parietal interactions maintained sensory history; TRN suppression of LP facilitated updating.',meaning:'Connects thalamic regulation to retaining and revising context.',limit:'Auditory tasks, not a visual-attention result. Published online May 29; October 7 is the issue date.'},
   {"paper":"chen2026sc","added":"2026-10-12","category":"New paper","title":"SC signals anticipate sensory input","regions":["sc"],"finding":"Human imaging detected modality-specific SC patterns before pictures or pressure arrived.","meaning":"Broadens the SC account from reacting to input toward anticipating it.","limit":"BOLD correlations cannot identify a causal prediction mechanism."},
@@ -569,6 +573,11 @@ const researchUpdates = [
 ];
 
 const developerNotes = [
+  {date:'2026-10-26',title:'Electrical coupling within TRN',changes:[
+    'Added a published October 14 methods study to Latest research, the literature library and TRN orientation/experiment sections. Slice physiology is distinguished from behavioral attention evidence.',
+    'Updated browser checks to follow older digest entries after they move into the archive.',
+    'Validated citation references, navigation, keyboard access, local-file loading and desktop/mobile layouts. No map edges or theory milestones were added.'
+  ]},
   {date:'2026-10-19',title:'Spatial competition and sensory-history updating',changes:[
     'Added an October 9 SC recording/modeling paper and an explicitly labeled May 29 thalamic-history study to the library, digest and experiment guides.',
     'Expanded the TRN guide and pulvinar theory history to distinguish maintaining context from updating it, with mouse auditory versus primate visual limits preserved.',

@@ -106,3 +106,17 @@ Triage and follow-ups:
 - Follow up Banerjee full text before assigning inhibitory cell types, identifying a demonstrated anatomical motif, or adding quantitative effects.
 
 Implementation: two references, two experiment walkthroughs, a TRN mechanism comparison and one routing-history milestone. No new interface feature or map edge. Literature now contains 112 records and 48 experiment walkthroughs. Repository was clean at start; upstream main matched 2bb0b5b. Validation: all three documented Node/Edge checks passed, covering citations, all guides/pathways, keyboard access, archive expansion, browser navigation, local files and 390/768 px overflow. Desktop and phone digest screenshots were visually reviewed. Edge could not launch in the sandbox; the authorized run outside it passed. git diff --check passed.
+
+## Weekly update — 26 October 2026
+
+Last successful literature search: **2026-10-26**. Window: **2026-10-12 through 2026-10-26**, overlapping the previous search. Next run: **2026-10-19** through its actual date. Targeted PubMed, publisher and bioRxiv searches covered pulvinar/LP, MD, TRN, SC and cortical/basal-ganglia interactions. Not a systematic review; indexing and access gaps remain.
+
+Added **Vaughn, Uygun, Basheer, Bender & Haas**, [published primary abstract, figures and metadata](https://pubmed.ncbi.nlm.nih.gov/42873885/), DOI 10.1126/sciadv.aed7447. Online **October 14**, issue October 16. The published record supports the methods, species and findings used. Publisher full text returned 403 and PMC a browser challenge; no unverified full-methods details were inferred. The earlier preprint (PMC12991111) is not the cited version. The library now has 113 references and the guides 49 experiment walkthroughs; theory totals remain unchanged.
+
+Triage and follow-ups:
+- No additional narrowly relevant MD/pulvinar/SC attention finding was verified in this pass. MD Fmr1 morphology and the October 15 anesthesia-response letter address different questions; the latter is not a new primary attention study.
+- A search lead titled Electrical stimulation of the human pulvinar generates visual percepts (PMID 42833358) could not be corroborated on the primary page; do not add or treat its suggested date as verified.
+- The bioRxiv directory lists Cooperative processing of visual threat across collicular pathways, DOI 10.64898/2026.10.12.758428, posted October 22. Follow up the actual preprint before assigning results or attention relevance; a directory entry alone is insufficient.
+- No new version status was verified for Xie or eLife 107731; retain current labels. Previous Xu, Caulfield and Banerjee full-methods follow-ups remain open. For Vaughn, inspect final full methods before adding quantitative network-size or cell-type comparisons.
+
+Implementation: one paper, TRN orientation context and one experiment; no feature or topology changes. Updated browser checks to expand the archive before interacting with older research cards. Working tree was clean and upstream matched 2243e20. Validation: all three documented Node/Edge checks passed (17 guides, 49 experiment walkthroughs, 31 pathways and 113 references), including citations, keyboard/archive access, navigation, local-file loading and phone/tablet overflow. Desktop and 390 px digest screenshots visually inspected. An ambiguous nested summary selector in the tests was corrected before the successful run. git diff --check passed.

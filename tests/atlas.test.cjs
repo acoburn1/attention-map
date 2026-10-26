@@ -125,6 +125,15 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     assert.equal(await page.locator('.research-card').count(), data.researchUpdates.length);
     assert.match(await page.locator('#reference-latest').innerText(), /Earlier paper · new to the map/i);
     if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'latest-desktop.png') });
+    const archive = page.locator('#reference-latest > details');
+    if (data.researchUpdates.length > 6) {
+      assert.equal(await archive.evaluate(el => el.open), false);
+      assert.equal(await page.locator('#reference-latest > .research-list > article').count(), 6);
+      assert.equal(await archive.locator('article').count(), data.researchUpdates.length - 6);
+      await archive.locator(':scope > summary').focus();
+      await page.keyboard.press('Enter');
+      assert.ok(await archive.locator('article').first().isVisible());
+    }
     const theory = page.locator('[data-update-paper="tomic2026"] .theory-connection');
     assert.equal(await theory.evaluate(el => el.open), false);
     await theory.locator('summary').focus();
@@ -138,15 +147,6 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     assert.equal(await theory.evaluate(el => el.open), false);
     assert.equal(await page.locator('[data-update-paper="xu2026"] .theory-connection').count(), 0);
 
-    const archive = page.locator('#reference-latest > details');
-    if (data.researchUpdates.length > 6) {
-      assert.equal(await archive.evaluate(el => el.open), false);
-      assert.equal(await page.locator('#reference-latest > .research-list > article').count(), 6);
-      assert.equal(await archive.locator('article').count(), data.researchUpdates.length - 6);
-      await archive.locator('summary').focus();
-      await page.keyboard.press('Enter');
-      assert.ok(await archive.locator('article').first().isVisible());
-    }
     await page.locator('[data-update-paper="yu2026"] [data-region-link="md"]').click();
     await page.locator('[data-guide-section="experiments"]').click();
     assert.match(await page.locator('#guideContent').innerText(), /ketamine/);
@@ -296,6 +296,7 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
     assert.match(page.url(), /#region\/md\/history$/);
     if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'history-region-desktop.png') });
     await page.goto(`${url}/#latest`);
+    if (await page.locator('#reference-latest > details').count() && !await page.locator('#reference-latest > details').evaluate(el => el.open)) await page.locator('#reference-latest > details > summary').click();
     await page.locator('[data-update-paper="tomic2026"] [data-history-link]').click();
     assert.match(page.url(), /#theory\/competition$/);
 
@@ -315,13 +316,14 @@ test('region exploration, reference filters, keyboard access and mobile layouts'
       assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
       if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, `latest-${width}.png`) });
 
+      if (await page.locator('#reference-latest > details').count() && !await page.locator('#reference-latest > details').evaluate(el => el.open)) await page.locator('#reference-latest > details > summary').click();
       const mobileTheory = page.locator('[data-update-paper="tomic2026"] .theory-connection');
       if (!await mobileTheory.evaluate(el => el.open)) await mobileTheory.locator('summary').click();
       assert.ok(await mobileTheory.locator('.theory-content').isVisible());
       assert.ok(await page.locator('.reference-body').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
       if (process.env.ATLAS_SCREENSHOT_DIR) await page.screenshot({ path: path.join(process.env.ATLAS_SCREENSHOT_DIR, 'theory-' + width + '.png') });
       const mobileArchive = page.locator('#reference-latest > details');
-      if (await mobileArchive.count() && !await mobileArchive.evaluate(el => el.open)) await mobileArchive.locator('summary').click();
+      if (await mobileArchive.count() && !await mobileArchive.evaluate(el => el.open)) await mobileArchive.locator(':scope > summary').click();
       await page.locator('[data-update-paper="ramezanpour2026"] [data-region-link="bg"]').click();
       assert.equal(await page.locator('#atlasRegion').inputValue(), 'bg');
       await page.goto(`${url}/#developer-notes`);
