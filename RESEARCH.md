@@ -120,3 +120,18 @@ Triage and follow-ups:
 - No new version status was verified for Xie or eLife 107731; retain current labels. Previous Xu, Caulfield and Banerjee full-methods follow-ups remain open. For Vaughn, inspect final full methods before adding quantitative network-size or cell-type comparisons.
 
 Implementation: one paper, TRN orientation context and one experiment; no feature or topology changes. Updated browser checks to expand the archive before interacting with older research cards. Working tree was clean and upstream matched 2243e20. Validation: all three documented Node/Edge checks passed (17 guides, 49 experiment walkthroughs, 31 pathways and 113 references), including citations, keyboard/archive access, navigation, local-file loading and phone/tablet overflow. Desktop and 390 px digest screenshots visually inspected. An ambiguous nested summary selector in the tests was corrected before the successful run. git diff --check passed.
+
+## Weekly update — 2 November 2026
+
+Last successful literature search: **2026-11-02**. Window: **2026-10-19 through 2026-11-02**, with a one-week overlap. Next run: **2026-10-26** through its actual date. Targeted publisher, PubMed and preprint searches covered pulvinar/LP, MD, TRN, SC and cortical/basal-ganglia interactions. This is not a systematic review or an absence claim.
+
+Added **Hopkins, Cain, White, Abakians & Monti**, [primary publisher article](https://www.nature.com/articles/s42003-026-10637-7), DOI 10.1038/s42003-026-10637-7, published **October 26**. Verified metadata, design, results and limitations against indexed primary Abstract, Results, Discussion and Methods. Direct opening hit a publisher identity-provider redirect; indexed sections were accessible. Avoided treating the abstract’s pulvinar summary as uniformly significant. No clinical efficacy or anatomically isolated suppression claim was added.
+
+Triage and follow-ups:
+- The [human pulvinar visual-percepts letter](https://pubmed.ncbi.nlm.nih.gov/42833358/) now has a primary bibliographic record: Kemball-Cook et al., DOI 10.1016/j.brs.2026.103231, October 5. Methods/results remain unverified; do not integrate based on its title.
+- Cooperative processing of visual threat across collicular pathways (10.64898/2026.10.12.758428) still needs primary preprint inspection before assigning findings.
+- Follow up [collision-detection imaging](https://doi.org/10.1162/IMAG.a.1432), identified through an October institutional report. Verify primary publication metadata, patient numbers and analyses before integration; functional connectivity must not be equated with a demonstrated pathway mechanism.
+- Phensy et al., [published record](https://pubmed.ncbi.nlm.nih.gov/42259288/), DOI 10.1016/j.neuron.2026.05.002, is an older-online candidate for PFC–MD gamma context (June 8 online; October 21 issue), not new October publication.
+- eLife 107731 indexed version history still lists reviewed-preprint v1. No Xie status upgrade verified. Xu, Caulfield, Banerjee and Vaughn full-methods follow-ups remain open.
+
+Implementation: one reference, one experiment walkthrough and one guide comparison. Expected totals: 114 references and 50 experiments. No feature, map edge or theory milestone added. Working tree was clean at start; origin/main matched a3309df. Validation: all three documented Node/Edge checks passed (17 guides, 50 experiments, 31 pathways, 114 references), covering citation integrity, navigation, archive expansion, keyboard access, local-file loading and 390/768 px overflow. Desktop and 390 px digest screenshots were visually inspected. No layout regression found. git diff --check passed. Upstream remained unchanged before publication.
