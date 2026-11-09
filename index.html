@@ -458,7 +458,7 @@
   </div>
 </div>
 
-<script src="region-content.js?v=0bcbbbd1810e"></script>
+<script src="region-content.js?v=6b80383c1445"></script>
 <script>
 const papers = {
   saalmann2012: {
@@ -1280,7 +1280,7 @@ function historyTimelineHtml(id){
       <span class="history-date">${esc(m.date)}</span><div class="detail-kicker">${esc(m.kind)}</div>
       <h4>${esc(m.title)}</h4><p>${esc(m.text)}</p><p><strong>What changed:</strong> ${esc(m.change)}</p>
       ${citationLinks(m.papers)}</article></li>`).join('')}</ol>
-    <article class="guide-section history-intro"><h3>Where this leaves the theory</h3><p>${esc(h.current)}</p><p class="research-limit"><strong>Still unresolved:</strong> ${esc(h.unresolved)}</p><p class="paper-meta">Synthesis of the sources above · reviewed October 6, 2026</p></article>
+    <article class="guide-section history-intro"><h3>Where this leaves the theory</h3><p>${esc(h.current)}</p><p class="research-limit"><strong>Still unresolved:</strong> ${esc(h.unresolved)}</p><p class="paper-meta">Synthesis of the sources above · history updated ${esc(h.updated || 'October 6, 2026')}</p></article>
   </section>`;
 }
 function regionHistoryHtml(id){

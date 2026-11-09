@@ -135,3 +135,20 @@ Triage and follow-ups:
 - eLife 107731 indexed version history still lists reviewed-preprint v1. No Xie status upgrade verified. Xu, Caulfield, Banerjee and Vaughn full-methods follow-ups remain open.
 
 Implementation: one reference, one experiment walkthrough and one guide comparison. Expected totals: 114 references and 50 experiments. No feature, map edge or theory milestone added. Working tree was clean at start; origin/main matched a3309df. Validation: all three documented Node/Edge checks passed (17 guides, 50 experiments, 31 pathways, 114 references), covering citation integrity, navigation, archive expansion, keyboard access, local-file loading and 390/768 px overflow. Desktop and 390 px digest screenshots were visually inspected. No layout regression found. git diff --check passed. Upstream remained unchanged before publication.
+
+## Weekly update — 9 November 2026
+
+Last successful literature search: **2026-11-09**. Window: **2026-10-26 through 2026-11-09**, overlapping the previous search by one week. Next run: **2026-11-02** through its actual date. Targeted primary publisher, PubMed/PMC and preprint searches covered pulvinar/LP, MD, TRN, SC and cortical/basal-ganglia interactions. This is not a systematic review.
+
+- **Butler et al.**, [publisher record](https://www.nature.com/articles/s41467-026-78945-4), DOI 10.1038/s41467-026-78945-4, **November 2**. Verified title, authors, species, task and qualitative findings against the indexed primary abstract; publisher labels it a peer-reviewed accepted manuscript. Direct opening encountered an identity-provider redirect. No sample counts, latencies or quantitative claims were taken from secondary summaries. Full methods and final-version status remain follow-ups.
+- **Zou, Wang, Qian & Zhang**, [primary full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC13722050/) and [PubMed record](https://pubmed.ncbi.nlm.nih.gov/42965178/), DOI 10.1162/IMAG.a.1432. Both primary records date publication **October 29**, superseding the unverified October 9 date in the earlier institutional report. Verified Methods, Results and Discussion; explicitly retained the patient reanalysis, analysis-dependent connectivity result and resolution/group-comparison boundaries. This resolves the November 2 primary-access follow-up.
+
+Triage and follow-ups:
+- No additional directly relevant new MD/TRN attention study was verified in this targeted pass. November 4 diabetes morphometry is a cross-sectional clinical comparator, not evidence for a new visual-attention mechanism. November issue dates alone did not establish new publication of the pupil/zoom-lens and gaze-bias candidates.
+- Cooperative processing of visual threat across collicular pathways now has an apparent PubMed lead (42990176), but direct opening failed. Secondary dates differ (October 18/22 versus November 6 indexing); verify the primary version/date and methods before adding. Do not treat indexing as a new publication.
+- Xie still carries the accepted-manuscript notice in indexed primary text; eLife 107731 still lists reviewed-preprint v1. No status upgrades made.
+- Prior Kemball-Cook visual-percepts letter, Phensy PFC–MD gamma candidate, and Xu/Caulfield/Banerjee/Vaughn full-methods follow-ups remain open.
+
+Implementation: two references, two experiments, a visual-pulvinar comparison and one ACC theory milestone; no new map edge or interface feature. Expected totals: 116 references, 52 experiments, 50 milestones and 68 history sources. Working tree was clean and upstream matched 2d308d2. Validation: all three documented Node/Edge tests passed (17 guides, 52 experiments, 31 pathways and 116 references), including citation integrity, navigation, archive/keyboard access, local-file loading and 390/768 px overflow. Desktop and phone previews were inspected. git diff --check passed.
+
+Preview correction: the history footer had a fixed October 6 review date. It now renders per-history update dates, with the original date retained for unchanged histories; routing/orienting use their documented October updates and monitoring uses November 9.

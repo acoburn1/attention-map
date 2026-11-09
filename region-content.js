@@ -1,6 +1,8 @@
 // Curated additions; weekly source checks and search checkpoints are in RESEARCH.md.
 // Section citations support the adjacent text; questions are explicitly proposed tests.
 const researchPapers = {
+  butler2026: {title:'Anterior cingulate neurons perform parallel processing of fixated and peripheral information to guide information sampling and choice',authors:'Butler, Muller, Veselic, Malalasekera, Behrens, Hunt & Kennerley',year:2026,journal:'Nature Communications',species:'Macaque',url:'https://www.nature.com/articles/s41467-026-78945-4',publicationDate:'2026-11-02',status:'Peer-reviewed accepted manuscript',note:'ACC value coding extends beyond fixated cues; causal necessity remains untested.',topics:['Cortical selection','Theory development'],methods:['Recording','Behavior']},
+  zou2026: {title:'Attention selectively enhances collision sensitivity in the superficial SC, PBGN and centromedial amygdala to looming stimuli in the upper visual field',authors:'Zou, Wang, Qian & Zhang',year:2026,journal:'Imaging Neuroscience',species:'Human',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC13722050/',publicationDate:'2026-10-29',status:'Peer-reviewed',note:'Collision-related imaging depends on attention, visual field and participant group.',topics:['Orienting / basal ganglia','Pulvinar'],methods:['Human imaging','Reanalysis']},
   hopkins2026: {title:'Targeting central thalamus with transcranial ultrasound reduces arousal in healthy volunteers',authors:'Hopkins, Cain, White, Abakians & Monti',year:2026,journal:'Communications Biology',species:'Human',url:'https://www.nature.com/articles/s42003-026-10637-7',publicationDate:'2026-10-26',status:'Peer-reviewed',note:'Human intervention distinguishes vigilance from spatial attention, with targeting limitations.',topics:['Arousal / consciousness','Pulvinar'],methods:['Human stimulation','Behavior']},
   vaughn2026: {title:'Photomapping electrically coupled networks of the mature thalamus and cortex',authors:'Vaughn, Uygun, Basheer, Bender & Haas',year:2026,journal:'Science Advances',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/42873885/',publicationDate:'2026-10-14',status:'Peer-reviewed',note:'Photostimulation and spike timing mapped electrical coupling in mature TRN slices; attention was not tested.',topics:['TRN / sensory gating','Methods / dynamics'],methods:['Synaptic physiology','Recording']},
   banerjee2026: {title:'Pooled versus structured inhibition drives stimulus competition across distinct spatial scales in the superior colliculus',authors:'Banerjee, Kothari & Mysore',year:2026,journal:'Journal of Neuroscience',species:'Mouse',url:'https://pubmed.ncbi.nlm.nih.gov/42855310/',publicationDate:'2026-10-09',status:'Peer-reviewed',note:'Local and distant visual competition followed different rules; inhibitory architecture was inferred with models.',topics:['Orienting / basal ganglia','Methods / dynamics'],methods:['Recording','Modeling']},
@@ -91,6 +93,7 @@ const regionGuides = {
       {title:'Projection-specific control',text:'ACC→visual-cortex pathways can facilitate cue processing, whereas ACC→SC pathways can alter response bias. Grouping these effects under “top-down attention” hides the sensory versus action distinction.',papers:['huda2020'],kind:'Causal circuit'}
     ],
     experiments:[
+      {paper:'butler2026',question:'Must a cue be fixated before its value is represented?',design:'Rhesus macaque neuronal recordings during choice among four simultaneously visible cues.',result:'ACC encoded peripheral cue values associated with subsequent sampling and choices, including never-fixated cues.',limit:'Recording evidence, not causal control or a demonstrated thalamic route. Accepted manuscript; full-methods review remains pending.'},
       {paper:'cole2024',question:'Is a prediction-error signal needed to change rules?',design:'Mice switched between odor and visual rules; ACC was silenced during selected time windows.',result:'Perturbing the prediction-error interval impaired rapid switching; established discrimination could remain accurate.',limit:'This omission-driven switch does not by itself establish the downstream route through MD.'},
       {paper:'huda2020',question:'Do ACC outputs have a single function?',design:'Projection-specific imaging and optogenetics separated visual-cortex and SC outputs during a visual choice task.',result:'The outputs dissociated sensory processing from control of motor response bias.',limit:'These are mouse sensorimotor circuits, not a demonstrated one-to-one equivalent of macaque FEF.'}
     ],
@@ -229,6 +232,7 @@ const regionGuides = {
       {title:'An identified secondary visual route',text:'In macaques, physiological identification found pulvinar cells that receive SC input and project to MT. This supports a continuous route through inferior pulvinar, not a blanket SC→dorsal-pulvinar arrow.',papers:['berman2010']}
     ],
     mechanisms:[
+      {title:'Connectivity without a proven bypass',text:'Blind-field collision responses in patients correlated between SC and pulvinar. This does not isolate a pulvinar subdivision or establish the route sustaining residual vision.',papers:['zou2026'],kind:'Human imaging / reanalysis'},
       {title:'Human targeting is a broader comparison',text:'Pulvinar ultrasound showed contralateral spatial-attention effects, but many comparisons failed significance or correction. This human target does not isolate the ventral pulvinar/LP territory represented here.',papers:['hopkins2026'],kind:'Human intervention / localization limit'},
       {title:'Parallel channels need not duplicate content',text:'Direct V1 and LP inputs to higher visual cortex can convey different visual and movement-related variables. Specify the projection target before assigning a function to LP output.',papers:['blot2021'],kind:'Projection-specific recording'},
       {title:'Sensory drive versus state context',text:'In mouse posterior medial cortex, LP input contributes arousal-related modulation while direct cortical input supplies stronger visual drive. This constrains a universal higher-order-thalamus-as-sensory-relay account.',papers:['neske2025'],kind:'Causal boundary condition'}
@@ -311,6 +315,7 @@ const regionGuides = {
       {title:'A visual route through inferior pulvinar',text:'SC-recipient pulvinar neurons projecting to MT establish an ascending route. Its existence does not prove that this route explains all covert deficits after SC inactivation.',papers:['berman2010','berman2011'],kind:'Physiological connectivity'}
     ],
     experiments:[
+      {paper:'zou2026',question:'Does attention change collision-sensitive subcortical activity?',design:'High-resolution fMRI in 23 healthy adults; separate reanalysis of 12 hemianopic patients.',result:'Attended upper-field collisions preferentially recruited superficial-SC, parabigeminal and centromedial-amygdala regions; patient beta-series correlations linked SC with pulvinar and VTA.',limit:'Patient path analysis was nonsignificant. Different stimuli across groups and limited layer resolution constrain comparison; connectivity does not prove directed transmission.'},
       {paper:'banerjee2026',question:'Does competition use the same rule at every distance?',design:'Mouse intermediate/deep SC recordings compared visual stimuli within and across receptive-field boundaries; models tested inhibition schemes.',result:'Local responses averaged inputs; distant competition was divisive and depended on relative stimulus strength.',limit:'Model fits do not causally identify inhibitory wiring or establish a behavioral attention mechanism.'},
       {"paper":"chen2026sc","question":"Does SC activity precede expected sensory input?","design":"7-T fMRI in 80 adults; separate groups of 40 anticipated pictures or thumb pressure.","result":"Modality-dependent depth gradients appeared before stimulation as well as during it.","limit":"Between-group BOLD evidence, not a causal test of attention or cellular layers."},
       {paper:'zenon2012',question:'Must an attention deficit eliminate visual cortical enhancement?',design:'SC was inactivated during motion-change detection while MT/MST neurons were recorded.',result:'Behavioral attention was impaired while classic cortical enhancement remained intact.',limit:'The result excludes that measured signature as a sufficient explanation; it does not identify a unique alternative route.'},
@@ -426,6 +431,7 @@ const theoryHistories = {
     ]
   },
   routing: {
+    updated:'October 19, 2026',
     title:'Pulvinar as a route and a regulator', subtitle:'Visual pulvinar / LP · cortex–thalamus–cortex and collicular input',
     regions:['vpulv','v1','v4','sc','trn'],
     summary:'The higher-order relay proposal grew into several testable roles: carrying signals, coordinating cortical interactions and conveying context or state. Different pathways support different mixtures.',
@@ -482,6 +488,7 @@ const theoryHistories = {
     ]
   },
   monitoring: {
+    updated:'November 9, 2026',
     title:'What tells control that it must change?', subtitle:'ACC and its partners · conflict, value and prediction errors',
     regions:['acc','md','pfc'],
     summary:'ACC theories have emphasized different control problems: detecting conflict, deciding whether control is worth its cost, and updating a model after violated expectations. These accounts overlap but are not synonyms.',
@@ -492,10 +499,12 @@ const theoryHistories = {
       {date:'2013',kind:'Original integrative theory',title:'Control has benefits and costs',text:'Shenhav and colleagues proposed that dACC specifies control allocation by considering expected payoff, required control and effort cost.',change:'Broadened the question from whether there is conflict to whether, where and how strongly to invest control. This remains a theoretical account.',papers:['shenhav2013']},
       {date:'2020',kind:'Mouse projection-specific manipulation',title:'Different outputs have different effects',text:'Huda and colleagues dissociated effects of ACC projections to visual cortex from those to SC on sensorimotor behavior.',change:'Warned against assigning a single undifferentiated top-down function to every ACC output.',papers:['huda2020']},
       {date:'2024',kind:'Mouse imaging + timed perturbation',title:'A violated expectation can trigger a switch',text:'Cole and colleagues found ACC prediction-error signals when an expected event was omitted. Timed silencing impaired switching, with VIP interneurons contributing to the error computation.',change:'Provided a circuit-level test of updating, without resolving every proposed role of human dACC.',papers:['cole2024']},
-      {date:'2024 online / 2025 issue',kind:'Tree shrew recording + perturbation',title:'Updating can involve a transthalamic partner',text:'Lam and colleagues linked ACC error monitoring, MD uncertainty processing and changes in PFC task representation.',change:'Offers a candidate route from monitoring to remapping. It is a separate species and paradigm from the mouse omission task, not a completed chain joining both experiments.',papers:['lam2024']}
+      {date:'2024 online / 2025 issue',kind:'Tree shrew recording + perturbation',title:'Updating can involve a transthalamic partner',text:'Lam and colleagues linked ACC error monitoring, MD uncertainty processing and changes in PFC task representation.',change:'Offers a candidate route from monitoring to remapping. It is a separate species and paradigm from the mouse omission task, not a completed chain joining both experiments.',papers:['lam2024']},
+      {date:'2026',kind:'Macaque recording · accepted manuscript',title:'Evaluating options beyond fixation',text:'ACC represented peripheral cue values during choice.',change:'Adds prospective information sampling to the monitoring history. It challenges fixation-only valuation accounts, without uniquely validating expected-value-of-control theory or demonstrating an ACC–MD mechanism.',papers:['butler2026']}
     ]
   },
   orienting: {
+    updated:'October 12, 2026',
     title:'Selection beyond the eye-movement command', subtitle:'SC, basal ganglia and FEF · orienting, monitoring and readout',
     regions:['sc','bg','fef','md'],
     summary:'Visual orienting remains a core function, but experiments that separate sensory selection from the report show that these circuits also matter when no saccade is made.',
@@ -562,6 +571,8 @@ const connectionTheory = {
 
 // Newest site updates first. Paper dates are stored separately from addition dates.
 const researchUpdates = [
+  {paper:'butler2026',added:'2026-11-09',category:'New paper',title:'Valuing information before looking at it',regions:['acc'],finding:'Macaque ACC encoded valuable peripheral cues, including cues never fixated.',meaning:'Adds prospective sampling to the ACC guide and theory history.',limit:'Accepted manuscript; correlations do not establish causal control.'},
+  {paper:'zou2026',added:'2026-11-09',category:'New paper',title:'Attention shapes responses to approaching collisions',regions:['sc','vpulv'],finding:'Human collision-sensitive activity varied with attention and visual field.',meaning:'Separates attended threat processing from blind-field connectivity after visual-pathway injury.',limit:'Imaging associations, not proof of an unconscious SC–pulvinar bypass. Primary publication record: October 29.'},
   {paper:'hopkins2026',added:'2026-11-02',category:'New paper',title:'Separating alertness from spatial attention',regions:['central','vpulv'],finding:'Central-thalamus ultrasound reduced vigilance; pulvinar results suggested spatially selective changes.',meaning:'Tests the map’s distinction between general engagement and selecting a location.',limit:'Pulvinar evidence was statistically weaker; stimulation may affect nearby tissue.'},
   {paper:'vaughn2026',added:'2026-10-26',category:'New paper',title:'Mapping electrical connections within TRN',regions:['trn'],finding:'A photostimulation method mapped electrically coupled neurons in mature mouse TRN.',meaning:'Adds internal connectivity to the map’s account of inhibitory control.',limit:'Brain-slice measurements, not an attention experiment. Online October 14; October 16 issue.'},
   {paper:'banerjee2026',added:'2026-10-19',category:'New paper',title:'Nearby and distant stimuli compete differently',regions:['sc'],finding:'Mouse SC recordings showed local averaging but divisive competition across receptive-field boundaries.',meaning:'A single competition rule may miss differences between spatial scales.',limit:'Recording and modeling support candidate mechanisms, not causal identification of inhibitory circuits.'},
@@ -577,6 +588,12 @@ const researchUpdates = [
 ];
 
 const developerNotes = [
+  {date:'2026-11-09',title:'Peripheral value and collision detection',changes:[
+    'Added November 2 ACC and October 29 collision-imaging papers to Latest research, the library and region guides. Publication dates remain separate from today’s site update.',
+    'Extended ACC theory development with prospective information sampling; distinguished neuronal correlations, human imaging and causal circuit evidence. Preserved pulvinar subdivision and patient-reanalysis limits.',
+    'Corrected the fixed October 6 label under theory histories to show their actual update dates.',
+    'Passed citation, navigation, archive, keyboard and local-file checks, plus phone/tablet overflow checks. Reviewed desktop and phone layouts.'
+  ]},
   {date:'2026-11-02',title:'Human tests of alertness and spatial attention',changes:[
     'Added an October 26 paper to Latest research and the library, with an experiment in the central-thalamus guide and a comparison in the visual-pulvinar guide.',
     'Kept intervention effects, inferred mechanisms, statistical uncertainty and subdivision limits distinct. No new map connection or interface feature was needed.',

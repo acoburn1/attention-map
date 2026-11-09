@@ -42,3 +42,7 @@ Added one SC sensory-anticipation milestone citing [Chen et al.](https://www.nat
 ## Update — 19 October 2026
 
 Added Hosford et al. to the routing history and linked that history from TRN. This is an older-online, auditory-task comparison, not a newly discovered visual-attention pathway. Current totals: 49 milestones, 67 history sources and 112 library records. Retained all existing map arrows and their evidence boundaries. Banerjee et al. is integrated into SC experiments; its model-based explanation is not labeled causal wiring evidence.
+
+## Update — 9 November 2026
+
+Added Butler et al. to the ACC monitoring history as a macaque recording study, labeled peer-reviewed accepted manuscript. The editorial connection concerns prospective sampling and limits of fixation-only valuation, not a unique validation of expected-value-of-control theory or an established ACC–MD mechanism. Current totals: 50 milestones, 68 history sources and 116 library records.
